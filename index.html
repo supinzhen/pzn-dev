@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蘇品甄 | Annie Su | Unreal Engine & Systems Engineer</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter (Sans-serif), Noto Sans TC (Sans-serif), JetBrains Mono (Monospace) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS.js (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ue-blue': '#0070FF',
+                        'tech-green': '#00FFAB',
+                        'slate-950': '#020617',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        serif: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'scale-up': 'scale-up 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'scale-up': {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            color: #f8fafc;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .border-glow-blue:hover {
+            border-color: #0070FF;
+            box-shadow: 0 0 15px rgba(0, 112, 255, 0.3);
+        }
+
+        .border-glow-green:hover {
+            border-color: #00FFAB;
+            box-shadow: 0 0 15px rgba(0, 255, 171, 0.3);
+        }
+
+        /* Typewriter Cursor */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #00FFAB;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Timeline Connector Line */
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #0070FF, #00FFAB, #64748b);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradient-x 15s ease infinite;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 280px;
+            height: 350px;
+        }
+
+        .profile-card {
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            border-radius: 24px;
+            border: 2px solid rgba(0, 112, 255, 0.3);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 112, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .profile-card:hover {
+            border-color: #0070FF;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 112, 255, 0.4);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .profile-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.8) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .profile-frame-decor {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 40px;
+            height: 40px;
+            border-top: 3px solid #00FFAB;
+            border-left: 3px solid #00FFAB;
+            border-top-left-radius: 12px;
+            z-index: 20;
+        }
+
+        .profile-frame-decor-2 {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-bottom: 3px solid #0070FF;
+            border-right: 3px solid #0070FF;
+            border-bottom-right-radius: 12px;
+            z-index: 20;
+        }
+
+        .lang-toggle-btn {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-toggle-btn.active {
+            background: #0070FF;
+            color: white;
+            border-color: #0070FF;
+        }
+
+        .tag-pill {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            border-width: 1px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="selection:bg-ue-blue/30 selection:text-tech-green font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] glass border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-tighter font-mono cursor-pointer" onclick="smoothScroll(event, 'hero')">
+                <span class="text-ue-blue">SU</span> <span class="text-slate-400">P.C.</span>
+            </div>
+            
+            <div class="hidden lg:flex space-x-8 text-sm font-medium items-center font-sans">
+                <a href="#hero" onclick="smoothScroll(event, 'hero')" class="hover:text-tech-green transition-colors" data-i18n="nav-about">關於我</a>
+                <a href="#skills" onclick="smoothScroll(event, 'skills')" class="hover:text-tech-green transition-colors" data-i18n="nav-skills">核心能力</a>
+                <a href="#experience" onclick="smoothScroll(event, 'experience')" class="hover:text-tech-green transition-colors" data-i18n="nav-exp">工作經歷</a>
+                <a href="#projects" onclick="smoothScroll(event, 'projects')" class="hover:text-tech-green transition-colors" data-i18n="nav-projects">精選專案</a>
+                <a href="#contact" onclick="smoothScroll(event, 'contact')" class="hover:text-tech-green transition-colors" data-i18n="nav-contact">聯絡我</a>
+                
+                <div class="flex items-center space-x-1 ml-4 bg-slate-900 p-1 rounded-lg">
+                    <button onclick="setLanguage('en')" id="btn-en" class="lang-toggle-btn px-2 py-1 rounded text-[10px] font-bold">EN</button>
+                    <button onclick="setLanguage('zh')" id="btn-zh" class="lang-toggle-btn px-2 py-1 rounded text-[10px] font-bold active">中文</button>
+                </div>
+            </div>
+            
+            <div class="lg:hidden flex items-center space-x-4">
+                 <div class="flex items-center space-x-1 bg-slate-900 p-1 rounded-lg">
+                    <button onclick="setLanguage('en')" id="btn-en-mob" class="lang-toggle-btn px-2 py-1 rounded text-[10px] font-bold">EN</button>
+                    <button onclick="setLanguage('zh')" id="btn-zh-mob" class="lang-toggle-btn px-2 py-1 rounded text-[10px] font-bold active">ZH</button>
+                </div>
+                <i class="fas fa-bars text-xl cursor-pointer"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-32 pb-12 relative overflow-hidden animated-bg" id="hero">
+        <div class="absolute top-1/4 -left-1/4 w-96 h-96 bg-ue-blue/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-tech-green/10 rounded-full blur-[120px]"></div>
+
+        <div class="container mx-auto px-6 z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+                    <h1 class="text-4xl md:text-7xl font-bold mb-6 tracking-tight leading-snug font-sans" data-aos="fade-right">
+                        <span data-i18n="hero-name-zh" class="block lg:inline">蘇品甄</span> 
+                        <span class="text-slate-500 font-light hidden lg:inline mx-2">|</span> 
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-ue-blue to-tech-green block lg:inline-block mt-4 lg:mt-0 font-sans" data-i18n="hero-name-en">Annie Su</span>
+                    </h1>
+                    
+                    <div class="h-10 mb-8 text-lg md:text-2xl font-mono text-slate-300" data-aos="fade-right" data-aos-delay="200">
+                        <span id="typewriter"></span><span class="cursor"></span>
+                    </div>
+
+                    <p class="max-w-2xl mx-auto lg:mx-0 text-slate-400 text-base md:text-lg mb-10 leading-relaxed font-sans" data-aos="fade-right" data-aos-delay="400" data-i18n="hero-desc">
+                        專注於開發即時互動與影視科技應用，將遊戲引擎與 AI 技術整合成現場運作系統。在工程架構與影像美學之間，構建通往未來的數位橋樑。
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 font-sans" data-aos="fade-right" data-aos-delay="600">
+                        <a href="#projects" onclick="smoothScroll(event, 'projects')" class="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20" data-i18n="btn-projects">
+                            查看專案
+                        </a>
+                        <a href="#contact" onclick="smoothScroll(event, 'contact')" class="px-8 py-3 glass hover:bg-white/10 text-white font-bold rounded-lg transition-all border border-white/10" data-i18n="btn-contact">
+                            聯絡我
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex justify-center order-1 lg:order-2" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="profile-container animate-float">
+                        <div class="profile-frame-decor"></div>
+                        <div class="profile-frame-decor-2"></div>
+                        <div class="profile-card">
+                            <img src="https://i.ibb.co/67P8vV5/image.png" alt="Annie Su">
+                            <div class="profile-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack (核心能力) -->
+    <section id="skills" class="py-24 relative bg-slate-900/30">
+        <div class="container mx-auto px-6 font-sans">
+            <h2 class="text-3xl font-bold mb-16 text-center" data-aos="fade-up">
+                <span data-i18n="skills-title">核心能力</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
+                <div class="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up">
+                    <div class="text-ue-blue text-4xl mb-6"><i class="fas fa-cube"></i></div>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skill-1-title">遊戲引擎開發</h3>
+                    <ul class="space-y-3 text-slate-400 font-sans text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> Unreal Engine 5</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> C++ / Blueprints</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> Pixel Streaming</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> Python Scripting</li>
+                    </ul>
+                </div>
+
+                <div class="glass p-8 rounded-2xl border-glow-green transition-all" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-tech-green text-4xl mb-6"><i class="fas fa-video"></i></div>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skill-2-title">虛擬製作技術</h3>
+                    <ul class="space-y-3 text-slate-400 font-sans text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-ue-blue mr-2"></i> Zero Density / Reality</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ue-blue mr-2"></i> Camera Tracking</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ue-blue mr-2"></i> nDisplay Configuration</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ue-blue mr-2"></i> LiveLink Protocol</li>
+                    </ul>
+                </div>
+
+                <div class="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-white text-4xl mb-6"><i class="fas fa-network-wired"></i></div>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skill-3-title">廣電系統工程</h3>
+                    <ul class="space-y-3 text-slate-400 font-sans text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> SMPTE ST 2110 IP</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> PTP Synchronization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> SDI / NDI Infrastructure</li>
+                        <li class="flex items-center"><i class="fas fa-check text-tech-green mr-2"></i> Cisco/Arista Switch</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline (工作經歷) -->
+    <section id="experience" class="py-24 bg-slate-950 relative overflow-hidden font-sans">
+        <div class="container mx-auto px-6 relative">
+            <h2 class="text-3xl font-bold mb-20 text-center font-sans" data-aos="fade-up">
+                <span data-i18n="exp-title">工作經歷</span>
+            </h2>
+            
+            <div class="relative font-sans">
+                <!-- Vertical Line -->
+                <div class="timeline-line"></div>
+
+                <!-- Exp 1: System Engineer (Left Side) -->
+                <div class="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-right">
+                    <div class="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                        <div class="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onclick="openModal('exp-antest')">
+                             <div class="text-ue-blue font-sans font-bold text-xs mb-2" data-i18n="exp-1-date">2025.08 - Present</div>
+                             <h3 class="text-xl font-bold text-white mb-1 font-sans" data-i18n="exp-1-title">系統工程師 @ 台灣安達斯</h3>
+                             <div class="flex flex-wrap justify-end gap-2 mb-4 font-mono">
+                                <span class="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#ST2110</span>
+                                <span class="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#VP</span>
+                                <span class="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#UE5</span>
+                             </div>
+                             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="exp-1-short">負責 ST 2110 IP 化製播流程設計與虛擬製作現場部署，優化訊號同步與延遲控制。</p>
+                             <div class="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans" data-i18n="view-details">查看細節 <i class="fas fa-chevron-right ml-1"></i></div>
+                        </div>
+                    </div>
+                    <div class="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,255,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                    <div class="md:hidden w-full pl-10">
+                        <div class="glass p-6 rounded-xl border-glow-blue cursor-pointer font-sans" onclick="openModal('exp-antest')">
+                             <span class="text-ue-blue font-sans font-bold block mb-2" data-i18n="exp-1-date">2025.08 - Present</span>
+                             <h3 class="text-xl font-bold text-white mb-1 font-sans" data-i18n="exp-1-title">系統工程師 @ 台灣安達斯</h3>
+                             <p class="text-slate-400 text-sm" data-i18n="exp-1-short">負責 ST 2110 IP 化製播流程設計與虛擬製作現場部署。</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-1/2 pl-12 font-sans"></div>
+                </div>
+
+                <!-- Exp 2: UE Engineer (Right Side) -->
+                <div class="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
+                    <div class="hidden md:block w-1/2 pr-12 font-sans"></div>
+                    <div class="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                    <div class="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
+                        <div class="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onclick="openModal('exp-n2')">
+                             <div class="text-tech-green font-sans font-bold text-xs mb-2" data-i18n="exp-2-date">2024.10 - 2025.07</div>
+                             <h3 class="text-xl font-bold text-white mb-1 font-sans" data-i18n="exp-2-title">UE 遊戲引擎工程師 @ 能火動畫</h3>
+                             <div class="flex flex-wrap gap-2 mb-4 font-mono">
+                                <span class="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#AI</span>
+                                <span class="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unreal Engine</span>
+                                <span class="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
+                             </div>
+                             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="exp-2-short">主導 3D AI 虛擬人開發，整合 LLM (ChatGPT) 與即時語音辨識，優化多人連線同步效能。</p>
+                             <div class="mt-4 text-tech-green text-[10px] font-bold tracking-widest uppercase font-sans" data-i18n="view-details">查看細節 <i class="fas fa-chevron-right ml-1"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exp 3: TA/RA @ NDHU (Left Side) -->
+                <div class="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
+                    <div class="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                        <div class="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onclick="openModal('exp-ndhu')">
+                             <div class="text-slate-500 font-sans font-bold text-xs mb-2" data-i18n="exp-3-date">2022.09 - 2024.07</div>
+                             <h3 class="text-xl font-bold text-white mb-1 font-sans" data-i18n="exp-3-title">研發助理 / TA @ 東華大學</h3>
+                             <div class="flex flex-wrap justify-end gap-2 mb-4 font-mono">
+                                <span class="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
+                                <span class="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unity3D</span>
+                                <span class="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Python</span>
+                             </div>
+                             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="exp-3-short">投入 VR/AR 內容開發與 360 度全景追蹤算法研究，支援國科會虛擬製作相關專案。</p>
+                             <div class="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans" data-i18n="view-details">查看細節 <i class="fas fa-chevron-right ml-1"></i></div>
+                        </div>
+                    </div>
+                    <div class="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                    <div class="md:hidden w-full pl-10 font-sans">
+                        <div class="glass p-6 rounded-xl border-glow-blue cursor-pointer" onclick="openModal('exp-ndhu')">
+                             <span class="text-slate-500 font-sans font-bold block mb-2" data-i18n="exp-3-date">2022.09 - 2024.07</span>
+                             <h3 class="text-xl font-bold text-white mb-1 font-sans" data-i18n="exp-3-title">研發助理 / TA @ 東華大學</h3>
+                             <p class="text-slate-400 text-sm" data-i18n="exp-3-short">投入 VR/AR 內容開發與 360 度全景追蹤研究。</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-1/2 pl-12 font-sans"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid (精選專案) -->
+    <section id="projects" class="py-24 bg-slate-900/20 font-sans">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold font-sans">
+                        <span data-i18n="projects-title">精選專案</span>
+                    </h2>
+                    <p class="text-slate-400 mt-2 font-sans" data-i18n="projects-subtitle">技術、視覺與工程的交匯點</p>
+                </div>
+                <div class="mt-4 md:mt-0" data-aos="fade-left">
+                    <span class="text-slate-500 font-sans text-sm font-sans" data-i18n="projects-gallery">作品集網格</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
+                <!-- Project 1 -->
+                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all" onclick="openModal('modal-1')" data-aos="zoom-in">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="AI Project" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center"><i class="fas fa-robot text-6xl text-white/20"></i></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3 font-mono">
+                            <span class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
+                            <span class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">AI</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans" data-i18n="proj-1-title">3D AI 虛擬人互動系統</h3>
+                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-1-desc">整合 LLM 與即時語音，實現具備自然語言理解能力的 3D 接待員。</p>
+                        <button class="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                            <span data-i18n="btn-details">查看細節</span> <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-green transition-all font-sans" onclick="openModal('modal-2')" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=800&auto=format&fit=crop" alt="VP Project" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-br from-tech-green/40 to-slate-950 flex items-center justify-center"><i class="fas fa-video-slash text-6xl text-white/20"></i></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3 font-mono">
+                            <span class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Python</span>
+                            <span class="text-[10px] px-2 py-1 bg-white/10 text-white border border-white/20 rounded">Unity</span>
+                            <span class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded">HTC Vive</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans" data-i18n="proj-2-title">非綠幕虛擬影視製作系統</h3>
+                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-2-desc">整合深度學習與深度相機影像去背，實現無綠幕即時影像合成。</p>
+                        <button class="text-xs font-bold text-tech-green flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                            <span data-i18n="btn-details">查看細節</span> <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans" onclick="openModal('modal-3')" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop" alt="Server Project" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center"><i class="fas fa-server text-6xl text-white/20"></i></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3 font-mono">
+                            <span class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">ST 2110</span>
+                            <span class="text-[10px] px-2 py-1 bg-slate-700/10 text-slate-400 border border-slate-700/20 rounded">IP</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans" data-i18n="proj-3-title">IP 化廣電直播架構</h3>
+                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-3-desc">基於全 IP 化架構，實現低延遲、高頻寬的 4K 訊號排程管理系統。</p>
+                        <button class="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                            <span data-i18n="btn-details">查看細節</span> <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (聯絡我) -->
+    <footer id="contact" class="py-24 border-t border-white/5 bg-slate-950 font-sans">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20 font-sans">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold mb-8 font-sans" data-i18n="edu-title">學歷背景</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start justify-center md:justify-start">
+                            <div class="w-1 h-12 bg-ue-blue"></div>
+                            <div class="text-left font-sans">
+                                <h4 class="font-bold text-white font-sans" data-i18n="edu-1-uni">國立東華大學</h4>
+                                <p class="text-slate-400 text-sm font-sans" data-i18n="edu-1-deg">資訊工程研究所 碩士 | 2022 - 2024</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start justify-center md:justify-start">
+                            <div class="w-1 h-12 bg-tech-green"></div>
+                            <div class="text-left font-sans">
+                                <h4 class="font-bold text-white font-sans" data-i18n="edu-2-uni">國立台灣藝術大學</h4>
+                                <p class="text-slate-400 text-sm font-sans" data-i18n="edu-2-deg">廣播電視學系 學士 | 2017 - 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <h2 class="text-3xl font-bold mb-8 font-sans" data-i18n="connect-title">聯絡我</h2>
+                    <p class="text-slate-400 mb-8 font-sans" data-i18n="connect-desc">對虛擬製作、遊戲引擎開發或廣電系統轉型有興趣？歡迎來信交流！</p>
+                    <div class="flex justify-center md:justify-start space-x-6 text-3xl">
+                        <a href="https://github.com/supinzhen" target="_blank" class="text-slate-500 hover:text-ue-blue transition-all"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/%E5%93%81%E7%94%84-%E8%98%87-b905491b8/" target="_blank" class="text-slate-500 hover:text-ue-blue transition-all"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:anniesuworkshop@gmail.com" class="text-slate-500 hover:text-tech-green transition-all"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-10 border-t border-white/5 text-slate-600 text-xs font-sans">
+                &copy; 2025 SU PIN-CHEN. CRAFTED WITH <span class="text-tech-green">CODE</span> AND <span class="text-ue-blue">UE5</span>.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4">
+        <div class="modal-overlay absolute inset-0 bg-slate-950/90 backdrop-blur-xl" onclick="closeModal()"></div>
+        <div class="glass max-w-2xl w-full p-8 rounded-2xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto font-sans">
+            <button onclick="closeModal()" class="sticky top-0 float-right text-slate-400 hover:text-white z-20">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <div id="modal-content" class="clear-both">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const translations = {
+            en: {
+                "nav-about": "About", "nav-skills": "Skills", "nav-exp": "Experience", "nav-projects": "Projects", "nav-contact": "Contact",
+                "hero-name-zh": "Su Pin-Chen", "hero-name-en": "Annie Su",
+                "hero-desc": "Focusing on real-time interaction and film-tech applications, integrating game engines and AI into live operation systems. Building digital bridges between engineering and aesthetics.",
+                "btn-projects": "View Projects", "btn-contact": "Contact Me",
+                "skills-title": "Skills",
+                "skill-1-title": "Game Engine Dev", "skill-2-title": "Virtual Production", "skill-3-title": "Broadcast Engineering",
+                "exp-title": "Experience",
+                "exp-1-title": "System Engineer @ New Digital Technology Holdings Ltd.", "exp-1-date": "2025.08 - Present", "exp-1-short": "Broadcasting system integration, ST 2110 IP transmission, and VP on-site deployment.",
+                "exp-2-title": "UE Engine Engineer @ BEARVFX", "exp-2-date": "2024.10 - 2025.07", "exp-2-short": "Led 3D AI avatar development and multi-user voice synchronization optimization.",
+                "exp-3-title": "Research Assistant @ NDHU", "exp-3-date": "2022.09 - 2024.07", "exp-3-short": "Focusing on 360 pano tracking, VR/AR development, and computer vision research.",
+                "view-details": "View Details",
+                "projects-title": "Projects", "projects-subtitle": "Where tech, visuals, and engineering meet", "projects-gallery": "Case Gallery",
+                "proj-1-title": "3D AI Avatar System", "proj-1-desc": "Integrated LLM and real-time speech for a 3D receptionist with NLU capabilities.",
+                "proj-2-title": "Green-screen-free VP System", "proj-2-desc": "Integrating deep-learning and depth-camera-based video matting methods with 3D tracking.",
+                "proj-3-title": "IP Broadcast Architecture", "proj-3-desc": "High-bandwidth 4K signal scheduling system based on a fully IP-based architecture.",
+                "btn-details": "VIEW DETAILS",
+                "edu-title": "Education", "edu-1-uni": "National Dong Hwa University", "edu-1-deg": "M.S. in Computer Science | 2022 - 2024",
+                "edu-2-uni": "National Taiwan Univ. of Arts", "edu-2-deg": "B.A. in Radio & Television | 2017 - 2022",
+                "connect-title": "Contact Me", "connect-desc": "Interested in VP, game engines, or broadcast IP transformation? Let's talk!",
+                "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
+            },
+            zh: {
+                "nav-about": "關於我", "nav-skills": "核心能力", "nav-exp": "工作經歷", "nav-projects": "精選專案", "nav-contact": "聯絡我",
+                "hero-name-zh": "蘇品甄", "hero-name-en": "Annie Su",
+                "hero-desc": "專注於開發即時互動與影視科技應用，將遊戲引擎與 AI 技術整合成現場運作系統。在工程架構與影像美學之間，構建通往未來的數位橋樑。",
+                "btn-projects": "查看專案", "btn-contact": "聯絡我",
+                "skills-title": "核心能力",
+                "skill-1-title": "遊戲引擎開發", "skill-2-title": "虛擬製作技術", "skill-3-title": "廣電系統工程",
+                "exp-title": "工作經歷",
+                "exp-1-title": "系統工程師 @ 台灣安達斯", "exp-1-date": "2025.08 - Present", "exp-1-short": "負責 ST 2110 IP 化製播流程設計與虛擬製作現場部署，優化訊號同步與延遲控制。",
+                "exp-2-title": "UE 遊戲引擎工程師 @ 能火動畫", "exp-2-date": "2024.10 - 2025.07", "exp-2-short": "主導 3D AI 虛擬人開發，整合 LLM (ChatGPT) 與即時語音辨識，優化多人連線同步效能。",
+                "exp-3-title": "研發助理 / TA @ 東華大學", "exp-3-date": "2022.09 - 2024.07", "exp-3-short": "投入 VR/AR 內容開發與 360 度全景追蹤算法研究，支援國科會虛擬製作相關專案。",
+                "view-details": "查看細節",
+                "projects-title": "精選專案", "projects-subtitle": "技術、視覺與工程的交匯點", "projects-gallery": "作品集網格",
+                "proj-1-title": "3D AI 虛擬人互動系統", "proj-1-desc": "整合 LLM 與即時語音，實現具備自然語言理解能力的 3D 接待員。",
+                "proj-2-title": "非綠幕虛擬影視製作系統", "proj-2-desc": "整合深度學習與深度相機影像去背，實現無綠幕即時影像合成。",
+                "proj-3-title": "IP 化廣電直播架構", "proj-3-desc": "基於全 IP 化架構，實現低延遲、高頻寬的 4K 訊號排程管理系統。",
+                "btn-details": "查看細節",
+                "edu-title": "學歷背景", "edu-1-uni": "國立東華大學", "edu-1-deg": "資訊工程研究所 碩士 | 2022 - 2024",
+                "edu-2-uni": "國立台灣藝術大學", "edu-2-deg": "廣播電視學系 學士 | 2017 - 2022",
+                "connect-title": "聯絡我", "connect-desc": "對虛擬製作、遊戲引擎開發或廣電系統轉型有興趣？歡迎來信交流！",
+                "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+            document.getElementById('btn-en-mob').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-zh-mob').classList.toggle('active', lang === 'zh');
+            resetTypewriter();
+        }
+
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
+
+        let wordIndex = 0, charIndex = 0, isDeleting = false, typingTimer;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function type() {
+            const words = translations[currentLang]["typewriter-words"];
+            const currentWord = words[wordIndex];
+            typewriterElement.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true; typingTimer = setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typingTimer = setTimeout(type, 500);
+            } else {
+                typingTimer = setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+
+        function resetTypewriter() {
+            clearTimeout(typingTimer);
+            wordIndex = charIndex = 0; isDeleting = false;
+            typewriterElement.textContent = ''; type();
+        }
+
+        const modalData = {
+            'modal-1': {
+                en: { title: '3D AI Avatar System', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.' },
+                zh: { title: '3D AI 虛擬人互動系統', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。' }
+            },
+            'modal-2': {
+                en: { 
+                    title: 'In-Camera VFX System (Green-screen-free)', 
+                    tech: 'Python, Unity, HTC Vive Tracker, Deep Learning', 
+                    desc: 'Our VP system eliminates the need for a green screen by integrating deep-learning-based and depth-camera-based video matting methods, coupled with a 3D tracker for camera tracking. This allows for real-time previewing of composite footage, reducing green screen setup costs and simplifying the compositing process of virtual and real images.',
+                    videoEmbedUrl: 'https://www.youtube-nocookie.com/embed/-cOFrrE-9bQ?rel=0&modestbranding=1',
+                    paperUrl: 'https://www.mdpi.com/2079-9292/13/16/3182',
+                    paperLabel: 'View Paper'
+                },
+                zh: { 
+                    title: '非綠幕虛擬影視製作系統', 
+                    tech: 'Python, Unity, HTC Vive Tracker, 深度學習', 
+                    desc: '本專案透過整合深度學習（Deep Learning）與深度相機（Depth Camera）的影像去背技術，結合 3D 追蹤器（HTC Vive Tracker）實現高精準度的相機追蹤。此系統消除了對傳統綠幕的需求，讓開發者能即時預覽虛實合成畫面，大幅降低棚內架設成本並簡化後期合成流程。',
+                    videoEmbedUrl: 'https://www.youtube-nocookie.com/embed/-cOFrrE-9bQ?rel=0&modestbranding=1',
+                    paperUrl: 'https://www.mdpi.com/2079-9292/13/16/3182',
+                    paperLabel: '查看論文'
+                }
+            },
+            'modal-3': {
+                en: { title: 'IP Broadcast Architecture', tech: 'ST 2110, PTP Sync, IP Routing', desc: 'Design and deployment of end-to-end IP broadcast pipelines. Focusing on high-bandwidth 4K scheduling and PTP clock calibration.' },
+                zh: { title: 'IP 化廣電直播架構', tech: 'ST 2110, PTP Sync, IP Routing', desc: '負責廣電系統從傳統 SDI 轉向 ST 2110 IP 化之架構設計。涉及 PTP 精準時鐘同步與視音訊路由規劃。' }
+            },
+            'exp-antest': {
+                en: { 
+                    title: 'System Engineer @ New Digital Technology Holdings Ltd.', 
+                    tech: 'Broadcasting × ST 2110 × Virtual Production × UE5 × Architecture', 
+                    desc: '• Designing SDI & ST 2110 IP transmission architectures.<br>• Handling PTP synchronization, IP Routing, and multi-vendor device integration.<br>• Managing SDI-to-IP transitions including switch configuration and traffic flow management.<br>• Supporting VP/UE technical deployment and on-site troubleshooting.' 
+                },
+                zh: { 
+                    title: '系統工程師 @ 台灣安達斯有限公司', 
+                    tech: '廣電系統整合 × ST 2110 × Virtual Production × 系統架構', 
+                    desc: '• 參與廣電系統整合專案，包含 SDI 與 ST 2110 IP 影音傳輸架構、PTP 時鐘同步與 IP Routing。<br>• 協助客戶完成 SDI → IP 系統轉換，負責交換器設定、流量管理與視音訊路由規劃。<br>• 支援虛擬製作與 Unreal Engine 系統整合，提供現場技術部署與故障排除。' 
+                }
+            },
+            'exp-n2': { 
+                en: { 
+                    title: 'UE Engine Engineer @ BEARVFX', 
+                    tech: 'AI Integration × Unreal Engine 3D Systems × Voice Optimization', 
+                    desc: '• Integrated facial recognition, TTS, and LLMs (OpenAI, Bedrock) into 3D avatars.<br>• Developed Animation Blueprints for immersive interactive behaviors.<br>• Enhanced Pixel Streaming with user management and dashboard interfaces.<br>• Solved multi-user voice recognition interference issues.' 
+                },
+                zh: { 
+                    title: 'UE 遊戲引擎工程師 @ 能火動畫股份有限公司', 
+                    tech: 'AI 技術整合 × Unreal Engine 3D 互動系統 × 語音優化', 
+                    desc: '• 參與 3D AI 虛擬人專案，整合人臉辨識、語音生成、LLM 技術。<br>• 設計虛擬人動畫藍圖 (Animation Blueprint)，提升互動沉浸感。<br>• 串接第三方 API (OpenAI, Bedrock 等) 建立可擴充架構。<br>• 擴充 Pixel Streaming 並解決多人連線時語音辨識互相干擾問題。<br>• 成功解決多人連線時語音辨識互相干擾的技術問題，提高系統穩定度。' 
+                }
+            },
+            'exp-ndhu': {
+                en: { 
+                    title: 'Research Assistant / TA @ National Dong Hwa University', 
+                    tech: 'Unity3D × VR/AR × Python × Computer Vision', 
+                    desc: '• RA (NSC Project): Research on 360-degree pano video tracking and positioning.<br>• RA (MOE Project): VR course design for project-based learning.<br>• TA: VR/AR game development (Unity) and Computer Vision courses (OpenCV).<br>• Handling debugging support and curriculum management.' 
+                },
+                zh: { 
+                    title: '研發助理 / 教學助理 @ 國立東華大學', 
+                    tech: 'Unity3D × VR/AR × Python × OpenCV × 跨領域協作', 
+                    desc: '• 研發助理 (國科會計畫)：360 度全景影片的追蹤、定位與互動研究。<br>• 研發助理 (教育部計畫)：小組學習輔助之虛擬實境課程開發。<br>• 課堂助教：VR 課程、電腦視覺課程 OpenCV 實作指導。<br>• 協助學生程式 Debug、錄製教學影片、成績統整與作業批改。' 
+                }
+            }
+        };
+
+        function openModal(id) {
+            const data = modalData[id][currentLang];
+            
+            const videoHtml = data.videoEmbedUrl ? `
+                <div class="aspect-video w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
+                    <iframe class="w-full h-full" src="${data.videoEmbedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            ` : '';
+            
+            const paperBtnHtml = data.paperUrl ? `
+                <a href="${data.paperUrl}" target="_blank" class="px-6 py-2 bg-tech-green/20 hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                    <i class="fas fa-file-lines mr-2"></i> ${data.paperLabel || 'Paper'}
+                </a>
+            ` : '';
+
+            document.getElementById('modal-content').innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-3xl font-bold text-ue-blue mb-2 font-sans">${data.title}</h3>
+                        <p class="text-tech-green font-sans text-sm tracking-wide uppercase font-bold">${data.tech}</p>
+                    </div>
+                    <div class="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
+                    
+                    ${videoHtml}
+
+                    <div class="text-slate-300 leading-relaxed text-lg space-y-4 font-sans">
+                        ${data.desc.includes('<br>') ? `<div class="p-4 bg-slate-900/50 rounded-lg border border-white/5 font-sans">${data.desc}</div>` : `<p>${data.desc}</p>`}
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        ${paperBtnHtml}
+                        <button onclick="closeModal()" class="px-6 py-2 glass hover:bg-white/10 text-white rounded-lg transition-all text-sm font-bold font-sans">Close Window</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal-container').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = ''; 
+        }
+
+        function smoothScroll(event, targetId) {
+            event.preventDefault();
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
+            }
+        }
+
+        type();
+        setLanguage('zh');
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
