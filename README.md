@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Su Pin-Chen (Annie Su) - Portfolio
 
-# Run and deploy your AI Studio app
+This is a React-based portfolio website showcasing Unreal Engine, Virtual Production, and Broadcast Engineering projects.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/drive/17RHqJ4JlGSmYw_KVvsMPCkervw1-yPuD
+## Project Structure
+- Built with **React** + **Vite** + **TypeScript**
+- Styled with **Tailwind CSS**
+- Configured with **ESLint** + **Prettier** for code quality
+- **GitHub Actions** for automated deployment
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:**  Node.js (v18+)
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   npm install
+   ```
+
+2. Set the environment variables if needed (refer to `.env.example` if available, or ask for API keys).
+   - Currently uses `GEMINI_API_KEY` for AI features.
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Deployment
+
+This project is configured to deploy to GitHub Pages automatically via GitHub Actions on push to the `main` branch.
+

@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vite
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
