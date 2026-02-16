@@ -270,7 +270,7 @@
         <div class="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-tech-green/10 rounded-full blur-[120px]"></div>
 
         <div class="container mx-auto px-6 z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
                 <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
                     <h1 class="text-4xl md:text-7xl font-bold mb-6 tracking-tight leading-snug font-sans"
                         data-aos="fade-right">
@@ -290,7 +290,7 @@
                         data-aos="fade-right" data-aos-delay="400" data-i18n="hero-desc">
                         專注於開發即時互動與影視科技應用，將遊戲引擎與 AI 技術整合成現場運作系統。在工程架構與影像美學之間，構建通往未來的數位橋樑。
                     </p>
-  
+
                     <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 font-sans"
                         data-aos="fade-right" data-aos-delay="600">
                         <a href="#projects" onclick="smoothScroll(event, 'projects')"
@@ -509,29 +509,38 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
-                <!-- Project 1 -->
-                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all"
-                    onclick="openModal('modal-1')" data-aos="zoom-in">
+                <!-- Project 3 (Now 1st) -->
+                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans"
+                    onclick="openModal('modal-3')" data-aos="zoom-in">
                     <div class="h-48 bg-slate-800 relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop"
-                            alt="AI Project"
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop"
+                            alt="Server Project"
                             class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center">
-                            <i class="fas fa-robot text-6xl text-white/20"></i>
+                            class="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center">
+                            <i class="fas fa-server text-6xl text-white/20"></i>
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="flex gap-2 mb-3 font-mono">
+                        <div class="flex justify-between items-start mb-3 font-mono">
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-slate-700/10 text-slate-400 border border-slate-700/20 rounded">ST
+                                    2110</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Rivermax</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-white/10 text-white border border-white/20 rounded">NMOS</span>
+                            </div>
                             <span
-                                class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">AI</span>
+                                class="text-[10px] text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2026</span>
                         </div>
                         <h3 class="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans"
-                            data-i18n="proj-1-title">3D AI 虛擬人互動系統</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-1-desc">整合 LLM
-                            與即時語音，實現具備自然語言理解能力的 3D 接待員。</p>
+                            data-i18n="proj-3-title">IP 化廣電直播架構</h3>
+                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-3-desc">基於全 IP 化架構，實現低延遲、高頻寬的
+                            4K 訊號排程管理系統。</p>
                         <button
                             class="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
                             <span data-i18n="btn-details">查看細節</span> <i class="fas fa-arrow-right ml-2"></i>
@@ -539,7 +548,7 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
+                <!-- Project 2 (Now 2nd) -->
                 <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-green transition-all font-sans"
                     onclick="openModal('modal-2')" data-aos="zoom-in" data-aos-delay="200">
                     <div class="h-48 bg-slate-800 relative overflow-hidden">
@@ -552,14 +561,18 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="flex gap-2 mb-3 font-mono">
+                        <div class="flex justify-between items-start mb-3 font-mono">
+                            <div class="flex gap-2 flex-wrap">
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Python</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-white/10 text-white border border-white/20 rounded">Unity</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded">HTC
+                                    Vive</span>
+                            </div>
                             <span
-                                class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Python</span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-white/10 text-white border border-white/20 rounded">Unity</span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded">HTC
-                                Vive</span>
+                                class="text-[10px] text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2023-2024</span>
                         </div>
                         <h3 class="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans"
                             data-i18n="proj-2-title">非綠幕虛擬影視製作系統</h3>
@@ -572,30 +585,33 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans"
-                    onclick="openModal('modal-3')" data-aos="zoom-in" data-aos-delay="400">
+                <!-- Project 1 (Now 3rd) -->
+                <div class="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all"
+                    onclick="openModal('modal-1')" data-aos="zoom-in" data-aos-delay="400">
                     <div class="h-48 bg-slate-800 relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop"
-                            alt="Server Project"
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop"
+                            alt="AI Project"
                             class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center">
-                            <i class="fas fa-server text-6xl text-white/20"></i>
+                            class="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center">
+                            <i class="fas fa-robot text-6xl text-white/20"></i>
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="flex gap-2 mb-3 font-mono">
+                        <div class="flex justify-between items-start mb-3 font-mono">
+                            <div class="flex gap-2 flex-wrap">
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
+                                <span
+                                    class="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">AI</span>
+                            </div>
                             <span
-                                class="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">ST
-                                2110</span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-slate-700/10 text-slate-400 border border-slate-700/20 rounded">IP</span>
+                                class="text-[10px] text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2024-2025</span>
                         </div>
                         <h3 class="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans"
-                            data-i18n="proj-3-title">IP 化廣電直播架構</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-3-desc">基於全 IP 化架構，實現低延遲、高頻寬的
-                            4K 訊號排程管理系統。</p>
+                            data-i18n="proj-1-title">3D AI 虛擬人互動系統</h3>
+                        <p class="text-slate-400 text-sm mb-4 font-sans" data-i18n="proj-1-desc">整合 LLM
+                            與即時語音，實現具備自然語言理解能力的 3D 接待員。</p>
                         <button
                             class="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
                             <span data-i18n="btn-details">查看細節</span> <i class="fas fa-arrow-right ml-2"></i>
@@ -686,7 +702,7 @@
                 "projects-title": "Projects", "projects-subtitle": "Where tech, visuals, and engineering meet", "projects-gallery": "Case Gallery",
                 "proj-1-title": "3D AI Avatar System", "proj-1-desc": "Integrated LLM and real-time speech for a 3D receptionist with NLU capabilities.",
                 "proj-2-title": "Green-screen-free VP System", "proj-2-desc": "Integrating deep-learning and depth-camera-based video matting methods with 3D tracking.",
-                "proj-3-title": "IP Broadcast Architecture", "proj-3-desc": "High-bandwidth 4K signal scheduling system based on a fully IP-based architecture.",
+                "proj-3-title": "Unreal Rivermax ST2110 Integration", "proj-3-desc": "Real-world integration of Unreal Engine with ST 2110 IP infrastructure using NVIDIA Rivermax.",
                 "btn-details": "VIEW DETAILS",
                 "edu-title": "Education", "edu-1-uni": "National Dong Hwa University", "edu-1-deg": "M.S. in Computer Science | 2022 - 2024",
                 "edu-2-uni": "National Taiwan Univ. of Arts", "edu-2-deg": "B.A. in Radio & Television | 2017 - 2022",
@@ -708,7 +724,7 @@
                 "projects-title": "精選專案", "projects-subtitle": "技術、視覺與工程的交匯點", "projects-gallery": "作品集網格",
                 "proj-1-title": "3D AI 虛擬人互動系統", "proj-1-desc": "整合 LLM 與即時語音，實現具備自然語言理解能力的 3D 接待員。",
                 "proj-2-title": "非綠幕虛擬影視製作系統", "proj-2-desc": "整合深度學習與深度相機影像去背，實現無綠幕即時影像合成。",
-                "proj-3-title": "IP 化廣電直播架構", "proj-3-desc": "基於全 IP 化架構，實現低延遲、高頻寬的 4K 訊號排程管理系統。",
+                "proj-3-title": "Unreal Rivermax ST2110 Integration", "proj-3-desc": "使用 NVIDIA Rivermax 整合 Unreal Engine 與 ST 2110 IP 廣播基礎設施的實務應用。",
                 "btn-details": "查看細節",
                 "edu-title": "學歷背景", "edu-1-uni": "國立東華大學", "edu-1-deg": "資訊工程研究所 碩士 | 2022 - 2024",
                 "edu-2-uni": "國立台灣藝術大學", "edu-2-deg": "廣播電視學系 學士 | 2017 - 2022",
@@ -762,30 +778,48 @@
 
         const modalData = {
             'modal-1': {
-                en: { title: '3D AI Avatar System', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.' },
-                zh: { title: '3D AI 虛擬人互動系統', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。' }
+                en: { year: '2024-2025', title: '3D AI Avatar System', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.' },
+                zh: { year: '2024-2025', title: '3D AI 虛擬人互動系統', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。' }
             },
             'modal-2': {
                 en: {
-                    title: 'In-Camera VFX System (Green-screen-free)',
+                    year: '2023-2024',
+                    title: 'Green-screen-free VP System',
                     tech: 'Python, Unity, HTC Vive Tracker, Deep Learning',
                     desc: 'Our VP system eliminates the need for a green screen by integrating deep-learning-based and depth-camera-based video matting methods, coupled with a 3D tracker for camera tracking. This allows for real-time previewing of composite footage, reducing green screen setup costs and simplifying the compositing process of virtual and real images.',
                     videoEmbedUrl: 'https://www.youtube-nocookie.com/embed/-cOFrrE-9bQ?rel=0&modestbranding=1',
                     paperUrl: 'https://www.mdpi.com/2079-9292/13/16/3182',
-                    paperLabel: 'View Paper'
+                    paperLabel: 'View Paper',
+                    githubUrl: 'https://github.com/supinzhen/Non-green-screen-Virtual-Production-System'
                 },
                 zh: {
+                    year: '2023-2024',
                     title: '非綠幕虛擬影視製作系統',
                     tech: 'Python, Unity, HTC Vive Tracker, 深度學習',
                     desc: '本專案透過整合深度學習（Deep Learning）與深度相機（Depth Camera）的影像去背技術，結合 3D 追蹤器（HTC Vive Tracker）實現高精準度的相機追蹤。此系統消除了對傳統綠幕的需求，讓開發者能即時預覽虛實合成畫面，大幅降低棚內架設成本並簡化後期合成流程。',
                     videoEmbedUrl: 'https://www.youtube-nocookie.com/embed/-cOFrrE-9bQ?rel=0&modestbranding=1',
                     paperUrl: 'https://www.mdpi.com/2079-9292/13/16/3182',
-                    paperLabel: '查看論文'
+                    paperLabel: '查看論文',
+                    githubUrl: 'https://github.com/supinzhen/Non-green-screen-Virtual-Production-System'
                 }
             },
             'modal-3': {
-                en: { title: 'IP Broadcast Architecture', tech: 'ST 2110, PTP Sync, IP Routing', desc: 'Design and deployment of end-to-end IP broadcast pipelines. Focusing on high-bandwidth 4K scheduling and PTP clock calibration.' },
-                zh: { title: 'IP 化廣電直播架構', tech: 'ST 2110, PTP Sync, IP Routing', desc: '負責廣電系統從傳統 SDI 轉向 ST 2110 IP 化之架構設計。涉及 PTP 精準時鐘同步與視音訊路由規劃。' }
+                en: {
+                    year: '2026',
+                    title: 'Unreal Rivermax ST2110 Integration',
+                    tech: 'ST 2110, NVIDIA Rivermax, NMOS, UE5',
+                    desc: 'This project demonstrates a real-world system integration workflow between Unreal Engine and professional broadcast IP infrastructure based on SMPTE ST 2110 standards.<br><br>The system utilizes NVIDIA Rivermax SDK with Mellanox ConnectX-6 Lx NIC for high-performance IP video transmission, integrates with AJA Kona IP for SDI/IP interoperability, and employs EVS Cerebrum for centralized device control and routing management. NMOS (IS‑04/IS‑05) is used for device discovery, registration, and automated routing control across the entire IP workflow, enabling Unreal Engine and other ST 2110 nodes to participate in a unified, standards‑based control environment.',
+                    imageUrl: './image/ST2110_Infra.png',
+                    githubUrl: 'https://github.com/supinzhen/Unreal-Rivermax-ST2110-Integration'
+                },
+                zh: {
+                    year: '2026',
+                    title: 'Unreal Rivermax ST2110 Integration',
+                    tech: 'ST 2110, NVIDIA Rivermax, NMOS, UE5',
+                    desc: '本專案展示了 Unreal Engine 與基於 SMPTE ST 2110 標準的專業廣播 IP 基礎設施之間的實際系統整合工作流程。<br>系統利用 NVIDIA Rivermax SDK 搭配 Mellanox ConnectX-6 Lx 網卡進行高效能 IP 影像傳輸，整合 AJA Kona IP 實現 SDI/IP 互通，並使用 EVS Cerebrum 進行集中設備控制與路由管理。透過 NMOS (IS‑04/IS‑05) 實現設備發現、註冊與自動路由控制，讓 Unreal Engine 與其他 ST 2110 節點能共同參與統一的標準化控制環境。',
+                    imageUrl: './image/ST2110_Infra.png',
+                    githubUrl: 'https://github.com/supinzhen/Unreal-Rivermax-ST2110-Integration'
+                }
             },
             'exp-antest': {
                 en: {
@@ -834,9 +868,21 @@
                 </div>
             ` : '';
 
+            const imageHtml = data.imageUrl ? `
+                <div class="w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
+                    <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-auto object-cover" />
+                </div>
+            ` : '';
+
             const paperBtnHtml = data.paperUrl ? `
                 <a href="${data.paperUrl}" target="_blank" class="px-6 py-2 bg-tech-green/20 hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
                     <i class="fas fa-file-lines mr-2"></i> ${data.paperLabel || 'Paper'}
+                </a>
+            ` : '';
+
+            const githubBtnHtml = data.githubUrl ? `
+                <a href="${data.githubUrl}" target="_blank" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                    <i class="fab fa-github mr-2"></i> GitHub
                 </a>
             ` : '';
 
@@ -844,17 +890,21 @@
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-3xl font-bold text-ue-blue mb-2 font-sans">${data.title}</h3>
-                        <p class="text-tech-green font-sans text-sm tracking-wide uppercase font-bold">${data.tech}</p>
+                        <p class="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">${data.tech}</p>
+                        <div class="flex gap-4 mb-4">
+                            ${paperBtnHtml}
+                            ${githubBtnHtml}
+                        </div>
                     </div>
                     <div class="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
                     
                     ${videoHtml}
+                    ${imageHtml}
 
                     <div class="text-slate-300 leading-relaxed text-lg space-y-4 font-sans">
                         ${data.desc.includes('<br>') ? `<div class="p-4 bg-slate-900/50 rounded-lg border border-white/5 font-sans">${data.desc}</div>` : `<p>${data.desc}</p>`}
                     </div>
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        ${paperBtnHtml}
+                    <div class="flex justify-end pt-4">
                         <button onclick="closeModal()" class="px-6 py-2 glass hover:bg-white/10 text-white rounded-lg transition-all text-sm font-bold font-sans">Close Window</button>
                     </div>
                 </div>
