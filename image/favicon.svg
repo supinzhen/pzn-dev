@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    
+    <!-- Neon S Glow Gradient -->
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0070FF">
+        <animate attributeName="stop-color" values="#0070FF;#00a2ff;#0070FF" dur="4s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#00FFAB">
+        <animate attributeName="stop-color" values="#00FFAB;#33ffcc;#00FFAB" dur="4s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+
+    <!-- Filter for Glow effect -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="innerGlow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Rect -->
+  <rect width="512" height="512" rx="64" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid Pattern for Tech Feel -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" opacity="0.03"/>
+  </pattern>
+  <rect width="512" height="512" rx="64" fill="url(#grid)"/>
+
+  <!-- Tech Decorative Elements -->
+  <!-- Corner Brackets -->
+  <g stroke="url(#neonGrad)" stroke-width="4" fill="none" opacity="0.6">
+    <path d="M 80 140 L 80 80 L 140 80" />
+    <path d="M 372 80 L 432 80 L 432 140" />
+    <path d="M 432 372 L 432 432 L 372 432" />
+    <path d="M 140 432 L 80 432 L 80 372" />
+  </g>
+
+  <!-- Scanline / Circuit lines -->
+  <line x1="100" y1="256" x2="150" y2="256" stroke="#0070FF" stroke-width="2" opacity="0.2"/>
+  <line x1="362" y1="256" x2="412" y2="256" stroke="#00FFAB" stroke-width="2" opacity="0.2"/>
+
+  <!-- The "S" - Futuristic geometric style -->
+  <g filter="url(#glow)">
+    <text x="50%" y="56%" 
+          text-anchor="middle" 
+          dominant-baseline="middle"
+          font-family="'Segoe UI', 'Inter', 'Roboto', 'Arial Black', sans-serif" 
+          font-weight="900" 
+          font-size="340" 
+          fill="url(#neonGrad)"
+          style="letter-spacing: -10px;">
+      S
+    </text>
+  </g>
+
+  <!-- High-tech crosshairs -->
+  <circle cx="256" cy="256" r="220" stroke="url(#neonGrad)" stroke-width="1" fill="none" opacity="0.1"/>
+  <circle cx="256" cy="256" r="240" stroke="url(#neonGrad)" stroke-width="0.5" fill="none" opacity="0.05"/>
+</svg>
