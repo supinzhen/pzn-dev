@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Save, Trash2, Edit2, Lock, Settings, ArrowLeft, Loader2, LogOut, Download, Copy, Check, Code as CodeIcon } from 'lucide-react';
+import React, { useState } from 'react';
+import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { noteService, Note } from '../utils/noteService';
 
@@ -14,9 +14,23 @@ const Admin: React.FC = () => {
     const [showExport, setShowExport] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    const [currentNote, setCurrentNote] = useState<Partial<Note>>({
+        title_zh: '',
+        title_en: '',
+        category: 'Unreal Engine',
+        date: new Date().toISOString().split('T')[0],
+        author: 'Annie Su',
+        readTime: '5 min read',
+        tags: [],
+        summary_zh: '',
+        summary_en: '',
+        content_zh: '',
+        content_en: ''
+    });
+
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        const adminPassword = (import.meta as any).env.VITE_ADMIN_PASSWORD || 'admin123';
+        const adminPassword = (import.meta as unknown as { env: Record<string, string> }).env.VITE_ADMIN_PASSWORD || 'admin123';
         if (password === adminPassword) {
             setIsAuthenticated(true);
             sessionStorage.setItem('admin_auth', 'true');
@@ -59,20 +73,6 @@ const Admin: React.FC = () => {
             </div>
         );
     }
-
-    const [currentNote, setCurrentNote] = useState<Partial<Note>>({
-        title_zh: '',
-        title_en: '',
-        category: 'Unreal Engine',
-        date: new Date().toISOString().split('T')[0],
-        author: 'Annie Su',
-        readTime: '5 min read',
-        tags: [],
-        summary_zh: '',
-        summary_en: '',
-        content_zh: '',
-        content_en: ''
-    });
 
     const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Web & AI'];
 

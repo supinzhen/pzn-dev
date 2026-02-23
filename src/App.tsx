@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Lock, LogOut } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import Intro from './pages/Intro';
 import Notes from './pages/Notes';
 import AllNotes from './pages/AllNotes';

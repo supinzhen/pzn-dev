@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, Calendar, Tag, ChevronRight, Filter } from 'lucide-react';
+import { ArrowLeft, Search, ChevronRight } from 'lucide-react';
 import { noteService, Note } from '../utils/noteService';
 
 interface AllNotesProps {
