@@ -458,7 +458,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                     <div className="absolute inset-0 bg-slate-950/80 dark:bg-slate-950/90 light:bg-slate-200/80 backdrop-blur-xl" onClick={closeModal}></div>
                     <div className="glass max-w-2xl w-full p-8 rounded-2xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto font-sans">
                         {(() => {
-                            const data = modalData[modalId][lang] as any; // Using local any for JSX to simplify property access while keeping the main definition typed
+                            const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
                             return (
                                 <>
                                     <button onClick={closeModal} className="sticky top-0 float-right text-slate-400 hover:text-ue-blue z-20">
