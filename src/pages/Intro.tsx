@@ -34,7 +34,25 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
         }
     }, [hash]);
 
-    const modalData: any = {
+    interface ModalContent {
+        year: string;
+        title: string;
+        tech: string;
+        desc: string;
+        videoEmbedUrl?: string;
+        imageUrl?: string;
+        paperUrl?: string;
+        paperLabel?: string;
+        githubUrl?: string;
+    }
+
+    interface ExperienceContent {
+        title: string;
+        tech: string;
+        desc: string;
+    }
+
+    const modalData: Record<string, { en: ModalContent | ExperienceContent; zh: ModalContent | ExperienceContent }> = {
         'modal-1': {
             en: { year: '2024-2025', title: '3D AI Avatar System', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.' },
             zh: { year: '2024-2025', title: '3D AI 虛擬人互動系統', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。' }
@@ -439,47 +457,54 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                 <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-slate-950/80 dark:bg-slate-950/90 light:bg-slate-200/80 backdrop-blur-xl" onClick={closeModal}></div>
                     <div className="glass max-w-2xl w-full p-8 rounded-2xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto font-sans">
-                        <button onClick={closeModal} className="sticky top-0 float-right text-slate-400 hover:text-ue-blue z-20">
-                            <X className="w-8 h-8" />
-                        </button>
-                        <div className="clear-both">
-                            <div className="space-y-6">
-                                <div>
-                                    <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">{modalData[modalId][lang].title}</h3>
-                                    <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">{modalData[modalId][lang].tech}</p>
-                                    <div className="flex gap-4 mb-4">
-                                        {modalData[modalId][lang].paperUrl && (
-                                            <a href={modalData[modalId][lang].paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/20 hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
-                                                <i className="fas fa-file-lines mr-2"></i> {modalData[modalId][lang].paperLabel || 'Paper'}
-                                            </a>
-                                        )}
-                                        {modalData[modalId][lang].githubUrl && (
-                                            <a href={modalData[modalId][lang].githubUrl} target="_blank" className="px-6 py-2 bg-slate-800/10 dark:bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
-                                                <i className="fab fa-github mr-2"></i> GitHub
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
+                        {(() => {
+                            const data = modalData[modalId][lang] as any; // Using local any for JSX to simplify property access while keeping the main definition typed
+                            return (
+                                <>
+                                    <button onClick={closeModal} className="sticky top-0 float-right text-slate-400 hover:text-ue-blue z-20">
+                                        <X className="w-8 h-8" />
+                                    </button>
+                                    <div className="clear-both">
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">{data.title}</h3>
+                                                <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">{data.tech}</p>
+                                                <div className="flex gap-4 mb-4">
+                                                    {data.paperUrl && (
+                                                        <a href={data.paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/20 hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                                                            <i className="fas fa-file-lines mr-2"></i> {data.paperLabel || 'Paper'}
+                                                        </a>
+                                                    )}
+                                                    {data.githubUrl && (
+                                                        <a href={data.githubUrl} target="_blank" className="px-6 py-2 bg-slate-800/10 dark:bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                                                            <i className="fab fa-github mr-2"></i> GitHub
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
 
-                                {modalData[modalId][lang].videoEmbedUrl && (
-                                    <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6 bg-black">
-                                        <iframe className="w-full h-full" src={modalData[modalId][lang].videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                                    </div>
-                                )}
-                                {modalData[modalId][lang].imageUrl && (
-                                    <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
-                                        <img src={modalData[modalId][lang].imageUrl} alt={modalData[modalId][lang].title} className="w-full h-auto object-cover" />
-                                    </div>
-                                )}
+                                            {data.videoEmbedUrl && (
+                                                <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6 bg-black">
+                                                    <iframe className="w-full h-full" src={data.videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                                </div>
+                                            )}
+                                            {data.imageUrl && (
+                                                <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
+                                                    <img src={data.imageUrl} alt={data.title} className="w-full h-auto object-cover" />
+                                                </div>
+                                            )}
 
-                                <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg space-y-4 font-sans" dangerouslySetInnerHTML={{ __html: modalData[modalId][lang].desc.includes('<br>') ? `<div class="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg border border-white/5 font-sans">${modalData[modalId][lang].desc}</div>` : `<p>${modalData[modalId][lang].desc}</p>` }}>
-                                </div>
-                                <div className="flex justify-end pt-4">
-                                    <button onClick={closeModal} className="px-6 py-2 glass hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg transition-all text-sm font-bold font-sans">Close Window</button>
-                                </div>
-                            </div>
-                        </div>
+                                            <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg space-y-4 font-sans" dangerouslySetInnerHTML={{ __html: data.desc.includes('<br>') ? `<div class="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg border border-white/5 font-sans">${data.desc}</div>` : `<p>${data.desc}</p>` }}>
+                                            </div>
+                                            <div className="flex justify-end pt-4">
+                                                <button onClick={closeModal} className="px-6 py-2 glass hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg transition-all text-sm font-bold font-sans">Close Window</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            );
+                        })()}
                     </div>
                 </div>
             )}

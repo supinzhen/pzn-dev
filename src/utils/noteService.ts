@@ -37,7 +37,7 @@ export const noteService = {
 
     saveNote: (note: Note): void => {
         const storedNotes = localStorage.getItem(LOCAL_STORAGE_KEY);
-        let customNotes: Note[] = storedNotes ? JSON.parse(storedNotes) : [];
+        const customNotes: Note[] = storedNotes ? JSON.parse(storedNotes) : [];
 
         const index = customNotes.findIndex(n => n.id === note.id);
         if (index > -1) {
@@ -52,9 +52,7 @@ export const noteService = {
     deleteNote: (id: number): void => {
         const storedNotes = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (!storedNotes) return;
-
-        let customNotes: Note[] = JSON.parse(storedNotes);
-        customNotes = customNotes.filter(n => n.id !== id);
+        const customNotes: Note[] = (JSON.parse(storedNotes) as Note[]).filter(n => n.id !== id);
 
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(customNotes));
     },

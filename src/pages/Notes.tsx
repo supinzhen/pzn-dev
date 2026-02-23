@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Book, Cpu, Video, Code, Filter, X, List, ChevronRight } from 'lucide-react';
 import { noteService } from '../utils/noteService';
-import notesData from '../assets/data/notes.json';
 
 interface NotesProps {
     lang: 'en' | 'zh';

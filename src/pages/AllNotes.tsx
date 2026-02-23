@@ -1,14 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, ChevronRight } from 'lucide-react';
-import { noteService, Note } from '../utils/noteService';
+import { noteService } from '../utils/noteService';
 
 interface AllNotesProps {
     lang: 'en' | 'zh';
-    t: (key: string) => string;
 }
 
-const AllNotes: React.FC<AllNotesProps> = ({ lang, t }) => {
+const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
