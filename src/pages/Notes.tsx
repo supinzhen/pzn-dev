@@ -9,8 +9,9 @@ interface NotesProps {
 }
 
 const Notes: React.FC<NotesProps> = ({ lang, t }) => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('category');
+    const activeTag = searchParams.get('tag');
 
     const categories = [
         { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, count: 12, desc: 'Technical logs about UE5, Blueprints, and C++.' },
@@ -27,10 +28,36 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         }));
     }, [lang]);
 
+    const allTags = useMemo(() => {
+        const tags = new Set<string>();
+        noteService.getNotes().forEach(note => {
+            note.tags?.forEach(tag => tags.add(tag));
+        });
+        return Array.from(tags).sort();
+    }, []);
+
     const filteredNotes = useMemo(() => {
-        if (!activeCategory) return allNotes;
-        return allNotes.filter(note => note.category.toLowerCase() === activeCategory.toLowerCase());
-    }, [activeCategory, allNotes]);
+        let filtered = allNotes;
+        if (activeCategory) {
+            filtered = filtered.filter(note => note.category.toLowerCase() === activeCategory.toLowerCase());
+        }
+        if (activeTag) {
+            filtered = filtered.filter(note => note.tags?.includes(activeTag));
+        }
+        return filtered;
+    }, [activeCategory, activeTag, allNotes]);
+
+    const handleTagClick = (tag: string) => {
+        if (activeTag === tag) {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.delete('tag');
+            setSearchParams(newParams);
+        } else {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.set('tag', tag);
+            setSearchParams(newParams);
+        }
+    };
 
     return (
         <div className="container mx-auto px-6 py-24">
@@ -105,6 +132,31 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                         清除篩選
                     </Link>
                 )}
+            </div>
+
+            {/* Tags Ribbon */}
+            <div className="mb-12">
+                <div className="flex flex-wrap gap-2">
+                    <button
+                        onClick={() => {
+                            const newParams = new URLSearchParams(searchParams);
+                            newParams.delete('tag');
+                            setSearchParams(newParams);
+                        }}
+                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${!activeTag ? 'bg-ue-blue text-white border-ue-blue shadow-lg shadow-ue-blue/20' : 'bg-white/5 border-white/10 text-slate-400 hover:border-ue-blue/30'}`}
+                    >
+                        ALL TAGS
+                    </button>
+                    {allTags.map(tag => (
+                        <button
+                            key={tag}
+                            onClick={() => handleTagClick(tag)}
+                            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${activeTag === tag ? 'bg-ue-blue text-white border-ue-blue shadow-lg shadow-ue-blue/20' : 'bg-white/5 border-white/10 text-slate-400 hover:border-ue-blue/30'}`}
+                        >
+                            #{tag.toUpperCase()}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             {/* Notes Grid */}

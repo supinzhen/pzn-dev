@@ -11,6 +11,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
     const notes = useMemo(() => noteService.getNotes(), []);
 
@@ -19,15 +20,24 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
         return ['All', ...Array.from(cats)];
     }, [notes]);
 
+    const allTags = useMemo(() => {
+        const tags = new Set<string>();
+        notes.forEach(note => {
+            note.tags?.forEach(tag => tags.add(tag));
+        });
+        return Array.from(tags).sort();
+    }, [notes]);
+
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
-            const title = lang === 'zh' ? note.title_zh : note.title_en;
-            const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                note.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+            const matchesSearch = !searchTerm ||
+                note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                note.summary.toLowerCase().includes(searchTerm.toLowerCase());
             const matchesCategory = selectedCategory === 'All' || note.category === selectedCategory;
-            return matchesSearch && matchesCategory;
+            const matchesTag = !selectedTag || note.tags?.includes(selectedTag);
+            return matchesSearch && matchesCategory && matchesTag;
         });
-    }, [notes, searchTerm, selectedCategory, lang]);
+    }, [notes, searchTerm, selectedCategory, selectedTag, lang]);
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen font-sans">
@@ -73,6 +83,25 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                 </div>
             </div>
 
+            {/* Tags Ribbon */}
+            <div className="mb-12 flex flex-wrap gap-2">
+                <button
+                    onClick={() => setSelectedTag(null)}
+                    className={`px-4 py-1.5 rounded-lg text-[10px] font-bold transition-all border ${!selectedTag ? 'bg-slate-800 text-white border-slate-700' : 'bg-white/5 border-white/10 text-slate-500 hover:border-ue-blue/30'}`}
+                >
+                    ALL TAGS
+                </button>
+                {allTags.map(tag => (
+                    <button
+                        key={tag}
+                        onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+                        className={`px-4 py-1.5 rounded-lg text-[10px] font-bold transition-all border ${selectedTag === tag ? 'bg-ue-blue text-white border-ue-blue shadow-lg shadow-ue-blue/20' : 'bg-white/5 border-white/10 text-slate-500 hover:border-ue-blue/30'}`}
+                    >
+                        #{tag.toUpperCase()}
+                    </button>
+                ))}
+            </div>
+
             {/* Table-like List */}
             <div className="glass rounded-3xl border border-white/10 overflow-hidden">
                 <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-black/10 dark:bg-white/5 border-b border-white/10 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
@@ -91,17 +120,17 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                                 to={`/notes/${note.id}`}
                                 className="grid grid-cols-1 md:grid-cols-12 gap-4 px-8 py-6 hover:bg-ue-blue/5 transition-all group items-center"
                             >
-                                <div className="col-span-1 text-xs font-mono text-slate-500">
+                                <div className="col-span-1 text-xs font-mono text-slate-600 dark:text-slate-500">
                                     {note.date.split('-').slice(1).join('/')}
-                                    <span className="md:hidden ml-2 text-slate-400">/ {note.date.split('-')[0]}</span>
-                                    <div className="hidden md:block text-[10px] opacity-40">{note.date.split('-')[0]}</div>
+                                    <span className="md:hidden ml-2 text-slate-500 dark:text-slate-400">/ {note.date.split('-')[0]}</span>
+                                    <div className="hidden md:block text-[10px] text-slate-600 dark:text-slate-400 opacity-60">{note.date.split('-')[0]}</div>
                                 </div>
                                 <div className="col-span-6">
                                     <h3 className="font-bold group-hover:text-ue-blue transition-colors text-lg md:text-base">
-                                        {lang === 'zh' ? note.title_zh : note.title_en}
+                                        {note.title}
                                     </h3>
-                                    <p className="text-slate-500 text-xs mt-1 md:hidden line-clamp-2">
-                                        {lang === 'zh' ? note.summary_zh : note.summary_en}
+                                    <p className="text-slate-600 dark:text-slate-500 text-xs mt-1 md:hidden line-clamp-2">
+                                        {note.summary}
                                     </p>
                                 </div>
                                 <div className="col-span-2 text-xs">

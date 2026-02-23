@@ -296,7 +296,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
                             <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
                                 <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-ndhu')}>
-                                    <div className="text-slate-500 font-sans font-bold text-xs mb-2">{t('exp-3-date')}</div>
+                                    <div className="text-slate-500 font-sans font-bold text-xs mb-2">
+                                        {t('exp-3-date')}</div>
                                     <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
                                     <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
                                         <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
@@ -331,7 +332,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             <h2 className="text-3xl font-bold font-sans">
                                 <span>{t('projects-title')}</span>
                             </h2>
-                            <p className="text-slate-500 mt-2 font-sans">{t('projects-subtitle')}</p>
+                            <p className="text-slate-600 dark:text-slate-400 mt-2 font-sans">{t('projects-subtitle')}</p>
                         </div>
                         <div className="mt-4 md:mt-0" data-aos="fade-left">
                             <span className="text-slate-500 font-sans text-sm">{t('projects-gallery')}</span>

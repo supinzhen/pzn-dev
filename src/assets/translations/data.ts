@@ -19,6 +19,8 @@ export const translations = {
         "edu-title": "Education", "edu-1-uni": "National Dong Hwa University", "edu-1-deg": "M.S. in Computer Science | 2022 - 2024",
         "edu-2-uni": "National Taiwan Univ. of Arts", "edu-2-deg": "B.A. in Radio & Television | 2017 - 2022",
         "connect-title": "Contact Me", "connect-desc": "Interested in VP, game engines, or broadcast IP transformation? Let's talk!",
+        "note-helpful": "Did you find this note helpful?", "note-desc": "This article is part of a professional technology series. Contact me for discussion.",
+        "back-to-list": "BACK TO LIST", "breadcrumb-home": "HOME", "breadcrumb-notes": "NOTES",
         "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
     },
     zh: {
@@ -41,6 +43,8 @@ export const translations = {
         "edu-title": "學歷背景", "edu-1-uni": "國立東華大學", "edu-1-deg": "資訊工程研究所 碩士 | 2022 - 2024",
         "edu-2-uni": "國立台灣藝術大學", "edu-2-deg": "廣播電視學系 學士 | 2017 - 2022",
         "connect-title": "聯絡我", "connect-desc": "對虛擬製作、遊戲引擎開發或廣電系統轉型有興趣？歡迎來信交流！",
+        "note-helpful": "覺得這篇筆記有幫助嗎？", "note-desc": "這篇文章是專業技術系列的一部分，如有疑問歡迎聯繫討論。",
+        "back-to-list": "返回列表", "breadcrumb-home": "首頁", "breadcrumb-notes": "技術筆記",
         "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
     }
 };
