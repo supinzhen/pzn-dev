@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "title_zh": "UE5 Render Graph (RDG) 效能優化與實踐",
+        "title_en": "UE5 Render Graph (RDG) Optimization & Practices",
+        "category": "Unreal Engine",
+        "date": "2024-02-15",
+        "author": "Annie Su",
+        "readTime": "12 min read",
+        "tags": [
+            "Rendering",
+            "RDG",
+            "C++"
+        ],
+        "summary_zh": "深入探討虛幻引擎渲染圖表系統，如何有效管理資源生命週期與減少屏障 (Barriers) 造成的開銷。",
+        "summary_en": "Deep dive into Unreal Engine Rendering Dependency Graph for efficient resource lifecycle management and barrier reduction.",
+        "content_zh": "<h2 class=\"text-2xl font-bold mb-4 text-ue-blue\">引言</h2><p class=\"mb-6\">Rendering Dependency Graph (RDG) 是自 UE4.22 引入的系統，旨在簡化渲染管線的開發。透過延遲執行 (Deferred Execution) 與圖表編譯，系統能自動處理資源屏障 (Barriers) 與瞬時資源 (Transient Resources) 的分配。</p><h2 class=\"text-2xl font-bold mb-4 text-ue-blue\">關鍵優化計畫</h2><ul class=\"list-disc ml-6 mb-6 space-y-2\"><li><strong>資源生命週期管理</strong>：利用 RDG_TEXTURE_DESC 定義暫時性資源。</li><li><strong>異步計算 (Async Compute)</strong>：將後處理與陰影計算移至 Async Pipe。</li><li><strong>減少 Barrier 造成的停頓</strong>：RDG 能自動規劃最晚的屏障觸發點。</li></ul><div class=\"bg-slate-100 dark:bg-slate-900/50 p-6 rounded-xl border border-white/5 mb-6\"><h4 class=\"text-ue-blue font-mono text-sm mb-4\">// RDG 範例程式碼</h4><pre class=\"font-mono text-xs text-slate-500 dark:text-slate-400 leading-relaxed overflow-x-auto\">FRDGTextureDesc Desc = FRDGTextureDesc::Create2D(\n    Extent, PF_FloatRGBA, FClearValueBinding::Black, \n    TexCreate_ShaderResource | TexCreate_UAV\n);\nFRDGTextureRef SceneColor = GraphBuilder.CreateTexture(Desc, TEXT(\"SceneColor\"));</pre></div>",
+        "content_en": "<h2 class=\"text-2xl font-bold mb-4 text-ue-blue\">Introduction</h2><p class=\"mb-6\">Rendering Dependency Graph (RDG) is a system introduced in UE4.22 to simplify render pipeline development. By using deferred execution and graph compilation, it automates resource barriers and transient resource allocation.</p>"
+    },
+    {
+        "id": 2,
+        "title_zh": "ST 2110-20 PTP 精確時間協定同步指南",
+        "title_en": "SMPTE ST 2110-20 PTP Synchronization Guide",
+        "category": "Broadcast IP",
+        "date": "2024-02-01",
+        "author": "Annie Su",
+        "readTime": "15 min read",
+        "tags": [
+            "Broadcasting",
+            "ST-2110",
+            "PTP"
+        ],
+        "summary_zh": "解析廣播級 IP 系統中的時鐘同步機制，如何配置 Grandmaster 以達成精確到亞微秒級的影像同步。",
+        "summary_en": "Analyzing clock sync mechanisms in professional IP broadcasting, configuring Grandmaster for sub-microsecond video sync.",
+        "content_zh": "<h2 class=\"text-2xl font-bold mb-4 text-ue-blue\">同步的核心：PTP (IEEE 1588)</h2><p class=\"mb-6\">在 ST 2110 系統中，傳統的 Blackburst 已被 PTP 取代。為了達成影音同步，所有的端點必須對齊到同一個 Grandmaster 時鐘。</p>",
+        "content_en": "<h2 class=\"text-2xl font-bold mb-4 text-ue-blue\">The Core of Sync: PTP (IEEE 1588)</h2><p class=\"mb-6\">In ST 2110 systems, traditional Blackburst has been replaced by PTP. To achieve AV alignment, all endpoints must sync to a single Grandmaster clock.</p>"
+    },
+    {
+        "id": 3,
+        "title_zh": "NVIDIA Rivermax SDK 於高頻寬網路之應用",
+        "title_en": "NVIDIA Rivermax SDK Applications in High-bandwidth Networks",
+        "category": "Broadcast IP",
+        "date": "2024-01-20",
+        "author": "Annie Su",
+        "readTime": "10 min read",
+        "tags": [
+            "Networking",
+            "Rivermax",
+            "Video-over-IP"
+        ],
+        "summary_zh": "實作 Rivermax SDK 進行 4K 無壓縮影像傳輸的網路配置優化，解決封包遺失與抖動問題。",
+        "summary_en": "Implementing Rivermax SDK for uncompressed 4K video transmission, optimizing network config to resolve packet loss and jitter.",
+        "content_zh": "<p>Content coming soon...</p>",
+        "content_en": "<p>Content coming soon...</p>"
+    },
+    {
+        "id": 4,
+        "title_zh": "MOS 協議與廣播自動化控制系統整合",
+        "title_en": "MOS Protocol & Broadcast Automation Systems Integration",
+        "category": "Broadcast IP",
+        "date": "2024-01-05",
+        "tags": [
+            "Automation",
+            "MOS",
+            "Systems"
+        ],
+        "summary_zh": "探討 MOS 協議在廣播自動化流程中的角色，連結新聞編輯室 (NRCS) 與製播設備。",
+        "summary_en": "Exploring the role of MOS protocol in broadcast automation, linking Newsroom Systems (NRCS) with gallery production devices.",
+        "content_zh": "<p>Content coming soon...</p>",
+        "content_en": "<p>Content coming soon...</p>"
+    }
+]

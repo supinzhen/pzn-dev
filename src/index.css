@@ -1,0 +1,209 @@
+:root {
+    --bg-primary: #020617;
+    --bg-secondary: transparent;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --ue-blue: #0070FF;
+    --tech-green: #15803d;
+}
+
+.light-mode {
+    --bg-primary: #b4a4a4;
+    --bg-secondary: #3097ff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: rgba(0, 112, 255, 0.12);
+    /* Subtle blueprint blue */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 112, 255, 0.15);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+::selection {
+    background-color: rgba(0, 112, 255, 0.2);
+}
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.border-glow-blue:hover {
+    border-color: var(--ue-blue);
+    box-shadow: 0 0 15px rgba(0, 112, 255, 0.3);
+}
+
+.border-glow-green:hover {
+    border-color: var(--tech-green);
+    box-shadow: 0 0 15px rgba(0, 255, 171, 0.3);
+}
+
+/* Timeline Connector Line */
+.timeline-line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--ue-blue), var(--tech-green), #64748b);
+}
+
+@media (min-width: 768px) {
+    .timeline-line {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.animated-bg {
+    background: linear-gradient(-45deg, var(--bg-primary), #0f172a, #1e1b4b, var(--bg-primary));
+    background-size: 400% 400%;
+    animation: gradient-x 15s ease infinite;
+}
+
+.light-mode .animated-bg {
+    background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #f8fafc);
+}
+
+.profile-container {
+    position: relative;
+    width: 280px;
+    height: 350px;
+}
+
+.profile-card {
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    border-radius: 24px;
+    border: 2px solid rgba(0, 112, 255, 0.3);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 112, 255, 0.2);
+    transition: all 0.5s ease;
+}
+
+.light-mode .profile-card {
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 112, 255, 0.1);
+}
+
+.profile-card:hover {
+    border-color: var(--ue-blue);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 112, 255, 0.4);
+}
+
+.profile-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+.profile-card:hover img {
+    transform: scale(1.05);
+}
+
+.profile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.8) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.light-mode .profile-overlay {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, transparent 40%);
+}
+
+.profile-frame-decor {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    border-top: 3px solid var(--tech-green);
+    border-left: 3px solid var(--tech-green);
+    border-top-left-radius: 12px;
+    z-index: 20;
+}
+
+.profile-frame-decor-2 {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border-bottom: 3px solid var(--ue-blue);
+    border-right: 3px solid var(--ue-blue);
+    border-bottom-right-radius: 12px;
+    z-index: 20;
+}
+
+.tag-pill {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', monospace;
+    border-width: 1px;
+}
+
+@keyframes gradient-x {
+
+    0%,
+    100% {
+        background-size: 200% 200%;
+        background-position: left center;
+    }
+
+    50% {
+        background-size: 200% 200%;
+        background-position: right center;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-scale-up {
+    animation: scale-up 0.3s ease-out forwards;
+}

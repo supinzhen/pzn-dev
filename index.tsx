@@ -1,7 +1,14 @@
-// React entry point
-// Import your React components here to start building your application
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './src/App';
+import './src/index.css';
 
-console.log('React app initialized');
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    );
+}
