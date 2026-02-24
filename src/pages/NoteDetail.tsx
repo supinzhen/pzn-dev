@@ -14,7 +14,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     const navigate = useNavigate();
 
     const t = (key: string): string => {
-        const data = translations[lang] as any;
+        const data = translations[lang] as unknown as Record<string, string>;
         return data[key] || key;
     };
 

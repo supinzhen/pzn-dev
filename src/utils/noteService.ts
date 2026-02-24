@@ -15,16 +15,26 @@ export interface Note {
 const LOCAL_STORAGE_KEY = 'pzn_custom_notes';
 const DELETED_NOTES_KEY = 'pzn_deleted_notes';
 
+interface RawNote extends Partial<Note> {
+    id: number;
+    title_zh?: string;
+    title_en?: string;
+    summary_zh?: string;
+    summary_en?: string;
+    content_zh?: string;
+    content_en?: string;
+}
+
 export const noteService = {
     getNotes: (): Note[] => {
         const storedNotes = localStorage.getItem(LOCAL_STORAGE_KEY);
-        const customNotes: any[] = storedNotes ? JSON.parse(storedNotes) : [];
+        const customNotes: RawNote[] = storedNotes ? JSON.parse(storedNotes) : [];
 
         const storedDeleted = localStorage.getItem(DELETED_NOTES_KEY);
         const deletedIds: number[] = storedDeleted ? JSON.parse(storedDeleted) : [];
 
         // 1. Get static notes and map legacy zh/en fields to unified fields
-        const staticNotes = (notesData as any[])
+        const staticNotes = (notesData as RawNote[])
             .filter(n => !deletedIds.includes(n.id))
             .map(n => ({
                 ...n,

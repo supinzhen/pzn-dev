@@ -31,6 +31,13 @@ const Admin: React.FC = () => {
         content_en: ''
     });
 
+    const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Web & AI'];
+    const allExistingTags = useMemo(() => {
+        const tags = new Set<string>();
+        notes.forEach(note => note.tags?.forEach(t => tags.add(t)));
+        return Array.from(tags).sort();
+    }, [notes]);
+
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         const adminPassword = (import.meta as unknown as { env: Record<string, string> }).env.VITE_ADMIN_PASSWORD || 'admin123';
@@ -77,12 +84,7 @@ const Admin: React.FC = () => {
         );
     }
 
-    const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Web & AI'];
-    const allExistingTags = useMemo(() => {
-        const tags = new Set<string>();
-        notes.forEach(note => note.tags?.forEach(t => tags.add(t)));
-        return Array.from(tags).sort();
-    }, [notes]);
+
 
     const handleSaveLocal = () => {
         let updatedNote: Note;

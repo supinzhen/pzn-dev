@@ -37,7 +37,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
             const matchesTag = !selectedTag || note.tags?.includes(selectedTag);
             return matchesSearch && matchesCategory && matchesTag;
         });
-    }, [notes, searchTerm, selectedCategory, selectedTag, lang]);
+    }, [notes, searchTerm, selectedCategory, selectedTag]);
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen font-sans">
