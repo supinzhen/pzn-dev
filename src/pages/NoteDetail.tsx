@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Tag, Calendar, Share2, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Clock, Tag, Calendar, Share2, ChevronRight, Twitter, Facebook, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
 import { noteService } from '../utils/noteService';
 import { renderMarkdown } from '../utils/markdown';
 import { translations } from '../assets/translations/data';
@@ -12,6 +12,8 @@ interface NoteDetailProps {
 const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
+    const [copied, setCopied] = React.useState(false);
+    const [showShare, setShowShare] = React.useState(false);
 
     const t = (key: string): string => {
         const data = translations[lang] as unknown as Record<string, string>;
@@ -34,6 +36,31 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
             </div>
         );
     }
+
+    const shareUrl = window.location.href;
+    const shareText = encodeURIComponent(note.title);
+
+    const handleShare = (platform: 'twitter' | 'facebook' | 'linkedin') => {
+        let url = '';
+        switch (platform) {
+            case 'twitter':
+                url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`;
+                break;
+            case 'facebook':
+                url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                break;
+            case 'linkedin':
+                url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+                break;
+        }
+        window.open(url, '_blank', 'width=600,height=400');
+    };
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(shareUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
@@ -81,14 +108,47 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                                 <div className="text-xs text-slate-500 font-mono uppercase">Systems Engineer</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-6 text-slate-500">
-                            <div className="flex items-center gap-2 text-xs font-mono">
+                        <div className="flex items-center gap-4 text-slate-500">
+                            <div className="flex items-center gap-2 text-xs font-mono mr-2">
                                 <Clock className="w-4 h-4" />
                                 {note.readTime}
                             </div>
-                            <button className="hover:text-ue-blue transition-colors">
-                                <Share2 className="w-4 h-4" />
-                            </button>
+
+                            <div className="flex items-center gap-2 border-l border-white/10 pl-4">
+                                <button
+                                    onClick={() => handleShare('twitter')}
+                                    className="p-2 hover:bg-ue-blue/10 hover:text-ue-blue rounded-full transition-all"
+                                    title="Share on Twitter"
+                                >
+                                    <Twitter className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={() => handleShare('facebook')}
+                                    className="p-2 hover:bg-ue-blue/10 hover:text-ue-blue rounded-full transition-all"
+                                    title="Share on Facebook"
+                                >
+                                    <Facebook className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={() => handleShare('linkedin')}
+                                    className="p-2 hover:bg-ue-blue/10 hover:text-ue-blue rounded-full transition-all"
+                                    title="Share on LinkedIn"
+                                >
+                                    <Linkedin className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={handleCopyLink}
+                                    className="p-2 hover:bg-ue-blue/10 hover:text-ue-blue rounded-full transition-all relative"
+                                    title="Copy Link"
+                                >
+                                    {copied ? <Check className="w-4 h-4 text-green-500" /> : <LinkIcon className="w-4 h-4" />}
+                                    {copied && (
+                                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[10px] px-2 py-1 rounded shadow-lg animate-fade-in-up">
+                                            COPIED
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </header>

@@ -31,8 +31,8 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
     const categories = [
         { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, desc: 'Technical logs about UE5, Blueprints, and C++.' },
+        { id: 3, title: 'System Integration', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
         { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, desc: 'On-set workflows and tracking systems.' },
-        { id: 3, title: 'Broadcast IP', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
         { id: 4, title: 'Others', icon: <List className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and other technical tools.' },
     ];
 
@@ -92,8 +92,8 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
             {/* Subject Categories */}
             <div className="mb-12">
-                <h2 className="text-xl font-bold mb-6 font-sans flex items-center gap-3">
-                    <span className="w-1.5 h-6 bg-ue-blue rounded-full"></span>
+                <h2 className="text-2xl font-bold mb-6 font-sans flex items-center gap-3">
+                    <span className="w-2 h-8 bg-ue-blue rounded-full"></span>
                     主題分類
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-sans focus-within:ring-0">

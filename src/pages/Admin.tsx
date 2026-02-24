@@ -38,7 +38,7 @@ const Admin: React.FC = () => {
         content: ''
     });
 
-    const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Others'];
+    const categories = ['Unreal Engine', 'System Integration', 'Virtual Production', 'Others'];
     const allExistingTags = useMemo(() => {
         const tags = new Set<string>();
         notes.forEach(note => note.tags?.forEach(t => tags.add(t)));
