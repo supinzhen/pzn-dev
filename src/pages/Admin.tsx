@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon, X } from 'lucide-react';
+import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon, X, Github, RefreshCw, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { noteService, Note } from '../utils/noteService';
+import { githubService } from '../utils/githubService';
 import { renderMarkdown } from '../utils/markdown';
 
 const Admin: React.FC = () => {
@@ -16,6 +17,14 @@ const Admin: React.FC = () => {
     const [copied, setCopied] = useState(false);
     const [previewMode, setPreviewMode] = useState(false);
     const [tagInput, setTagInput] = useState('');
+    const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle');
+    const [syncError, setSyncError] = useState('');
+
+    // GitHub Settings
+    const [githubToken, setGithubToken] = useState(localStorage.getItem('gh_token') || '');
+    const [githubRepo, setGithubRepo] = useState(localStorage.getItem('gh_repo') || 'pzn-dev');
+    const [githubOwner, setGithubOwner] = useState(localStorage.getItem('gh_owner') || 'supinzhen');
+    const [showGithubSettings, setShowGithubSettings] = useState(false);
 
     const [currentNote, setCurrentNote] = useState<Partial<Note>>({
         title_zh: '',
@@ -138,6 +147,40 @@ const Admin: React.FC = () => {
         }
     };
 
+    const handleSyncToGitHub = async () => {
+        if (!githubToken) {
+            alert('Please enter your GitHub Personal Access Token in settings!');
+            setShowGithubSettings(true);
+            return;
+        }
+
+        setSyncStatus('syncing');
+        setSyncError('');
+
+        try {
+            await githubService.updateNotes(
+                githubToken,
+                githubOwner,
+                githubRepo,
+                'src/assets/data/notes.json',
+                notes,
+                `Admin: Sync technical notes [${new Date().toLocaleString()}]`
+            );
+
+            // Save settings to localStorage on successful sync
+            localStorage.setItem('gh_token', githubToken);
+            localStorage.setItem('gh_owner', githubOwner);
+            localStorage.setItem('gh_repo', githubRepo);
+
+            setSyncStatus('success');
+            setTimeout(() => setSyncStatus('idle'), 3000);
+        } catch (err: any) {
+            console.error('Sync failed:', err);
+            setSyncStatus('error');
+            setSyncError(err.message || 'Unknown error occurred during sync');
+        }
+    };
+
     const handleAddTag = (e: React.KeyboardEvent | React.MouseEvent) => {
         if ('key' in e && e.key !== 'Enter') return;
         e.preventDefault();
@@ -216,6 +259,25 @@ const Admin: React.FC = () => {
                 </div>
                 <div className="flex gap-4">
                     <button
+                        onClick={handleSyncToGitHub}
+                        disabled={syncStatus === 'syncing'}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all shadow-lg ${syncStatus === 'syncing' ? 'bg-slate-700 text-slate-400 cursor-not-allowed' :
+                                syncStatus === 'success' ? 'bg-green-600 text-white shadow-green-500/20' :
+                                    syncStatus === 'error' ? 'bg-red-600 text-white shadow-red-500/20' :
+                                        'bg-ue-blue text-white shadow-ue-blue/20 hover:scale-105'
+                            }`}
+                    >
+                        <RefreshCw className={`w-4 h-4 ${syncStatus === 'syncing' ? 'animate-spin' : ''}`} />
+                        {syncStatus === 'syncing' ? 'SYNCING...' : syncStatus === 'success' ? 'SYNCED!' : syncStatus === 'error' ? 'SYNC ERROR' : 'SYNC TO GITHUB'}
+                    </button>
+                    <button
+                        onClick={() => setShowGithubSettings(!showGithubSettings)}
+                        className={`p-3 rounded-xl border transition-all ${showGithubSettings ? 'bg-ue-blue text-white border-ue-blue' : 'bg-white/5 border-white/10 text-slate-400 hover:border-ue-blue/30'}`}
+                        title="GitHub Settings"
+                    >
+                        <Github className="w-5 h-5" />
+                    </button>
+                    <button
                         onClick={() => setShowExport(true)}
                         className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-slate-400 rounded-xl font-bold hover:bg-ue-blue/10 hover:text-ue-blue transition-all"
                     >
@@ -235,6 +297,69 @@ const Admin: React.FC = () => {
                     </button>
                 </div>
             </header>
+
+            {/* Sync Error Message */}
+            {syncStatus === 'error' && (
+                <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-500 text-sm animate-scale-up">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p><strong>Sync failed:</strong> {syncError}</p>
+                    <button onClick={() => setSyncStatus('idle')} className="ml-auto text-red-500 hover:text-white transition-colors">
+                        <X className="w-4 h-4" />
+                    </button>
+                </div>
+            )}
+
+            {/* GitHub Settings Panel */}
+            {showGithubSettings && (
+                <div className="mb-12 glass p-8 rounded-3xl border-ue-blue/20 bg-ue-blue/5 animate-scale-up">
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-xl font-bold flex items-center gap-2 text-ue-blue">
+                            <Github className="w-5 h-5" />
+                            GitHub Sync Settings
+                        </h2>
+                        <button onClick={() => setShowGithubSettings(false)} className="text-slate-500 hover:text-white transition-colors">
+                            <X className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="md:col-span-1">
+                            <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">GitHub Owner</label>
+                            <input
+                                type="text"
+                                value={githubOwner}
+                                onChange={(e) => setGithubOwner(e.target.value)}
+                                className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
+                                placeholder="e.g. supinzhen"
+                            />
+                        </div>
+                        <div className="md:col-span-1">
+                            <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Repository Name</label>
+                            <input
+                                type="text"
+                                value={githubRepo}
+                                onChange={(e) => setGithubRepo(e.target.value)}
+                                className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
+                                placeholder="e.g. pzn-dev"
+                            />
+                        </div>
+                        <div className="md:col-span-1">
+                            <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Personal Access Token (classic)</label>
+                            <input
+                                type="password"
+                                value={githubToken}
+                                onChange={(e) => setGithubToken(e.target.value)}
+                                className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
+                                placeholder="ghp_xxxxxxxxxxxx"
+                            />
+                        </div>
+                    </div>
+                    <p className="mt-4 text-[10px] text-slate-500 flex items-start gap-2 italic">
+                        <AlertCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                        Your token is stored only in your browser's localStorage. It is used to update src/assets/data/notes.json directly on GitHub, which triggers a site rebuild.
+                    </p>
+                </div>
+            )}
 
 
 
