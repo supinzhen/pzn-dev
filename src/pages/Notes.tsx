@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Book, Cpu, Video, Code, Filter, X, List, ChevronRight } from 'lucide-react';
+import { Book, Cpu, Video, Filter, X, List, ChevronRight } from 'lucide-react';
 import { noteService } from '../utils/noteService';
 
 interface NotesProps {
