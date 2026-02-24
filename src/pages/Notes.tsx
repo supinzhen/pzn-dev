@@ -33,7 +33,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, desc: 'Technical logs about UE5, Blueprints, and C++.' },
         { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, desc: 'On-set workflows and tracking systems.' },
         { id: 3, title: 'Broadcast IP', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
-        { id: 4, title: 'Web & AI', icon: <Code className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and web tools.' },
+        { id: 4, title: 'Others', icon: <List className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and other technical tools.' },
     ];
 
     const allTags = useMemo(() => {
@@ -76,11 +76,11 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                     </h1>
                     <Link
                         to="/notes/all"
-                        className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-ue-blue/10 border border-white/10 hover:border-ue-blue/30 rounded-xl transition-all group font-sans text-sm font-bold"
+                        className="flex items-center gap-2 px-8 py-4 bg-ue-blue text-white hover:bg-ue-blue/90 shadow-lg shadow-ue-blue/20 rounded-xl transition-all group font-sans text-sm font-bold active:scale-95"
                     >
-                        <List className="w-4 h-4 text-ue-blue" />
+                        <List className="w-5 h-5" />
                         瀏覽全部文章
-                        <ChevronRight className="w-3 h-3 text-slate-500 group-hover:translate-x-1 transition-transform" />
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
                 <p className="text-slate-500 dark:text-slate-400 max-w-2xl font-sans text-lg">
@@ -88,28 +88,32 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                 </p>
             </div>
 
-            {/* Categories Grid */}
-            <div className="mb-20">
-                <h2 className="text-2xl font-bold mb-8 font-sans flex items-center gap-3">
-                    <span className="w-2 h-8 bg-ue-blue rounded-full"></span>
+
+
+            {/* Subject Categories */}
+            <div className="mb-12">
+                <h2 className="text-xl font-bold mb-6 font-sans flex items-center gap-3">
+                    <span className="w-1.5 h-6 bg-ue-blue rounded-full"></span>
                     主題分類
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 font-sans">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-sans focus-within:ring-0">
                     {categories.map((cat) => (
                         <Link
                             key={cat.id}
                             to={`/notes?category=${cat.title.toLowerCase()}`}
-                            className={`glass p-8 rounded-2xl border transition-all group cursor-pointer block ${activeCategory === cat.title.toLowerCase() ? 'border-ue-blue ring-1 ring-ue-blue/20' : 'border-white/5 hover:border-ue-blue/30'}`}
+                            className={`glass p-5 rounded-xl border transition-all group cursor-pointer block ${activeCategory === cat.title.toLowerCase() ? 'border-ue-blue ring-1 ring-ue-blue/20' : 'border-white/5 hover:border-ue-blue/30'}`}
                         >
-                            <div className="mb-6 transform group-hover:scale-110 transition-transform">
-                                {cat.icon}
+                            <div className="mb-4 transform group-hover:scale-105 transition-transform flex items-center gap-3">
+                                <div className="p-2 bg-ue-blue/5 rounded-lg">
+                                    {React.cloneElement(cat.icon as React.ReactElement, { className: 'w-5 h-5 text-ue-blue' })}
+                                </div>
+                                <h3 className="text-base font-bold font-sans group-hover:text-ue-blue transition-colors">{cat.title}</h3>
                             </div>
-                            <h3 className="text-xl font-bold mb-2 font-sans group-hover:text-ue-blue transition-colors">{cat.title}</h3>
-                            <p className="text-slate-500 text-sm mb-4 font-sans leading-relaxed">{cat.desc}</p>
-                            <div className="flex justify-between items-center text-xs font-mono">
+                            <p className="text-slate-500 text-[11px] mb-3 font-sans leading-relaxed line-clamp-2">{cat.desc}</p>
+                            <div className="flex justify-between items-center text-[10px] font-mono">
                                 <span className="text-slate-500 dark:text-slate-600 uppercase">{categoryCounts[cat.title] ?? 0} NOTES</span>
                                 <span className="text-ue-blue font-bold flex items-center">
-                                    BROWSE <i className="fas fa-chevron-right ml-2 text-[10px]"></i>
+                                    BROWSE <ChevronRight className="w-2 h-2 ml-1" />
                                 </span>
                             </div>
                         </Link>
@@ -169,32 +173,32 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
             {/* Notes Grid */}
             <div className="mb-20">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 font-sans">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans">
                     {filteredNotes.length > 0 ? (
-                        filteredNotes.map((note) => (
-                            <Link key={note.id} to={`/notes/${note.id}`} className="glass p-8 rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col justify-between block font-sans">
+                        filteredNotes.slice(0, 4).map((note) => (
+                            <Link key={note.id} to={`/notes/${note.slug}`} className="glass p-6 rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col justify-between block font-sans min-h-[160px]">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-ue-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                                 <div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <span className="px-3 py-1 bg-ue-blue/10 text-ue-blue rounded text-[10px] font-mono border border-ue-blue/20">
+                                    <div className="flex justify-between items-start mb-3">
+                                        <span className="px-2 py-0.5 bg-ue-blue/10 text-ue-blue rounded text-[9px] font-mono border border-ue-blue/20">
                                             {note.category}
                                         </span>
-                                        <span className="text-slate-500 dark:text-slate-600 text-xs font-mono">{note.date}</span>
+                                        <span className="text-slate-500 dark:text-slate-600 text-[10px] font-mono">{note.date}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold mb-4 group-hover:text-ue-blue transition-colors">{note.title}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed line-clamp-2 italic font-sans dark:font-light">"{note.summary}"</p>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors line-clamp-1">{note.title}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed line-clamp-1 italic font-sans dark:font-light">"{note.summary}"</p>
                                 </div>
 
-                                <div className="flex justify-between items-center mt-auto pt-6 border-t border-white/5">
-                                    <div className="flex gap-2">
-                                        {note.tags.map(tag => (
-                                            <span key={tag} className="text-[10px] text-slate-500 bg-slate-100 dark:bg-slate-900 px-2 py-0.5 rounded border border-white/5">#{tag}</span>
+                                <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/5">
+                                    <div className="flex gap-1.5">
+                                        {note.tags.slice(0, 3).map(tag => (
+                                            <span key={tag} className="text-[9px] text-slate-500 bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-white/5">#{tag}</span>
                                         ))}
                                     </div>
-                                    <div className="text-ue-blue text-xs font-bold hover:underline flex items-center gap-2 font-sans">
+                                    <div className="text-ue-blue text-[10px] font-bold hover:underline flex items-center gap-1.5 font-sans">
                                         READ MORE
-                                        <i className="fas fa-arrow-right text-[10px]"></i>
+                                        <i className="fas fa-arrow-right text-[9px]"></i>
                                     </div>
                                 </div>
                             </Link>
@@ -207,6 +211,8 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                     )}
                 </div>
             </div>
+
+
 
             {/* Migration Status Card */}
             <div className="p-12 glass rounded-3xl border-dashed border-white/10 flex flex-col items-center text-center">

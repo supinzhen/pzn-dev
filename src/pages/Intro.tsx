@@ -13,6 +13,14 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
     const [modalId, setModalId] = useState<string | null>(null);
     const { hash } = useLocation();
 
+    // Helper to handle asset paths with base URL
+    const getAssetPath = (path: string) => {
+        if (path.startsWith('http') || path.startsWith('//')) return path;
+        const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        return `${base}${cleanPath}`;
+    };
+
     useEffect(() => {
         AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
     }, []);
@@ -85,7 +93,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                 title: 'Unreal Rivermax ST2110 Integration',
                 tech: 'ST 2110, NVIDIA Rivermax, NMOS, UE5',
                 desc: 'This project demonstrates a real-world system integration workflow between Unreal Engine and professional broadcast IP infrastructure based on SMPTE ST 2110 standards.<br><br>The system utilizes NVIDIA Rivermax SDK with Mellanox ConnectX-6 Lx NIC for high-performance IP video transmission, integrates with AJA Kona IP for SDI/IP interoperability, and employs EVS Cerebrum for centralized device control and routing management. NMOS (IS‑04/IS‑05) is used for device discovery, registration, and automated routing control across the entire IP workflow, enabling Unreal Engine and other ST 2110 nodes to participate in a unified, standards‑based control environment.',
-                imageUrl: './ST2110_Infra.png',
+                imageUrl: '/ST2110_Infra.png',
                 githubUrl: 'https://github.com/supinzhen/Unreal-Rivermax-ST2110-Integration'
             },
             zh: {
@@ -93,7 +101,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                 title: 'Unreal Rivermax ST2110 Integration',
                 tech: 'ST 2110, NVIDIA Rivermax, NMOS, UE5',
                 desc: '本專案展示了 Unreal Engine 與基於 SMPTE ST 2110 標準的專業廣播 IP 基礎設施之間的實際系統整合工作流程。<br>系統利用 NVIDIA Rivermax SDK 搭配 Mellanox ConnectX-6 Lx 網卡進行高效能 IP 影像傳輸，整合 AJA Kona IP 實現 SDI/IP 互通，並使用 EVS Cerebrum 進行集中設備控制與路由管理。透過 NMOS (IS‑04/IS‑05) 實現設備發現、註冊與自動路由控制，讓 Unreal Engine 與其他 ST 2110 節點能共同參與統一的標準化控制環境。',
-                imageUrl: './ST2110_Infra.png',
+                imageUrl: '/ST2110_Infra.png',
                 githubUrl: 'https://github.com/supinzhen/Unreal-Rivermax-ST2110-Integration'
             }
         },
@@ -182,7 +190,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                 <div className="profile-frame-decor"></div>
                                 <div className="profile-frame-decor-2"></div>
                                 <div className="profile-card">
-                                    <img src="./image/Gemini_Generated_Image_uydifmuydifmuydi.png" alt="Annie Su" />
+                                    <img src={getAssetPath('/image/Gemini_Generated_Image_uydifmuydifmuydi.png')} alt="Annie Su" />
                                     <div className="profile-overlay"></div>
                                 </div>
                             </div>
@@ -492,7 +500,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                             )}
                                             {data.imageUrl && (
                                                 <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
-                                                    <img src={data.imageUrl} alt={data.title} className="w-full h-auto object-cover" />
+                                                    <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
                                                 </div>
                                             )}
 

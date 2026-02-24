@@ -29,7 +29,7 @@ const Admin: React.FC = () => {
         content: ''
     });
 
-    const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Web & AI'];
+    const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Others'];
     const allExistingTags = useMemo(() => {
         const tags = new Set<string>();
         notes.forEach(note => note.tags?.forEach(t => tags.add(t)));
@@ -85,6 +85,11 @@ const Admin: React.FC = () => {
 
 
     const handleSaveLocal = () => {
+        if (!currentNote.title_en?.trim()) {
+            alert('English Title is required for URL generation!');
+            return;
+        }
+
         let updatedNote: Note;
         if (isEditing !== null) {
             updatedNote = { ...currentNote, id: isEditing } as Note;
@@ -271,13 +276,26 @@ const Admin: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Title (EN)</label>
+                                    <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Title (EN) <span className="text-ue-blue">* Required for URL</span></label>
                                     <input
                                         type="text"
+                                        placeholder="Enter English title..."
                                         value={currentNote.title_en}
                                         onChange={(e) => setCurrentNote({ ...currentNote, title_en: e.target.value })}
-                                        className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
+                                        className={`w-full bg-slate-100 dark:bg-slate-900 border ${!currentNote.title_en ? 'border-ue-blue/30' : 'border-white/10'} rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50`}
                                     />
+                                </div>
+                            </div>
+
+                            {/* Slug Preview */}
+                            <div className="bg-slate-100 dark:bg-slate-900 shadow-inner rounded-xl px-4 py-3 border border-ue-blue/10">
+                                <label className="block text-[10px] font-mono text-slate-500 mb-1 uppercase">Generated URL Slug (From English Title)</label>
+                                <div className="text-sm font-mono text-ue-blue break-all">
+                                    {(currentNote.title_en || '').toLowerCase()
+                                        .replace(/[^\w\s-]/g, '')
+                                        .replace(/\s+/g, '-')
+                                        .replace(/-+/g, '-')
+                                        .trim() || 'waiting for english title...'}
                                 </div>
                             </div>
 
@@ -433,7 +451,8 @@ const Admin: React.FC = () => {
                                         <button onClick={() => handleDelete(note.id)} className="p-1.5 hover:text-red-500"><Trash2 className="w-3.5 h-3.5" /></button>
                                     </div>
                                 </div>
-                                <h3 className="text-sm font-bold mb-1 truncate">{note.title_zh}</h3>
+                                <h3 className="text-sm font-bold mb-1 truncate">{note.title_zh || note.title}</h3>
+                                <p className="text-[10px] text-ue-blue font-mono mb-1 truncate">/{note.slug}</p>
                                 <p className="text-[11px] text-slate-500 font-mono">{note.date}</p>
                             </div>
                         ))}

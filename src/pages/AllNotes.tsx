@@ -117,7 +117,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                         filteredNotes.map((note) => (
                             <Link
                                 key={note.id}
-                                to={`/notes/${note.id}`}
+                                to={`/notes/${note.slug}`}
                                 className="grid grid-cols-1 md:grid-cols-12 gap-4 px-8 py-6 hover:bg-ue-blue/5 transition-all group items-center"
                             >
                                 <div className="col-span-1 text-xs font-mono text-slate-600 dark:text-slate-500">

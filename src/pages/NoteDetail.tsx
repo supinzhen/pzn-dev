@@ -10,7 +10,7 @@ interface NoteDetailProps {
 }
 
 const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
-    const { id } = useParams<{ id: string }>();
+    const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
 
     const t = (key: string): string => {
@@ -23,8 +23,8 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     }, []);
 
     const note = useMemo(() => {
-        return noteService.getNoteById(id || '');
-    }, [id]);
+        return noteService.getNoteBySlug(slug || '');
+    }, [slug]);
 
     if (!note) {
         return (

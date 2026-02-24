@@ -40,7 +40,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Intro lang={lang} t={t} />} />
                     <Route path="/notes" element={<Notes lang={lang} t={t} />} />
                     <Route path="/notes/all" element={<AllNotes lang={lang} />} />
-                    <Route path="/notes/:id" element={<NoteDetail lang={lang} />} />
+                    <Route path="/notes/:slug" element={<NoteDetail lang={lang} />} />
                     <Route path="/admin" element={<Admin />} />
                 </Routes>
             </Layout>
