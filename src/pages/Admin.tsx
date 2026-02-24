@@ -25,10 +25,8 @@ const Admin: React.FC = () => {
         author: 'Annie Su',
         readTime: '5 min read',
         tags: [],
-        summary_zh: '',
-        summary_en: '',
-        content_zh: '',
-        content_en: ''
+        summary: '',
+        content: ''
     });
 
     const categories = ['Unreal Engine', 'Virtual Production', 'Broadcast IP', 'Web & AI'];
@@ -110,10 +108,8 @@ const Admin: React.FC = () => {
             author: 'Annie Su',
             readTime: '5 min read',
             tags: [],
-            summary_zh: '',
-            summary_en: '',
-            content_zh: '',
-            content_en: ''
+            summary: '',
+            content: ''
         });
     };
 
@@ -365,59 +361,32 @@ const Admin: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Summary (ZH)</label>
-                                    <textarea
-                                        value={currentNote.summary_zh}
-                                        onChange={(e) => setCurrentNote({ ...currentNote, summary_zh: e.target.value })}
-                                        rows={2}
-                                        className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Summary (EN)</label>
-                                    <textarea
-                                        value={currentNote.summary_en}
-                                        onChange={(e) => setCurrentNote({ ...currentNote, summary_en: e.target.value })}
-                                        rows={2}
-                                        className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
-                                    />
-                                </div>
+                            <div>
+                                <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Summary</label>
+                                <textarea
+                                    value={currentNote.summary}
+                                    onChange={(e) => setCurrentNote({ ...currentNote, summary: e.target.value })}
+                                    rows={2}
+                                    className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
+                                />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center">
-                                        <label className="block text-xs font-mono text-slate-500 uppercase">Content (ZH)</label>
-                                    </div>
-                                    <textarea
-                                        value={currentNote.content_zh}
-                                        onChange={(e) => setCurrentNote({ ...currentNote, content_zh: e.target.value })}
-                                        rows={12}
-                                        placeholder="Chinese content..."
-                                        className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none font-mono text-sm focus:ring-2 focus:ring-ue-blue/50"
-                                    />
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center">
-                                        <label className="block text-xs font-mono text-slate-500 uppercase">Content (EN)</label>
-                                    </div>
-                                    <textarea
-                                        value={currentNote.content_en}
-                                        onChange={(e) => setCurrentNote({ ...currentNote, content_en: e.target.value })}
-                                        rows={12}
-                                        placeholder="English content..."
-                                        className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none font-mono text-sm focus:ring-2 focus:ring-ue-blue/50"
-                                    />
-                                </div>
+                            <div>
+                                <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Content</label>
+                                <textarea
+                                    value={currentNote.content}
+                                    onChange={(e) => setCurrentNote({ ...currentNote, content: e.target.value })}
+                                    rows={16}
+                                    placeholder="Article content (Markdown supported)..."
+                                    className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none font-mono text-sm focus:ring-2 focus:ring-ue-blue/50"
+                                />
                             </div>
 
                             <div className="p-6 bg-slate-100 dark:bg-slate-900/50 border border-white/10 rounded-2xl">
                                 <div className="flex justify-between items-center mb-4">
                                     <h3 className="text-sm font-bold flex items-center gap-2">
                                         <CodeIcon className="w-4 h-4 text-ue-blue" />
-                                        PREVIEW (ZH)
+                                        PREVIEW
                                     </h3>
                                     <button
                                         onClick={() => setPreviewMode(!previewMode)}
@@ -428,7 +397,7 @@ const Admin: React.FC = () => {
                                 </div>
                                 {previewMode && (
                                     <article className="prose-markdown max-h-[400px] overflow-y-auto">
-                                        <div dangerouslySetInnerHTML={renderMarkdown(currentNote.content_zh || '')} />
+                                        <div dangerouslySetInnerHTML={renderMarkdown(currentNote.content || '')} />
                                     </article>
                                 )}
                             </div>

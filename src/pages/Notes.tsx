@@ -13,20 +13,28 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
     const activeCategory = searchParams.get('category');
     const activeTag = searchParams.get('tag');
 
-    const categories = [
-        { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, count: 12, desc: 'Technical logs about UE5, Blueprints, and C++.' },
-        { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, count: 8, desc: 'On-set workflows and tracking systems.' },
-        { id: 3, title: 'Broadcast IP', icon: <Book className="w-8 h-8 text-ue-blue" />, count: 5, desc: 'ST 2110, NMOS, and networking notes.' },
-        { id: 4, title: 'Web & AI', icon: <Code className="w-8 h-8 text-ue-blue" />, count: 10, desc: 'React, LLM integration, and web tools.' },
-    ];
-
     const allNotes = useMemo(() => {
         return noteService.getNotes().map(note => ({
             ...note,
-            title: lang === 'zh' ? note.title_zh : note.title_en,
-            summary: lang === 'zh' ? note.summary_zh : note.summary_en
+            title: lang === 'zh' ? (note.title_zh || note.title) : (note.title_en || note.title),
+            summary: lang === 'zh' ? (note.summary_zh || note.summary) : (note.summary_en || note.summary)
         }));
     }, [lang]);
+
+    const categoryCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        allNotes.forEach(n => {
+            counts[n.category] = (counts[n.category] || 0) + 1;
+        });
+        return counts;
+    }, [allNotes]);
+
+    const categories = [
+        { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, desc: 'Technical logs about UE5, Blueprints, and C++.' },
+        { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, desc: 'On-set workflows and tracking systems.' },
+        { id: 3, title: 'Broadcast IP', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
+        { id: 4, title: 'Web & AI', icon: <Code className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and web tools.' },
+    ];
 
     const allTags = useMemo(() => {
         const tags = new Set<string>();
@@ -99,7 +107,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                             <h3 className="text-xl font-bold mb-2 font-sans group-hover:text-ue-blue transition-colors">{cat.title}</h3>
                             <p className="text-slate-500 text-sm mb-4 font-sans leading-relaxed">{cat.desc}</p>
                             <div className="flex justify-between items-center text-xs font-mono">
-                                <span className="text-slate-500 dark:text-slate-600 uppercase">{cat.count} NOTES</span>
+                                <span className="text-slate-500 dark:text-slate-600 uppercase">{categoryCounts[cat.title] ?? 0} NOTES</span>
                                 <span className="text-ue-blue font-bold flex items-center">
                                     BROWSE <i className="fas fa-chevron-right ml-2 text-[10px]"></i>
                                 </span>

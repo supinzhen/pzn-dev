@@ -3,13 +3,19 @@ import notesData from '../assets/data/notes.json';
 export interface Note {
     id: number;
     title: string;
+    title_zh?: string;
+    title_en?: string;
     category: string;
     date: string;
     author: string;
     readTime: string;
     tags: string[];
     summary: string;
+    summary_zh?: string;
+    summary_en?: string;
     content: string;
+    content_zh?: string;
+    content_en?: string;
 }
 
 const LOCAL_STORAGE_KEY = 'pzn_custom_notes';
@@ -17,12 +23,6 @@ const DELETED_NOTES_KEY = 'pzn_deleted_notes';
 
 interface RawNote extends Partial<Note> {
     id: number;
-    title_zh?: string;
-    title_en?: string;
-    summary_zh?: string;
-    summary_en?: string;
-    content_zh?: string;
-    content_en?: string;
 }
 
 export const noteService = {
@@ -95,7 +95,7 @@ export const noteService = {
         }
 
         // 2. Track as deleted if it's one of the original static notes
-        const isStatic = (notesData as Note[]).some(n => n.id === id);
+        const isStatic = (notesData as RawNote[]).some(n => n.id === id);
         if (isStatic) {
             const storedDeleted = localStorage.getItem(DELETED_NOTES_KEY);
             const deletedIds: number[] = storedDeleted ? JSON.parse(storedDeleted) : [];
