@@ -163,7 +163,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                 </span>
                             </h1>
 
-                            <p className="max-w-2xl mx-auto lg:mx-0 text-slate-400 text-base md:text-lg mb-10 leading-relaxed font-sans" data-aos="fade-right" data-aos-delay="400">
+                            <p className="max-w-2xl mx-auto lg:mx-0 text-slate-400 text-base md:text-lg mb-10 leading-relaxed font-sans text-center lg:text-left" data-aos="fade-right" data-aos-delay="400">
                                 {t('hero-desc')}
                             </p>
 
@@ -327,14 +327,14 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
             {/* Projects Section */}
             <section id="projects" className="py-24 relative font-sans">
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-                        <div data-aos="fade-right">
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left">
+                        <div data-aos="fade-right" className="w-full md:w-auto">
                             <h2 className="text-3xl font-bold font-sans">
                                 <span>{t('projects-title')}</span>
                             </h2>
                             <p className="text-slate-600 dark:text-slate-400 mt-2 font-sans">{t('projects-subtitle')}</p>
                         </div>
-                        <div className="mt-4 md:mt-0" data-aos="fade-left">
+                        <div className="mt-4 md:mt-0 w-full md:w-auto" data-aos="fade-left">
                             <span className="text-slate-500 font-sans text-sm">{t('projects-gallery')}</span>
                         </div>
                     </div>
@@ -423,15 +423,15 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         <div data-aos="fade-right">
                             <h2 className="text-3xl font-bold mb-8 font-sans">{t('edu-title')}</h2>
                             <div className="space-y-6">
-                                <div className="flex gap-4 items-start justify-center md:justify-start">
-                                    <div className="w-1 h-12 bg-ue-blue"></div>
+                                <div className="flex gap-4 items-stretch">
+                                    <div className="w-1 self-stretch bg-ue-blue rounded-full flex-shrink-0"></div>
                                     <div className="text-left font-sans">
                                         <h4 className="font-bold font-sans">{t('edu-1-uni')}</h4>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-1-deg')}</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-4 items-start justify-center md:justify-start">
-                                    <div className="w-1 h-12 bg-tech-green"></div>
+                                <div className="flex gap-4 items-stretch">
+                                    <div className="w-1 self-stretch bg-tech-green rounded-full flex-shrink-0"></div>
                                     <div className="text-left font-sans">
                                         <h4 className="font-bold font-sans">{t('edu-2-uni')}</h4>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-2-deg')}</p>
