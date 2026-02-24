@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Github, Mail, X } from 'lucide-react';
@@ -168,12 +168,12 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 font-sans" data-aos="fade-right" data-aos-delay="600">
-                                <a href="#projects" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                                <Link to="/#projects" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
                                     {t('btn-projects')}
-                                </a>
-                                <a href="#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                                </Link>
+                                <Link to="/#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
                                     {t('btn-contact')}
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
