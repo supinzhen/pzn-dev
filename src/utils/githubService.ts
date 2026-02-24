@@ -1,6 +1,6 @@
 
 export const githubService = {
-    updateNotes: async (token: string, owner: string, repo: string, path: string, content: any, message: string) => {
+    updateNotes: async (token: string, owner: string, repo: string, path: string, content: unknown, message: string) => {
         const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
         // 1. Get current file data to get the SHA

@@ -174,10 +174,10 @@ const Admin: React.FC = () => {
 
             setSyncStatus('success');
             setTimeout(() => setSyncStatus('idle'), 3000);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Sync failed:', err);
             setSyncStatus('error');
-            setSyncError(err.message || 'Unknown error occurred during sync');
+            setSyncError(err instanceof Error ? err.message : 'Unknown error occurred during sync');
         }
     };
 
@@ -262,9 +262,9 @@ const Admin: React.FC = () => {
                         onClick={handleSyncToGitHub}
                         disabled={syncStatus === 'syncing'}
                         className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all shadow-lg ${syncStatus === 'syncing' ? 'bg-slate-700 text-slate-400 cursor-not-allowed' :
-                                syncStatus === 'success' ? 'bg-green-600 text-white shadow-green-500/20' :
-                                    syncStatus === 'error' ? 'bg-red-600 text-white shadow-red-500/20' :
-                                        'bg-ue-blue text-white shadow-ue-blue/20 hover:scale-105'
+                            syncStatus === 'success' ? 'bg-green-600 text-white shadow-green-500/20' :
+                                syncStatus === 'error' ? 'bg-red-600 text-white shadow-red-500/20' :
+                                    'bg-ue-blue text-white shadow-ue-blue/20 hover:scale-105'
                             }`}
                     >
                         <RefreshCw className={`w-4 h-4 ${syncStatus === 'syncing' ? 'animate-spin' : ''}`} />
