@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Tag, Calendar, Share2, ChevronRight, Twitter, Facebook, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
+import { ArrowLeft, Clock, Tag, Calendar, ChevronRight, Twitter, Facebook, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
 import { noteService } from '../utils/noteService';
 import { renderMarkdown } from '../utils/markdown';
 import { translations } from '../assets/translations/data';
@@ -13,7 +13,6 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const [copied, setCopied] = React.useState(false);
-    const [showShare, setShowShare] = React.useState(false);
 
     const t = (key: string): string => {
         const data = translations[lang] as unknown as Record<string, string>;
