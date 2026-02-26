@@ -44,7 +44,21 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
 
     useEffect(() => {
         if (note) {
-            document.title = `${displayTitle} | Annie Su`;
+            const fullTitle = `${displayTitle} | Annie Su`;
+            document.title = fullTitle;
+
+            // Update Meta Tags for Link Previews (SPA fallback)
+            const metaTitle = document.querySelector('meta[property="og:title"]');
+            if (metaTitle) metaTitle.setAttribute('content', fullTitle);
+
+            const metaDesc = document.querySelector('meta[property="og:description"]');
+            if (metaDesc) metaDesc.setAttribute('content', note.summary || '');
+
+            const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+            if (twitterTitle) twitterTitle.setAttribute('content', fullTitle);
+
+            const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+            if (twitterDesc) twitterDesc.setAttribute('content', note.summary || '');
         }
     }, [displayTitle, note]);
 

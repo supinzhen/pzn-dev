@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, Menu, X as XIcon } from 'lucide-react';
 import Intro from './pages/Intro';
 import Notes from './pages/Notes';
@@ -34,7 +34,7 @@ const App: React.FC = () => {
     };
 
     return (
-        <Router>
+        <Router basename="/pzn-dev">
             <Layout lang={lang} setLang={setLang} t={t} theme={theme} toggleTheme={toggleTheme}>
                 <Routes>
                     <Route path="/" element={<Intro lang={lang} t={t} />} />
