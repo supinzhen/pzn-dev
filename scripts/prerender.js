@@ -69,19 +69,36 @@ async function prerender() {
         let html = template;
 
         // Replace Titles
-        html = html.replace(/<title>.*?<\/title>/g, `<title>${fullTitle}</title>`);
+        html = html.replace(/<title>.*?<\/title>/gi, `<title>${fullTitle}</title>`);
 
-        // Replace OG Tags (using non-greedy match to handle existing content)
-        html = html.replace(/<meta property="og:title" content=".*?">/g, `<meta property="og:title" content="${fullTitle}">`);
-        html = html.replace(/<meta property="og:description" content=".*?">/g, `<meta property="og:description" content="${description}">`);
-        html = html.replace(/<meta property="og:url" content=".*?">/g, `<meta property="og:url" content="${url}">`);
-        html = html.replace(/<meta property="og:image" content=".*?">/g, `<meta property="og:image" content="${ogImage}">`);
+        // Helper to replace meta tags regardless of attribute order or newlines
+        const replaceMeta = (tagName, newContent) => {
+            // This regex looks for a meta tag that has EITHER name OR property attribute matching tagName
+            // and replaces the entire tag with one that has both for maximum compatibility.
+            const regex = new RegExp(`<meta\\s+[^>]*?(name|property)="${tagName}"[\\s\\S]*?>`, 'gi');
 
-        // Replace Twitter Tags
-        html = html.replace(/<meta property="twitter:title" content=".*?">/g, `<meta property="twitter:title" content="${fullTitle}">`);
-        html = html.replace(/<meta property="twitter:description" content=".*?">/g, `<meta property="twitter:description" content="${description}">`);
-        html = html.replace(/<meta property="twitter:url" content=".*?">/g, `<meta property="twitter:url" content="${url}">`);
-        html = html.replace(/<meta property="twitter:image" content=".*?">/g, `<meta property="twitter:image" content="${ogImage}">`);
+            // We'll use property for OG and name for others, but many platforms accept both.
+            // To be safe, we just output one clean tag.
+            const isOG = tagName.startsWith('og:');
+            const attr = isOG ? 'property' : 'name';
+
+            html = html.replace(regex, `<meta ${attr}="${tagName}" content="${newContent}">`);
+        };
+
+        // Standard
+        replaceMeta('description', description);
+
+        // Open Graph
+        replaceMeta('og:title', fullTitle);
+        replaceMeta('og:description', description);
+        replaceMeta('og:url', url);
+        replaceMeta('og:image', ogImage);
+
+        // Twitter (often uses name, but the source has property. We'll match both and output name/property)
+        replaceMeta('twitter:title', fullTitle);
+        replaceMeta('twitter:description', description);
+        replaceMeta('twitter:url', url);
+        replaceMeta('twitter:image', ogImage);
 
         fs.writeFileSync(path.join(noteDir, 'index.html'), html);
         console.log(`✅ Prerendered: /notes/${slug}`);
