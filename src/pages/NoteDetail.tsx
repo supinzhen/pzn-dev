@@ -19,12 +19,22 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
         return data[key] || key;
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const [noteContent, setNoteContent] = React.useState<{ content: string, content_zh?: string, content_en?: string } | null>(null);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const note = useMemo(() => {
         return noteService.getNoteBySlug(slug || '');
+    }, [slug]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (slug) {
+            setIsLoading(true);
+            noteService.getNoteContent(slug).then(content => {
+                setNoteContent(content);
+                setIsLoading(false);
+            });
+        }
     }, [slug]);
 
     if (!note) {
@@ -60,6 +70,8 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
+
+    const displayContent = lang === 'en' ? (noteContent?.content_en || noteContent?.content) : (noteContent?.content_zh || noteContent?.content);
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
@@ -154,10 +166,17 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
 
                 {/* Article Content */}
                 <article className="max-w-none font-sans prose-markdown">
-                    <div
-                        dangerouslySetInnerHTML={renderMarkdown(note.content)}
-                        className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg"
-                    />
+                    {isLoading ? (
+                        <div className="py-24 flex flex-col items-center justify-center gap-4 text-slate-500">
+                            <div className="w-8 h-8 border-2 border-ue-blue/30 border-t-ue-blue rounded-full animate-spin"></div>
+                            <span className="text-xs font-mono uppercase tracking-widest">Loading content...</span>
+                        </div>
+                    ) : (
+                        <div
+                            dangerouslySetInnerHTML={renderMarkdown(displayContent || '')}
+                            className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg"
+                        />
+                    )}
                 </article>
 
                 {/* Footer / Tags */}

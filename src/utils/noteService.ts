@@ -14,7 +14,7 @@ export interface Note {
     summary: string;
     summary_zh?: string;
     summary_en?: string;
-    content: string;
+    content?: string;
     content_zh?: string;
     content_en?: string;
 }
@@ -48,10 +48,11 @@ export const noteService = {
             .filter(n => !deletedIds.includes(n.id))
             .map(n => {
                 const title = n.title || n.title_zh || n.title_en || '';
+                const title_en_for_slug = n.title_en || n.title || '';
                 return {
                     ...n,
                     title,
-                    slug: getSlug(title),
+                    slug: n.slug || getSlug(title_en_for_slug),
                     summary: n.summary || n.summary_zh || n.summary_en || '',
                     content: n.content || n.content_zh || n.content_en || ''
                 };
@@ -63,10 +64,11 @@ export const noteService = {
         staticNotes.forEach(n => notesMap.set(n.id, n as Note));
         customNotes.forEach(n => {
             const title = n.title || n.title_zh || n.title_en || '';
+            const title_en_for_slug = n.title_en || n.title || '';
             const mapped = {
                 ...n,
                 title,
-                slug: getSlug(title),
+                slug: n.slug || getSlug(title_en_for_slug),
                 summary: n.summary || n.summary_zh || n.summary_en || '',
                 content: n.content || n.content_zh || n.content_en || ''
             };
@@ -137,5 +139,36 @@ export const noteService = {
     getNoteBySlug: (slug: string): Note | undefined => {
         const notes = noteService.getNotes();
         return notes.find(n => n.slug === slug);
+    },
+
+    getNoteContent: async (slug: string): Promise<{ content: string, content_zh?: string, content_en?: string } | null> => {
+        try {
+            // Check local storage first (for newly created notes not yet synced)
+            const storedNotes = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (storedNotes) {
+                const customNotes: Note[] = JSON.parse(storedNotes);
+                const localNote = customNotes.find(n => n.slug === slug);
+                if (localNote && localNote.content) {
+                    return {
+                        content: localNote.content,
+                        content_zh: localNote.content_zh,
+                        content_en: localNote.content_en
+                    };
+                }
+            }
+
+            // Fetch from public/posts
+            const response = await fetch(`/posts/${slug}.json`);
+            if (!response.ok) return null;
+            const data = await response.json();
+            return {
+                content: data.content,
+                content_zh: data.content_zh,
+                content_en: data.content_en
+            };
+        } catch (error) {
+            console.error('Failed to fetch note content:', error);
+            return null;
+        }
     }
 };

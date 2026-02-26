@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon, X, Github, RefreshCw, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { noteService, Note } from '../utils/noteService';
-import { githubService } from '../utils/githubService';
+import { githubService, FileUpdate } from '../utils/githubService';
 import { renderMarkdown } from '../utils/markdown';
 
 const Admin: React.FC = () => {
@@ -127,9 +127,26 @@ const Admin: React.FC = () => {
         });
     };
 
-    const handleEdit = (note: Note) => {
+    const handleEdit = async (note: Note) => {
         setIsEditing(note.id);
-        setCurrentNote(note);
+
+        // If the note doesn't have content (partial index), fetch it
+        if (!note.content) {
+            const fullContent = await noteService.getNoteContent(note.slug);
+            if (fullContent) {
+                setCurrentNote({
+                    ...note,
+                    content: fullContent.content,
+                    content_zh: fullContent.content_zh,
+                    content_en: fullContent.content_en
+                });
+            } else {
+                setCurrentNote(note);
+            }
+        } else {
+            setCurrentNote(note);
+        }
+
         window.scrollTo(0, 0);
     };
 
@@ -158,12 +175,39 @@ const Admin: React.FC = () => {
         setSyncError('');
 
         try {
-            await githubService.updateNotes(
+            // Prepare all files that need to be updated
+            // 1. The index file (metadata only)
+            const indexContent = notes.map(note => {
+                const { content, content_en, content_zh, ...metadata } = note;
+                return metadata;
+            });
+
+            const filesToUpdate: FileUpdate[] = [
+                {
+                    path: 'src/assets/data/notes.json',
+                    content: indexContent
+                }
+            ];
+
+            // 2. Individual post files
+            notes.forEach(note => {
+                filesToUpdate.push({
+                    path: `public/posts/${note.slug}.json`,
+                    content: {
+                        id: note.id,
+                        slug: note.slug,
+                        content: note.content || '',
+                        content_zh: note.content_zh || '',
+                        content_en: note.content_en || ''
+                    }
+                });
+            });
+
+            await githubService.updateMultipleFiles(
                 githubToken,
                 githubOwner,
                 githubRepo,
-                'src/assets/data/notes.json',
-                notes,
+                filesToUpdate,
                 `Admin: Sync technical notes [${new Date().toLocaleString()}]`
             );
 
@@ -577,7 +621,7 @@ const Admin: React.FC = () => {
                                     </div>
                                 </div>
                                 <h3 className="text-sm font-bold mb-1 truncate">{note.title_zh || note.title}</h3>
-                                <p className="text-[10px] text-ue-blue font-mono mb-1 truncate">/{note.slug}</p>
+                                <p className="text-[10px] text-ue-blue font-mono mb-1 break-all">/{note.slug}</p>
                                 <p className="text-[11px] text-slate-500 font-mono">{note.date}</p>
                             </div>
                         ))}
