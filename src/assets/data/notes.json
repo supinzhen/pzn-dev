@@ -29,7 +29,7 @@
         "tags": [
             "Unreal Engine"
         ],
-        "summary": "",
+        "summary": "本系統以 NVIDIA Mellanox ConnectX‑6 系列網路介面卡 與 NVIDIA Rivermax SDK 為核心，建置一條符合 SMPTE ST 2110 的專業級 IP 視訊傳輸流程。Unreal Engine 負責即時渲染影像，並透過 Rivermax 將影像以 ST 2110‑20格式送出；接收端採用 AJA Kona IP 進行視訊解碼與監看。\n整體訊號路由與來源切換則由 Cerebrum Broadcast Controller 透過 NMOS IS‑04 / IS‑05 進行統一管理與控制。",
         "summary_zh": "",
         "summary_en": ""
     }
