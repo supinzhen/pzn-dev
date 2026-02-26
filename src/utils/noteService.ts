@@ -158,7 +158,8 @@ export const noteService = {
             }
 
             // Fetch from public/posts
-            const response = await fetch(`/posts/${slug}.json`);
+            const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+            const response = await fetch(`${baseUrl}/posts/${slug}.json`);
             if (!response.ok) return null;
             const data = await response.json();
             return {
