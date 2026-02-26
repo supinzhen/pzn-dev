@@ -37,6 +37,17 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
         }
     }, [slug]);
 
+    const displayTitle = useMemo(() => {
+        if (!note) return '';
+        return lang === 'zh' ? (note.title_zh || note.title) : (note.title_en || note.title);
+    }, [note, lang]);
+
+    useEffect(() => {
+        if (note) {
+            document.title = `${displayTitle} | Annie Su`;
+        }
+    }, [displayTitle, note]);
+
     if (!note) {
         return (
             <div className="container mx-auto px-6 py-24 text-center">
@@ -47,7 +58,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     }
 
     const shareUrl = window.location.href;
-    const shareText = encodeURIComponent(note.title);
+    const shareText = encodeURIComponent(displayTitle);
 
     const handleShare = (platform: 'twitter' | 'facebook' | 'linkedin') => {
         let url = '';
@@ -71,7 +82,8 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const displayContent = lang === 'en' ? (noteContent?.content_en || noteContent?.content) : (noteContent?.content_zh || noteContent?.content);
+    // User requested: Title switches language, but content remains fixed (only one content field used)
+    const displayContent = noteContent?.content || '';
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
@@ -81,7 +93,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                 <ChevronRight className="w-3 h-3" />
                 <Link to="/notes" className="hover:text-ue-blue transition-colors text-ue-blue/60">{t('breadcrumb-notes')}</Link>
                 <ChevronRight className="w-3 h-3" />
-                <span className="text-slate-700 dark:text-slate-300 truncate max-w-[200px] uppercase font-bold">{note.title}</span>
+                <span className="text-slate-700 dark:text-slate-300 truncate max-w-[200px] uppercase font-bold">{displayTitle}</span>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -106,7 +118,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                     </div>
 
                     <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-8 font-sans">
-                        {note.title}
+                        {displayTitle}
                     </h1>
 
                     <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-white/10 dark:border-white/5">

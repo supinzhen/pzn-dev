@@ -23,6 +23,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
     useEffect(() => {
         AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
+        document.title = '蘇品甄 | Annie Su | Unreal Engine & Systems Engineer';
     }, []);
 
     useEffect(() => {

@@ -45,6 +45,10 @@ const Admin: React.FC = () => {
         return Array.from(tags).sort();
     }, [notes]);
 
+    React.useEffect(() => {
+        document.title = 'Admin Dashboard | Annie Su';
+    }, []);
+
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         const adminPassword = (import.meta as unknown as { env: Record<string, string> }).env.VITE_ADMIN_PASSWORD || 'admin123';

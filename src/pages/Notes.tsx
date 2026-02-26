@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Book, Cpu, Video, Filter, X, List, ChevronRight } from 'lucide-react';
 import { noteService } from '../utils/noteService';
@@ -20,6 +20,10 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
             summary: lang === 'zh' ? (note.summary_zh || note.summary) : (note.summary_en || note.summary)
         }));
     }, [lang]);
+
+    useEffect(() => {
+        document.title = `${t('nav-notes')} | Annie Su`;
+    }, [lang, t]);
 
     const categoryCounts = useMemo(() => {
         const counts: Record<string, number> = {};

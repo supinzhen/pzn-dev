@@ -15,6 +15,11 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
 
     const notes = useMemo(() => noteService.getNotes(), []);
 
+    React.useEffect(() => {
+        const title = lang === 'zh' ? '所有技術文章' : 'All Technical Articles';
+        document.title = `${title} | Annie Su`;
+    }, [lang]);
+
     const categories = useMemo(() => {
         const cats = new Set(notes.map(n => n.category));
         return ['All', ...Array.from(cats)];
