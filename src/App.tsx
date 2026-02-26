@@ -182,9 +182,7 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
                     <div>
                         &copy; 2025 SU PIN-CHEN. CRAFTED WITH <span className="text-ue-blue">CODE</span> AND <span className="text-ue-blue">UE5</span>.
                     </div>
-                    <Link to="/admin" className="opacity-30 hover:opacity-100 hover:text-ue-blue transition-all">
-                        [ SYSTEM_ADMIN_PANEL ]
-                    </Link>
+                    {/* Hidden Admin Access */}
                 </div>
             </footer>
         </div>
