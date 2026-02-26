@@ -177,10 +177,21 @@ const Admin: React.FC = () => {
         try {
             // Prepare all files that need to be updated
             // 1. The index file (metadata only)
-            const indexContent = notes.map(note => {
-                const { content, content_en, content_zh, ...metadata } = note;
-                return metadata;
-            });
+            const indexContent = notes.map(note => ({
+                id: note.id,
+                slug: note.slug,
+                title: note.title,
+                title_zh: note.title_zh,
+                title_en: note.title_en,
+                category: note.category,
+                date: note.date,
+                author: note.author,
+                readTime: note.readTime,
+                tags: note.tags,
+                summary: note.summary,
+                summary_zh: note.summary_zh,
+                summary_en: note.summary_en
+            }));
 
             const filesToUpdate: FileUpdate[] = [
                 {

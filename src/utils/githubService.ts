@@ -17,13 +17,14 @@ export const githubService = {
 
         // 1. Get the latest commit SHA of the main branch (usually 'main' or 'master')
         const branchResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/main`, { headers: authHeader });
+        let branchData;
         if (!branchResponse.ok) {
             // Try 'master' if 'main' fails
             const masterResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/master`, { headers: authHeader });
             if (!masterResponse.ok) throw new Error('Failed to fetch branch info');
-            var branchData = await masterResponse.json();
+            branchData = await masterResponse.json();
         } else {
-            var branchData = await branchResponse.json();
+            branchData = await branchResponse.json();
         }
 
         const latestCommitSha = branchData.commit.sha;
