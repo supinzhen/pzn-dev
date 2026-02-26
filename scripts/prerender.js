@@ -18,9 +18,9 @@ async function prerender() {
     }
 
     const template = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
-    const notes = JSON.parse(fs.readFileSync(NOTES_DATA_PATH, 'utf-8'));
+    const notesArr = JSON.parse(fs.readFileSync(NOTES_DATA_PATH, 'utf-8'));
 
-    for (const note of notes) {
+    for (const note of notesArr) {
         const slug = note.slug;
         const noteDir = path.join(DIST_DIR, 'notes', slug);
 
@@ -30,20 +30,29 @@ async function prerender() {
 
         const title = note.title_zh || note.title;
         const fullTitle = `${title} | Annie Su`;
-        const description = note.summary || '';
+        // Clean up summary: remove newlines, limit length
+        const description = (note.summary_zh || note.summary || '')
+            .replace(/\r?\n|\r/g, ' ')
+            .replace(/"/g, '&quot;')
+            .trim()
+            .substring(0, 160);
+
+        const url = `https://supinzhen.github.io/pzn-dev/notes/${slug}`;
 
         let html = template;
 
         // Replace Titles
         html = html.replace(/<title>.*?<\/title>/g, `<title>${fullTitle}</title>`);
 
-        // Replace OG Tags
+        // Replace OG Tags (using non-greedy match to handle existing content)
         html = html.replace(/<meta property="og:title" content=".*?">/g, `<meta property="og:title" content="${fullTitle}">`);
         html = html.replace(/<meta property="og:description" content=".*?">/g, `<meta property="og:description" content="${description}">`);
+        html = html.replace(/<meta property="og:url" content=".*?">/g, `<meta property="og:url" content="${url}">`);
 
         // Replace Twitter Tags
         html = html.replace(/<meta property="twitter:title" content=".*?">/g, `<meta property="twitter:title" content="${fullTitle}">`);
         html = html.replace(/<meta property="twitter:description" content=".*?">/g, `<meta property="twitter:description" content="${description}">`);
+        html = html.replace(/<meta property="twitter:url" content=".*?">/g, `<meta property="twitter:url" content="${url}">`);
 
         fs.writeFileSync(path.join(noteDir, 'index.html'), html);
         console.log(`✅ Prerendered: /notes/${slug}`);
