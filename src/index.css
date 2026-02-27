@@ -292,8 +292,10 @@ body {
 
 .profile-container {
     position: relative;
-    width: 280px;
-    height: 350px;
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 280 / 350;
+    margin: 0 auto;
 }
 
 .profile-card {
