@@ -156,7 +156,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
     return (
         <div className="relative">
-            {/* global background decor / glows */}
+            {/* Ambient background decorative glows */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
                 <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-ue-blue/20 rounded-full blur-[120px]"></div>
                 <div className="absolute top-1/3 -right-1/4 w-96 h-96 bg-ue-blue/10 rounded-full blur-[120px]"></div>
@@ -479,7 +479,6 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         <div className="bg-white dark:bg-slate-900 max-w-3xl w-full px-8 pb-8 pt-4 md:px-12 md:pb-12 md:pt-6 rounded-3xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto custom-scrollbar flex flex-col font-sans border border-slate-200 dark:border-white/10 shadow-2xl">
                             {(() => {
                                 const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
-                                const isProject = modalId.startsWith('modal');
 
                                 return (
                                     <div className="w-full">
