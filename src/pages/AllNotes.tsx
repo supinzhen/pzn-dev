@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, ChevronRight } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { noteService } from '../utils/noteService';
 
 interface AllNotesProps {
@@ -18,6 +20,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
     React.useEffect(() => {
         const title = lang === 'zh' ? '所有技術文章' : 'All Technical Articles';
         document.title = `${title} | Annie Su`;
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
     }, [lang]);
 
     const categories = useMemo(() => {
@@ -51,20 +54,21 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                 <button
                     onClick={() => navigate('/notes')}
                     className="flex items-center gap-2 text-slate-400 dark:text-slate-400 hover:text-white transition-colors mb-6 group"
+                    data-aos="fade-right"
                 >
                     <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
                     <span className="text-sm font-bold tracking-wider font-mono uppercase">BACK TO NOTES</span>
                 </button>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-right" data-aos-delay="100">
                     <span className="text-ue-blue">All</span> Technical Articles
                 </h1>
-                <p className="text-slate-500 dark:text-slate-400 max-w-2xl text-lg">
+                <p className="text-slate-500 dark:text-slate-400 max-w-2xl text-lg" data-aos="fade-right" data-aos-delay="200">
                     {lang === 'zh' ? '完整的技術筆記檔案庫，涵蓋 Unreal Engine、虛擬製作與廣播系統。' : 'Complete technical archives covering Unreal Engine, Virtual Production, and Broadcast systems.'}
                 </p>
             </div>
 
             {/* Controls */}
-            <div className="flex flex-col md:flex-row gap-6 mb-12">
+            <div className="flex flex-col md:flex-row gap-6 mb-12" data-aos="fade-up" data-aos-delay="300">
                 <div className="relative flex-grow">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                     <input
@@ -89,7 +93,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
             </div>
 
             {/* Tags Ribbon */}
-            <div className="mb-12 flex flex-wrap gap-2">
+            <div className="mb-12 flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="400">
                 <button
                     onClick={() => setSelectedTag(null)}
                     className={`px-4 py-1.5 rounded-lg text-[10px] font-bold transition-all border ${!selectedTag ? 'bg-slate-800 text-white border-slate-700' : 'bg-white/5 border-white/10 text-slate-500 hover:border-ue-blue/30'}`}
@@ -108,7 +112,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
             </div>
 
             {/* Table-like List */}
-            <div className="glass rounded-3xl border border-white/10 overflow-hidden">
+            <div className="glass rounded-3xl border border-white/10 overflow-hidden" data-aos="fade-up" data-aos-delay="500">
                 <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-black/10 dark:bg-white/5 border-b border-white/10 text-[10px] font-mono text-slate-400 uppercase tracking-widest">
                     <div className="col-span-1">Date</div>
                     <div className="col-span-6">Title</div>

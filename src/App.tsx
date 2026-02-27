@@ -63,8 +63,13 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
     const location = useLocation();
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    // Close menu on route change
-    useEffect(() => { setMobileOpen(false); }, [location]);
+    // Close menu and scroll to top on route change (unless hashing)
+    useEffect(() => {
+        setMobileOpen(false);
+        if (!location.hash) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+    }, [location]);
 
     const dropLinkCls = `block px-4 py-3 text-sm hover:text-ue-blue hover:bg-white/5 transition-colors whitespace-nowrap ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`;
 

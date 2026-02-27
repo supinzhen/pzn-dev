@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocation, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -145,6 +146,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
     };
 
     const openModal = (id: string) => {
+        console.log("Opening modal:", id, "lang:", lang, "data:", modalData[id]);
         setModalId(id);
         document.body.style.overflow = 'hidden';
     };
@@ -471,96 +473,96 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         </div>
                     </div>
                 </section>
+            </div>
 
-                {/* Modal */}
-                {modalId && modalData[modalId] && modalData[modalId][lang] && (
-                    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-                        <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md" onClick={closeModal}></div>
-                        <div className="bg-white dark:bg-slate-900 max-w-3xl w-full px-8 pb-8 pt-4 md:px-12 md:pb-12 md:pt-6 rounded-3xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto custom-scrollbar flex flex-col font-sans border border-slate-200 dark:border-white/10 shadow-2xl">
-                            {(() => {
-                                const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
+            {/* Render Modal into Body using createPortal to escape parent stacking contexts */}
+            {modalId && modalData[modalId] && modalData[modalId][lang] && createPortal(
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md" onClick={closeModal}></div>
+                    <div className="bg-white dark:bg-slate-900 max-w-3xl w-full px-8 pb-8 pt-4 md:px-12 md:pb-12 md:pt-6 rounded-3xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto custom-scrollbar flex flex-col font-sans border border-slate-200 dark:border-white/10 shadow-2xl">
+                        {(() => {
+                            const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
 
-                                return (
-                                    <div className="w-full">
-                                        <button
-                                            onClick={closeModal}
-                                            className="sticky top-0 float-right text-slate-400 dark:text-slate-500 hover:text-ue-blue z-20 p-2"
-                                        >
-                                            <X className="w-8 h-8" />
-                                        </button>
+                            return (
+                                <div className="w-full">
+                                    <button
+                                        onClick={closeModal}
+                                        className="sticky top-0 float-right text-slate-400 dark:text-slate-500 hover:text-ue-blue z-20 p-2"
+                                    >
+                                        <X className="w-8 h-8" />
+                                    </button>
 
-                                        <div className="clear-both">
-                                            <div className="space-y-6">
-                                                <div>
-                                                    <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">
-                                                        {data.title}
-                                                    </h3>
-                                                    <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">
-                                                        {data.tech}
-                                                    </p>
-                                                    {(data.paperUrl || data.githubUrl) && (
-                                                        <div className="flex flex-wrap gap-4 mb-4">
-                                                            {data.paperUrl && (
-                                                                <a href={data.paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/10 dark:bg-tech-green/20 hover:bg-tech-green/20 dark:hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
-                                                                    <i className="fas fa-file-lines mr-2"></i> {data.paperLabel || t('view-paper') || '查看論文'}
-                                                                </a>
-                                                            )}
-                                                            {data.githubUrl && (
-                                                                <a href={data.githubUrl} target="_blank" className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 border border-slate-200 dark:border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center text-slate-700 dark:text-white">
-                                                                    <i className="fab fa-github mr-2"></i> GitHub
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
-
-                                                {/* Media Support */}
-                                                {(data.videoEmbedUrl || data.imageUrl) && (
-                                                    <div className="space-y-6">
-                                                        {data.videoEmbedUrl && (
-                                                            <div className="aspect-video w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg bg-black mb-6">
-                                                                <iframe className="w-full h-full" src={data.videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                                                            </div>
+                                    <div className="clear-both">
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">
+                                                    {data.title}
+                                                </h3>
+                                                <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">
+                                                    {data.tech}
+                                                </p>
+                                                {(data.paperUrl || data.githubUrl) && (
+                                                    <div className="flex flex-wrap gap-4 mb-4">
+                                                        {data.paperUrl && (
+                                                            <a href={data.paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/10 dark:bg-tech-green/20 hover:bg-tech-green/20 dark:hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                                                                <i className="fas fa-file-lines mr-2"></i> {data.paperLabel || t('view-paper') || '查看論文'}
+                                                            </a>
                                                         )}
-                                                        {data.imageUrl && (
-                                                            <div className="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg mb-6">
-                                                                <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
-                                                            </div>
+                                                        {data.githubUrl && (
+                                                            <a href={data.githubUrl} target="_blank" className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 border border-slate-200 dark:border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center text-slate-700 dark:text-white">
+                                                                <i className="fab fa-github mr-2"></i> GitHub
+                                                            </a>
                                                         )}
                                                     </div>
                                                 )}
+                                            </div>
 
-                                                <div className="text-text-primary leading-relaxed text-lg space-y-4 font-sans">
-                                                    <div
-                                                        className="font-sans"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: data.desc.includes('<br>')
-                                                                ? data.desc
-                                                                : data.desc.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')
-                                                        }}
-                                                    >
-                                                    </div>
-                                                </div>
+                                            <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
 
-                                                <div className="flex justify-end pt-4">
-                                                    <button
-                                                        onClick={closeModal}
-                                                        className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-700 dark:text-white rounded-xl transition-all text-sm font-bold font-sans border border-slate-200 dark:border-white/10 shadow-sm"
-                                                    >
-                                                        Close Window
-                                                    </button>
+                                            {/* Media Support */}
+                                            {(data.videoEmbedUrl || data.imageUrl) && (
+                                                <div className="space-y-6">
+                                                    {data.videoEmbedUrl && (
+                                                        <div className="aspect-video w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg bg-black mb-6">
+                                                            <iframe className="w-full h-full" src={data.videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                                        </div>
+                                                    )}
+                                                    {data.imageUrl && (
+                                                        <div className="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg mb-6">
+                                                            <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
+                                                        </div>
+                                                    )}
                                                 </div>
+                                            )}
+
+                                            <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg space-y-4 font-sans">
+                                                <div
+                                                    className="font-sans"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: data.desc.includes('<br>')
+                                                            ? data.desc
+                                                            : data.desc.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')
+                                                    }}
+                                                >
+                                                </div>
+                                            </div>
+
+                                            <div className="flex justify-end pt-4">
+                                                <button
+                                                    onClick={closeModal}
+                                                    className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-700 dark:text-white rounded-xl transition-all text-sm font-bold font-sans border border-slate-200 dark:border-white/10 shadow-sm"
+                                                >
+                                                    Close Window
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                );
-                            })()}
-                        </div>
+                                </div>
+                            );
+                        })()}
                     </div>
-                )}
-            </div>
+                </div>, document.body
+            )}
         </div>
     );
 };

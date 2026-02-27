@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Tag, Calendar, ChevronRight, Twitter, Facebook, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { noteService } from '../utils/noteService';
 import { renderMarkdown } from '../utils/markdown';
 import { translations } from '../assets/translations/data';
@@ -28,6 +30,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
         if (slug) {
             setIsLoading(true);
             noteService.getNoteContent(slug).then(content => {
@@ -102,7 +105,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
             {/* Breadcrumbs */}
-            <div className="flex items-center gap-2 text-xs text-text-secondary mb-12 font-sans">
+            <div className="flex items-center gap-2 text-xs text-text-secondary mb-12 font-sans" data-aos="fade-right">
                 <Link to="/" className="hover:text-ue-blue transition-colors text-ue-blue/80">{t('breadcrumb-home')}</Link>
                 <ChevronRight className="w-3 h-3 opacity-50" />
                 <Link to="/notes" className="hover:text-ue-blue transition-colors text-ue-blue/80">{t('breadcrumb-notes')}</Link>
@@ -112,7 +115,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
 
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
-                <header className="mb-12">
+                <header className="mb-12" data-aos="fade-up" data-aos-delay="100">
                     <button
                         onClick={() => navigate('/notes')}
                         className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors mb-8 group"
@@ -191,7 +194,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                 </header>
 
                 {/* Article Content */}
-                <article className="max-w-none font-sans prose-markdown">
+                <article className="max-w-none font-sans prose-markdown" data-aos="fade-up" data-aos-delay="200">
                     {isLoading ? (
                         <div className="py-24 flex flex-col items-center justify-center gap-4 text-slate-500">
                             <div className="w-8 h-8 border-2 border-ue-blue/30 border-t-ue-blue rounded-full animate-spin"></div>
@@ -206,7 +209,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                 </article>
 
                 {/* Footer / Tags */}
-                <footer className="mt-16 pt-8 border-t border-white/10 dark:border-white/5">
+                <footer className="mt-16 pt-8 border-t border-white/10 dark:border-white/5" data-aos="fade-up" data-aos-delay="300">
                     <div className="flex items-center gap-3 text-slate-500 mb-8">
                         <Tag className="w-4 h-4" />
                         <div className="flex gap-2 font-sans">
