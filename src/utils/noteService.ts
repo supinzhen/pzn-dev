@@ -17,6 +17,7 @@ export interface Note {
     content?: string;
     content_zh?: string;
     content_en?: string;
+    imageUrl?: string;
 }
 
 const LOCAL_STORAGE_KEY = 'pzn_custom_notes';

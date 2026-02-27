@@ -180,29 +180,26 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans">
                     {filteredNotes.length > 0 ? (
                         filteredNotes.slice(0, 4).map((note) => (
-                            <Link key={note.id} to={`/notes/${note.slug}`} className="glass p-6 rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col justify-between block font-sans min-h-[160px]">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-ue-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-                                <div>
-                                    <div className="flex justify-between items-start mb-3">
-                                        <span className="px-2 py-0.5 bg-ue-blue/10 text-ue-blue rounded text-[9px] font-mono border border-ue-blue/20">
-                                            {note.category}
-                                        </span>
-                                        <span className="text-slate-500 dark:text-slate-600 text-[10px] font-mono">{note.date}</span>
+                            <Link key={note.id} to={`/notes/${note.slug}`} className="glass rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col block font-sans min-h-[160px]">
+                                <div className="p-6 flex flex-col flex-1">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <span className="text-text-secondary text-[10px] font-mono opacity-80">{note.date}</span>
                                     </div>
-                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors line-clamp-1">{note.title}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed line-clamp-1 italic font-sans dark:font-light">"{note.summary}"</p>
-                                </div>
+                                    <h3 className="text-xl font-bold mb-2 text-text-primary group-hover:text-ue-blue transition-colors line-clamp-1">{note.title}</h3>
+                                    <p className="text-text-secondary text-sm mb-4 leading-relaxed line-clamp-2 italic font-sans">
+                                        {note.summary}
+                                    </p>
 
-                                <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/5">
-                                    <div className="flex gap-1.5">
-                                        {note.tags.slice(0, 3).map(tag => (
-                                            <span key={tag} className="text-[9px] text-slate-500 bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-white/5">#{tag}</span>
-                                        ))}
-                                    </div>
-                                    <div className="text-ue-blue text-[10px] font-bold hover:underline flex items-center gap-1.5 font-sans">
-                                        READ MORE
-                                        <i className="fas fa-arrow-right text-[9px]"></i>
+                                    <div className="flex justify-between items-center mt-auto pt-4 border-t border-border-color">
+                                        <div className="flex gap-1.5 overflow-hidden">
+                                            {note.tags.slice(0, 2).map(tag => (
+                                                <span key={tag} className="text-[9px] text-text-secondary bg-text-primary/5 px-2 py-0.5 rounded border border-border-color whitespace-nowrap">#{tag}</span>
+                                            ))}
+                                        </div>
+                                        <div className="text-ue-blue text-[10px] font-bold flex items-center gap-1.5 font-sans whitespace-nowrap">
+                                            READ MORE
+                                            <i className="fas fa-arrow-right text-[9px]"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </Link>

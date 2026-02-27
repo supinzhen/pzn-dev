@@ -102,12 +102,12 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
             {/* Breadcrumbs */}
-            <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-500 mb-12 font-mono">
-                <Link to="/" className="hover:text-ue-blue transition-colors text-ue-blue/60">{t('breadcrumb-home')}</Link>
-                <ChevronRight className="w-3 h-3" />
-                <Link to="/notes" className="hover:text-ue-blue transition-colors text-ue-blue/60">{t('breadcrumb-notes')}</Link>
-                <ChevronRight className="w-3 h-3" />
-                <span className="text-slate-700 dark:text-slate-300 truncate max-w-[200px] uppercase font-bold">{displayTitle}</span>
+            <div className="flex items-center gap-2 text-xs text-text-secondary mb-12 font-sans">
+                <Link to="/" className="hover:text-ue-blue transition-colors text-ue-blue/80">{t('breadcrumb-home')}</Link>
+                <ChevronRight className="w-3 h-3 opacity-50" />
+                <Link to="/notes" className="hover:text-ue-blue transition-colors text-ue-blue/80">{t('breadcrumb-notes')}</Link>
+                <ChevronRight className="w-3 h-3 opacity-50" />
+                <span className="text-text-primary truncate max-w-[200px] uppercase font-bold">{displayTitle}</span>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -115,18 +115,18 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                 <header className="mb-12">
                     <button
                         onClick={() => navigate('/notes')}
-                        className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-ue-blue transition-colors mb-8 group"
+                        className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors mb-8 group"
                     >
                         <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
-                        <span className="text-sm font-bold tracking-wider font-mono uppercase">{t('back-to-list')}</span>
+                        <span className="text-sm font-bold tracking-wider font-sans uppercase">{t('back-to-list')}</span>
                     </button>
 
                     <div className="flex items-center gap-3 mb-6">
                         <span className="px-3 py-1 bg-ue-blue/10 text-ue-blue rounded text-[10px] font-mono border border-ue-blue/20">
                             {note.category}
                         </span>
-                        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-500 text-xs font-mono">
-                            <Calendar className="w-3 h-3" />
+                        <div className="flex items-center gap-2 text-text-secondary text-xs font-mono">
+                            <Calendar className="w-3 h-3 opacity-70" />
                             {note.date}
                         </div>
                     </div>
@@ -135,19 +135,19 @@ const NoteDetail: React.FC<NoteDetailProps> = ({ lang }) => {
                         {displayTitle}
                     </h1>
 
-                    <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-white/10 dark:border-white/5">
+                    <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-border-color">
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-ue-blue/20 border border-ue-blue/30 flex items-center justify-center text-ue-blue font-bold font-mono">
+                            <div className="w-10 h-10 rounded-full bg-ue-blue/20 border border-ue-blue/30 flex items-center justify-center text-ue-blue font-bold font-mono shadow-inner">
                                 AS
                             </div>
                             <div>
-                                <div className="text-sm font-bold">{note.author}</div>
-                                <div className="text-xs text-slate-500 font-mono uppercase">Systems Engineer</div>
+                                <div className="text-sm font-bold text-text-primary">{note.author}</div>
+                                <div className="text-xs text-text-secondary font-mono uppercase opacity-80">Systems Engineer</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4 text-slate-500">
+                        <div className="flex items-center gap-4 text-text-secondary">
                             <div className="flex items-center gap-2 text-xs font-mono mr-2">
-                                <Clock className="w-4 h-4" />
+                                <Clock className="w-4 h-4 opacity-70" />
                                 {note.readTime}
                             </div>
 

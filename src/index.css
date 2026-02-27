@@ -35,12 +35,15 @@
 
 .prose-markdown p {
     margin-bottom: 1.25rem;
-    color: var(--text-secondary);
-    line-height: 1.625;
+    color: var(--prose-text);
+    line-height: 1.7;
 }
 
+/* Specific overrides for better dark mode readability in articles */
+/* Removed specific dark/light mode overrides for p as --prose-text handles it */
+
 .prose-markdown strong {
-    color: var(--text-primary);
+    color: var(--prose-strong);
     font-weight: 700;
 }
 
@@ -48,18 +51,19 @@
     list-style-type: disc;
     padding-left: 1.5rem;
     margin-bottom: 1.25rem;
-    color: var(--text-secondary);
+    color: var(--prose-text);
 }
 
 .prose-markdown ol {
     list-style-type: decimal;
     padding-left: 1.5rem;
     margin-bottom: 1.25rem;
-    color: var(--text-secondary);
+    color: var(--prose-text);
 }
 
 .prose-markdown li {
     margin-bottom: 0.5rem;
+    color: var(--prose-text);
 }
 
 .prose-markdown li>ul,
@@ -115,20 +119,31 @@
     border-collapse: collapse;
     margin: 1.5rem 0;
     border: 1px solid var(--border-color);
-    font-size: 0.9em;
+    font-size: 0.95em;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
 .prose-markdown th,
 .prose-markdown td {
     border: 1px solid var(--border-color);
-    padding: 0.75rem;
+    padding: 0.85rem;
     text-align: left;
 }
 
+.prose-markdown td {
+    color: var(--prose-table-td);
+}
+
+/* Removed light-mode override for td as --prose-table-td handles it */
+
 .prose-markdown th {
-    background-color: rgba(0, 112, 255, 0.05);
+    background-color: var(--prose-table-th-bg);
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--prose-table-th);
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
 }
 
 .prose-markdown a {
@@ -157,26 +172,51 @@
 :root {
     --bg-primary: #020617;
     --bg-secondary: transparent;
-    --text-primary: #f8fafc;
+    --text-primary: #ffffff;
     --text-secondary: #94a3b8;
     --border-color: rgba(255, 255, 255, 0.08);
     --glass-bg: rgba(15, 23, 42, 0.6);
     --glass-border: rgba(255, 255, 255, 0.08);
     --ue-blue: #0070FF;
     --tech-green: #15803d;
+    /* Prose Specific */
+    --prose-text: #f1f5f9;
+    --prose-strong: #ffffff;
+    --prose-table-th: #ffffff;
+    --prose-table-td: #e2e8f0;
+    --prose-table-th-bg: rgba(0, 112, 255, 0.1);
+}
+
+.dark-mode {
+    --bg-primary: #020617;
+    --bg-secondary: #0f172a;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    /* Prose Specific - Dark Mode */
+    --prose-text: #d1d5db;
+    --prose-strong: #ffffff;
+    --prose-table-th: #ffffff;
+    --prose-table-td: #e2e8f0;
+    --prose-table-th-bg: rgba(255, 255, 255, 0.05);
 }
 
 .light-mode {
-    --bg-primary: #f1f5f9;
-    /* Cleaner, lighter slate */
-    --bg-secondary: #ffffff;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
     --text-primary: #0f172a;
-    /* Slate 900 */
     --text-secondary: #475569;
-    /* Slate 600 */
     --border-color: rgba(0, 112, 255, 0.08);
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(0, 112, 255, 0.1);
+    /* Prose Specific - Light Mode */
+    --prose-text: #334155;
+    --prose-strong: #0f172a;
+    --prose-table-th: #0f172a;
+    --prose-table-td: #1e293b;
+    --prose-table-th-bg: rgba(0, 112, 255, 0.05);
 }
 
 body {
@@ -228,13 +268,26 @@ body {
 }
 
 .animated-bg {
-    background: linear-gradient(-45deg, var(--bg-primary), #0f172a, #1e1b4b, var(--bg-primary));
+    background-image: linear-gradient(-45deg, var(--bg-primary), #0f172a, #2e1065, #020617);
     background-size: 400% 400%;
     animation: gradient-x 15s ease infinite;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.animated-bg::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .light-mode .animated-bg {
-    background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #f8fafc);
+    background-image: linear-gradient(-45deg, #f8fafc, #f1f5f9, #ffffff, #f8fafc);
+    background-attachment: fixed;
 }
 
 .profile-container {
@@ -255,7 +308,7 @@ body {
 }
 
 .light-mode .profile-card {
-    background: #ffffff;
+    background: transparent;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 112, 255, 0.1);
 }
 
@@ -269,6 +322,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    border-radius: 24px;
     transition: transform 0.5s ease;
 }
 
@@ -280,6 +334,7 @@ body {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(15, 23, 42, 0.8) 0%, transparent 40%);
+    border-radius: 24px;
     pointer-events: none;
     z-index: 10;
 }

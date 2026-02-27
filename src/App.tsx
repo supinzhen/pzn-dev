@@ -18,8 +18,10 @@ const App: React.FC = () => {
         const root = document.documentElement;
         if (theme === 'light') {
             root.classList.add('light-mode');
+            root.classList.remove('dark');
         } else {
             root.classList.remove('light-mode');
+            root.classList.add('dark');
         }
         localStorage.setItem('theme', theme);
     }, [theme]);
@@ -66,8 +68,11 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
 
     const dropLinkCls = `block px-4 py-3 text-sm hover:text-ue-blue hover:bg-white/5 transition-colors whitespace-nowrap ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`;
 
+    const isHomePage = location.pathname === '/';
+    const bgAnimationCls = isHomePage ? 'animated-bg' : '';
+
     return (
-        <div className={`selection:bg-ue-blue/30 font-sans min-h-screen text-slate-100 overflow-x-hidden ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`selection:bg-ue-blue/30 font-sans min-h-screen text-slate-100 overflow-x-hidden ${bgAnimationCls} ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
             {/* Navigation */}
             <nav className="fixed top-0 w-full z-[100] glass border-b border-white/5">
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -156,16 +161,30 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
                 {/* ── Mobile dropdown ── */}
                 {mobileOpen && (
                     <div className={`lg:hidden border-t border-white/5 px-6 py-4 flex flex-col gap-1 ${theme === 'dark' ? 'bg-slate-950/95' : 'bg-slate-50/95'} backdrop-blur-md`}>
-                        <p className={`text-[10px] font-mono uppercase tracking-widest mb-1 ${theme === 'dark' ? 'text-slate-600' : 'text-slate-400'}`}>
+                        {/* Major Link: About */}
+                        <Link
+                            to="/#hero"
+                            onClick={() => setMobileOpen(false)}
+                            className={`block px-4 py-4 text-lg font-bold hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}
+                        >
                             {t('nav-about')}
-                        </p>
-                        <Link to="/#hero" onClick={() => setMobileOpen(false)} className={dropLinkCls}>{t('nav-about')}</Link>
-                        <Link to="/#skills" onClick={() => setMobileOpen(false)} className={dropLinkCls}>{t('nav-skills')}</Link>
-                        <Link to="/#experience" onClick={() => setMobileOpen(false)} className={dropLinkCls}>{t('nav-exp')}</Link>
-                        <Link to="/#projects" onClick={() => setMobileOpen(false)} className={dropLinkCls}>{t('nav-projects')}</Link>
-                        <Link to="/#contact" onClick={() => setMobileOpen(false)} className={dropLinkCls}>{t('nav-contact')}</Link>
-                        <div className="border-t border-white/5 mt-2 pt-2">
-                            <Link to="/notes" onClick={() => setMobileOpen(false)} className={dropLinkCls}>
+                        </Link>
+
+                        {/* Secondary Links for Hero sections */}
+                        <div className="flex flex-col mb-4">
+                            <Link to="/#skills" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-skills')}</Link>
+                            <Link to="/#experience" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-exp')}</Link>
+                            <Link to="/#projects" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-projects')}</Link>
+                            <Link to="/#contact" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-contact')}</Link>
+                        </div>
+
+                        {/* Major Link: Tech Notes */}
+                        <div className="border-t border-white/5 pt-2">
+                            <Link
+                                to="/notes"
+                                onClick={() => setMobileOpen(false)}
+                                className={`block px-4 py-4 text-lg font-bold hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}
+                            >
                                 {t('nav-notes')}
                             </Link>
                         </div>

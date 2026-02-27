@@ -50,10 +50,10 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
             <div className="mb-12">
                 <button
                     onClick={() => navigate('/notes')}
-                    className="flex items-center gap-2 text-slate-500 hover:text-ue-blue transition-colors mb-6 group"
+                    className="flex items-center gap-2 text-slate-400 dark:text-slate-400 hover:text-white transition-colors mb-6 group"
                 >
                     <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm font-bold tracking-wider font-mono">BACK TO NOTES</span>
+                    <span className="text-sm font-bold tracking-wider font-mono uppercase">BACK TO NOTES</span>
                 </button>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
                     <span className="text-ue-blue">All</span> Technical Articles
@@ -109,7 +109,7 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
 
             {/* Table-like List */}
             <div className="glass rounded-3xl border border-white/10 overflow-hidden">
-                <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-black/10 dark:bg-white/5 border-b border-white/10 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-black/10 dark:bg-white/5 border-b border-white/10 text-[10px] font-mono text-slate-400 uppercase tracking-widest">
                     <div className="col-span-1">Date</div>
                     <div className="col-span-6">Title</div>
                     <div className="col-span-2">Category</div>
@@ -125,16 +125,16 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                                 to={`/notes/${note.slug}`}
                                 className="grid grid-cols-1 md:grid-cols-12 gap-4 px-8 py-6 hover:bg-ue-blue/5 transition-all group items-center"
                             >
-                                <div className="col-span-1 text-xs font-mono text-slate-600 dark:text-slate-500">
+                                <div className="col-span-1 text-xs font-mono text-text-secondary">
                                     {note.date.split('-').slice(1).join('/')}
-                                    <span className="md:hidden ml-2 text-slate-500 dark:text-slate-400">/ {note.date.split('-')[0]}</span>
-                                    <div className="hidden md:block text-[10px] text-slate-600 dark:text-slate-400 opacity-60">{note.date.split('-')[0]}</div>
+                                    <span className="md:hidden ml-2 text-text-secondary">/ {note.date.split('-')[0]}</span>
+                                    <div className="hidden md:block text-[10px] text-text-secondary opacity-60">{note.date.split('-')[0]}</div>
                                 </div>
                                 <div className="col-span-6">
-                                    <h3 className="font-bold group-hover:text-ue-blue transition-colors text-lg md:text-base">
+                                    <h3 className="font-bold group-hover:text-ue-blue transition-colors text-lg md:text-base text-text-primary">
                                         {note.title}
                                     </h3>
-                                    <p className="text-slate-600 dark:text-slate-500 text-xs mt-1 md:hidden line-clamp-2">
+                                    <p className="text-text-secondary text-xs mt-1 md:hidden line-clamp-2">
                                         {note.summary}
                                     </p>
                                 </div>

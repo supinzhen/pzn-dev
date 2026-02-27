@@ -9,7 +9,7 @@ const DIST_DIR = path.resolve(__dirname, '../dist');
 const NOTES_DATA_PATH = path.resolve(__dirname, '../src/assets/data/notes.json');
 const POSTS_DIR = path.resolve(__dirname, '../public/posts');
 const INDEX_HTML_PATH = path.resolve(DIST_DIR, 'index.html');
-const DEFAULT_IMAGE = 'https://supinzhen.github.io/pzn-dev/image/Gemini_Generated_Image_uydifmuydifmuydi.png';
+const DEFAULT_IMAGE = 'https://supinzhen.github.io/pzn-dev/image/favicon.svg';
 
 async function prerender() {
     console.log('🚀 Starting custom prerender script...');

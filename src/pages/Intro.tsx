@@ -155,369 +155,413 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
     };
 
     return (
-        <div className="animated-bg">
-            {/* Hero Section */}
-            <section className="min-h-[85vh] flex items-center justify-center pt-32 pb-16 relative overflow-hidden" id="hero">
+        <div className="relative">
+            {/* global background decor / glows */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
                 <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-ue-blue/20 rounded-full blur-[120px]"></div>
+                <div className="absolute top-1/3 -right-1/4 w-96 h-96 bg-ue-blue/10 rounded-full blur-[120px]"></div>
+                <div className="absolute top-1/2 -right-1/4 w-80 h-80 bg-tech-green/10 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[70%] -left-1/4 w-96 h-96 bg-ue-blue/10 rounded-full blur-[120px]"></div>
                 <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-tech-green/10 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-0 -left-1/4 w-80 h-80 bg-tech-green/10 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-0 right-0 w-64 h-64 bg-ue-blue/10 rounded-full blur-[100px]"></div>
+            </div>
 
-                <div className="container mx-auto px-6 z-10">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
-                        <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-                            <h1 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight leading-snug font-sans" data-aos="fade-right">
-                                <span className="block lg:inline">{t('hero-name-zh')}</span>
-                                <span className="text-slate-500 font-light hidden lg:inline mx-2">|</span>
-                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-ue-blue to-cyan-500 block lg:inline-block mt-4 lg:mt-0 font-sans">
-                                    {t('hero-name-en')}
-                                </span>
-                            </h1>
+            <div className="bg-white/70 backdrop-blur-md dark:bg-transparent dark:backdrop-blur-none min-h-screen relative z-10">
+                {/* Hero Section */}
+                <section className="min-h-[85vh] flex items-center justify-center pt-32 pb-16 relative" id="hero">
 
-                            <p className="max-w-2xl mx-auto lg:mx-0 text-slate-400 text-base md:text-lg mb-10 leading-relaxed font-sans text-center lg:text-left" data-aos="fade-right" data-aos-delay="400">
-                                {t('hero-desc')}
-                            </p>
+                    <div className="container mx-auto px-6 z-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
+                            <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
+                                <h1 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight leading-snug font-sans" data-aos="fade-right">
+                                    <span className="block lg:inline">{t('hero-name-zh')}</span>
+                                    <span className="text-slate-500 font-light hidden lg:inline mx-2">|</span>
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-ue-blue to-cyan-500 block lg:inline-block mt-4 lg:mt-0 font-sans">
+                                        {t('hero-name-en')}
+                                    </span>
+                                </h1>
 
-                            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 font-sans" data-aos="fade-right" data-aos-delay="600">
-                                <Link to="/#projects" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
-                                    {t('btn-projects')}
-                                </Link>
-                                <Link to="/#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
-                                    {t('btn-contact')}
-                                </Link>
+                                <p className="max-w-2xl mx-auto lg:mx-0 text-slate-400 text-base md:text-lg mb-10 leading-relaxed font-sans text-center lg:text-left" data-aos="fade-right" data-aos-delay="400">
+                                    {t('hero-desc')}
+                                </p>
+
+                                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 font-sans" data-aos="fade-right" data-aos-delay="600">
+                                    <Link to="/#projects" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                                        {t('btn-projects')}
+                                    </Link>
+                                    <Link to="/#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                                        {t('btn-contact')}
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="flex-1 flex justify-center order-1 lg:order-2" data-aos="zoom-in" data-aos-delay="300">
-                            <div className="profile-container animate-float">
-                                <div className="profile-frame-decor"></div>
-                                <div className="profile-frame-decor-2"></div>
-                                <div className="profile-card">
-                                    <img src={getAssetPath('/image/Gemini_Generated_Image_uydifmuydifmuydi.png')} alt="Annie Su" />
-                                    <div className="profile-overlay"></div>
+                            <div className="flex-1 flex justify-center order-1 lg:order-2" data-aos="zoom-in" data-aos-delay="300">
+                                <div className="profile-container animate-float">
+                                    <div className="profile-frame-decor"></div>
+                                    <div className="profile-frame-decor-2"></div>
+                                    <div className="profile-card">
+                                        <img src={getAssetPath('/image/Gemini_Generated_Image_uydifmuydifmuydi.png')} alt="Annie Su" />
+                                        <div className="profile-overlay"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Skills Section */}
-            <section id="skills" className="pt-[60px] pb-24 relative bg-slate-900/30">
-                <div className="container mx-auto px-6 font-sans">
-                    <h2 className="text-3xl font-bold mb-16 text-center" data-aos="fade-up">
-                        <span>{t('skills-title')}</span>
-                    </h2>
+                {/* Skills Section */}
+                <section id="skills" className="pt-[60px] pb-24 relative">
+                    <div className="container mx-auto px-6 font-sans">
+                        <h2 className="text-3xl font-bold mb-16 text-center" data-aos="fade-up">
+                            <span>{t('skills-title')}</span>
+                        </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
-                        <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up">
-                            <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-cube"></i></div>
-                            <h3 className="text-xl font-bold mb-4">{t('skill-1-title')}</h3>
-                            <ul className="space-y-3 text-slate-400 font-sans text-sm">
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Unreal Engine 5</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> C++ / Blueprints</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Pixel Streaming</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Python Scripting</li>
-                            </ul>
-                        </div>
-                        <div className="glass p-8 rounded-2xl border-glow-green transition-all" data-aos="fade-up" data-aos-delay="200">
-                            <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-video"></i></div>
-                            <h3 className="text-xl font-bold mb-4">{t('skill-2-title')}</h3>
-                            <ul className="space-y-3 text-slate-400 font-sans text-sm">
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Zero Density / Reality</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Camera Tracking</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> nDisplay Configuration</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> LiveLink Protocol</li>
-                            </ul>
-                        </div>
-                        <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up" data-aos-delay="400">
-                            <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-network-wired"></i></div>
-                            <h3 className="text-xl font-bold mb-4">{t('skill-3-title')}</h3>
-                            <ul className="space-y-3 text-slate-400 font-sans text-sm">
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SMPTE ST 2110 IP</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> PTP Synchronization</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SDI / NDI Infrastructure</li>
-                                <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Cisco/Arista Switch</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Experience Section */}
-            <section id="experience" className="py-24 relative overflow-hidden font-sans">
-                <div className="container mx-auto px-6 relative">
-                    <h2 className="text-3xl font-bold mb-20 text-center font-sans tracking-tight" data-aos="fade-up">
-                        <span>{t('exp-title')}</span>
-                    </h2>
-
-                    <div className="relative font-sans">
-                        <div className="timeline-line"></div>
-
-                        {/* Exp 1 */}
-                        <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-right">
-                            <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
-                                <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-antest')}>
-                                    <div className="text-ue-blue font-sans font-bold text-xs mb-2">{t('exp-1-date')}</div>
-                                    <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
-                                    <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
-                                        <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#ST2110</span>
-                                        <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#VP</span>
-                                        <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#UE5</span>
-                                    </div>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-1-short')}</p>
-                                    <div className="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans">
-                                        {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                    </div>
-                                </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
+                            <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up">
+                                <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-cube"></i></div>
+                                <h3 className="text-xl font-bold mb-4">{t('skill-1-title')}</h3>
+                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Unreal Engine 5</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> C++ / Blueprints</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Pixel Streaming</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Python Scripting</li>
+                                </ul>
                             </div>
-                            <div className="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,255,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                            <div className="md:hidden w-full pl-10">
-                                <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer font-sans" onClick={() => openModal('exp-antest')}>
-                                    <span className="text-ue-blue font-sans font-bold block mb-2">{t('exp-1-date')}</span>
-                                    <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-1-short')}</p>
-                                </div>
+                            <div className="glass p-8 rounded-2xl border-glow-green transition-all" data-aos="fade-up" data-aos-delay="200">
+                                <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-video"></i></div>
+                                <h3 className="text-xl font-bold mb-4">{t('skill-2-title')}</h3>
+                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Zero Density / Reality</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Camera Tracking</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> nDisplay Configuration</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> LiveLink Protocol</li>
+                                </ul>
                             </div>
-                            <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
-                        </div>
-
-                        {/* Exp 2 */}
-                        <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
-                            <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
-                            <div className="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                            <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
-                                <div className="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-n2')}>
-                                    <div className="text-tech-green font-sans font-bold text-xs mb-2">{t('exp-2-date')}</div>
-                                    <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
-                                    <div className="flex flex-wrap gap-2 mb-4 font-mono">
-                                        <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#AI</span>
-                                        <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unreal Engine</span>
-                                        <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
-                                    </div>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-2-short')}</p>
-                                    <div className="mt-4 text-tech-green text-[10px] font-bold tracking-widest uppercase font-sans">
-                                        {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Exp 3 */}
-                        <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
-                            <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
-                                <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-ndhu')}>
-                                    <div className="text-slate-500 font-sans font-bold text-xs mb-2">
-                                        {t('exp-3-date')}</div>
-                                    <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
-                                    <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
-                                        <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
-                                        <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unity3D</span>
-                                        <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Python</span>
-                                    </div>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-3-short')}</p>
-                                    <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
-                                        {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                            <div className="md:hidden w-full pl-10 font-sans">
-                                <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer" onClick={() => openModal('exp-ndhu')}>
-                                    <span className="text-slate-500 font-sans font-bold block mb-2">{t('exp-3-date')}</span>
-                                    <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-3-short')}</p>
-                                </div>
-                            </div>
-                            <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Projects Section */}
-            <section id="projects" className="py-24 relative font-sans">
-                <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left">
-                        <div data-aos="fade-right" className="w-full md:w-auto">
-                            <h2 className="text-3xl font-bold font-sans">
-                                <span>{t('projects-title')}</span>
-                            </h2>
-                            <p className="text-slate-600 dark:text-slate-400 mt-2 font-sans">{t('projects-subtitle')}</p>
-                        </div>
-                        <div className="mt-4 md:mt-0 w-full md:w-auto" data-aos="fade-left">
-                            <span className="text-slate-500 font-sans text-sm">{t('projects-gallery')}</span>
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
-                        {/* Project 3 */}
-                        <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans" onClick={() => openModal('modal-3')} data-aos="zoom-in">
-                            <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop" alt="Server Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center">
-                                    <i className="fas fa-server text-6xl text-white/20"></i>
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex justify-between items-start mb-3 font-mono">
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
-                                        <span className="text-[10px] px-2 py-1 bg-slate-700/10 text-slate-500 dark:text-slate-400 border border-slate-700/20 rounded">ST 2110</span>
-                                        <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Rivermax</span>
-                                    </div>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2026</span>
-                                </div>
-                                <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-3-title')}</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-3-desc')}</p>
-                                <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
-                                    <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Project 2 */}
-                        <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-green transition-all font-sans" onClick={() => openModal('modal-2')} data-aos="zoom-in" data-aos-delay="200">
-                            <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=800&auto=format&fit=crop" alt="VP Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-br from-tech-green/40 to-slate-950 flex items-center justify-center">
-                                    <i className="fas fa-video-slash text-6xl text-white/20"></i>
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex justify-between items-start mb-3 font-mono">
-                                    <div className="flex gap-2 flex-wrap">
-                                        <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Python</span>
-                                        <span className="text-[10px] px-2 py-1 bg-white/10 text-slate-800 dark:text-white border border-white/20 rounded">Unity</span>
-                                    </div>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2023-2024</span>
-                                </div>
-                                <h3 className="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans">{t('proj-2-title')}</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-2-desc')}</p>
-                                <button className="text-xs font-bold text-tech-green flex items-center group-hover:translate-x-1 transition-transform font-sans">
-                                    <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Project 1 */}
-                        <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all" onClick={() => openModal('modal-1')} data-aos="zoom-in" data-aos-delay="400">
-                            <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="AI Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center">
-                                    <i className="fas fa-robot text-6xl text-white/20"></i>
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex justify-between items-start mb-3 font-mono">
-                                    <div className="flex gap-2 flex-wrap">
-                                        <span className="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
-                                        <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">AI</span>
-                                    </div>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2024-2025</span>
-                                </div>
-                                <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-1-title')}</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-1-desc')}</p>
-                                <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
-                                    <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
-                                </button>
+                            <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up" data-aos-delay="400">
+                                <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-network-wired"></i></div>
+                                <h3 className="text-xl font-bold mb-4">{t('skill-3-title')}</h3>
+                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SMPTE ST 2110 IP</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> PTP Synchronization</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SDI / NDI Infrastructure</li>
+                                    <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Cisco/Arista Switch</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Footer Connect */}
-            <section id="contact" className="py-24 border-t border-white/5 font-sans">
-                <div className="container mx-auto px-6 text-center md:text-left">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 font-sans">
-                        <div data-aos="fade-right">
-                            <h2 className="text-3xl font-bold mb-8 font-sans">{t('edu-title')}</h2>
-                            <div className="space-y-6">
-                                <div className="flex gap-4 items-stretch">
-                                    <div className="w-1 self-stretch bg-ue-blue rounded-full flex-shrink-0"></div>
-                                    <div className="text-left font-sans">
-                                        <h4 className="font-bold font-sans">{t('edu-1-uni')}</h4>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-1-deg')}</p>
+                {/* Experience Section */}
+                <section id="experience" className="py-24 relative font-sans">
+                    <div className="container mx-auto px-6 relative">
+                        <h2 className="text-3xl font-bold mb-20 text-center font-sans tracking-tight" data-aos="fade-up">
+                            <span>{t('exp-title')}</span>
+                        </h2>
+
+                        <div className="relative font-sans">
+                            <div className="timeline-line"></div>
+
+                            {/* Exp 1 */}
+                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-right">
+                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-antest')}>
+                                        <div className="text-ue-blue font-sans font-bold text-xs mb-2">{t('exp-1-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
+                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#ST2110</span>
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#VP</span>
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#UE5</span>
+                                        </div>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-1-short')}</p>
+                                        <div className="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans">
+                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex gap-4 items-stretch">
-                                    <div className="w-1 self-stretch bg-tech-green rounded-full flex-shrink-0"></div>
-                                    <div className="text-left font-sans">
-                                        <h4 className="font-bold font-sans">{t('edu-2-uni')}</h4>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-2-deg')}</p>
+                                <div className="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,255,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="md:hidden w-full pl-10">
+                                    <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer font-sans" onClick={() => openModal('exp-antest')}>
+                                        <span className="text-ue-blue font-sans font-bold block mb-2">{t('exp-1-date')}</span>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-1-short')}</p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
+                            </div>
+
+                            {/* Exp 2 */}
+                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
+                                <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
+                                <div className="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-n2')}>
+                                        <div className="text-tech-green font-sans font-bold text-xs mb-2">{t('exp-2-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
+                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#AI</span>
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unreal Engine</span>
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
+                                        </div>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-2-short')}</p>
+                                        <div className="mt-4 text-tech-green text-[10px] font-bold tracking-widest uppercase font-sans">
+                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div data-aos="fade-left">
-                            <h2 className="text-3xl font-bold mb-8 font-sans">{t('connect-title')}</h2>
-                            <p className="text-slate-500 dark:text-slate-400 mb-8 font-sans">{t('connect-desc')}</p>
-                            <div className="flex justify-center md:justify-start space-x-6 text-3xl">
-                                <a href="https://github.com/supinzhen" target="_blank" className="text-slate-500 hover:text-ue-blue transition-all"><Github /></a>
-                                <a href="https://www.linkedin.com/in/%E5%93%81%E7%94%84-%E8%98%87-b905491b8/" target="_blank" className="text-slate-500 hover:text-ue-blue transition-all"><i className="fab fa-linkedin"></i></a>
-                                <a href="mailto:anniesuworkshop@gmail.com" className="text-slate-500 hover:text-tech-green transition-all"><Mail /></a>
+                            {/* Exp 3 */}
+                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
+                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-ndhu')}>
+                                        <div className="text-slate-500 font-sans font-bold text-xs mb-2">
+                                            {t('exp-3-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
+                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unity3D</span>
+                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Python</span>
+                                        </div>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-3-short')}</p>
+                                        <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
+                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="md:hidden w-full pl-10 font-sans">
+                                    <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer" onClick={() => openModal('exp-ndhu')}>
+                                        <span className="text-slate-500 font-sans font-bold block mb-2">{t('exp-3-date')}</span>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-3-short')}</p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Modal */}
-            {modalId && modalData[modalId] && modalData[modalId][lang] && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-slate-950/80 dark:bg-slate-950/90 light:bg-slate-200/80 backdrop-blur-xl" onClick={closeModal}></div>
-                    <div className="glass max-w-2xl w-full p-8 rounded-2xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto font-sans">
-                        {(() => {
-                            const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
-                            return (
-                                <>
-                                    <button onClick={closeModal} className="sticky top-0 float-right text-slate-400 hover:text-ue-blue z-20">
-                                        <X className="w-8 h-8" />
+                {/* Projects Section */}
+                <section id="projects" className="py-24 relative font-sans">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left">
+                            <div data-aos="fade-right" className="w-full md:w-auto">
+                                <h2 className="text-3xl font-bold font-sans">
+                                    <span>{t('projects-title')}</span>
+                                </h2>
+                                <p className="text-slate-600 dark:text-slate-400 mt-2 font-sans">{t('projects-subtitle')}</p>
+                            </div>
+                            <div className="mt-4 md:mt-0 w-full md:w-auto" data-aos="fade-left">
+                                <span className="text-slate-500 font-sans text-sm">{t('projects-gallery')}</span>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
+                            {/* Project 3 */}
+                            <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans" onClick={() => openModal('modal-3')} data-aos="zoom-in">
+                                <div className="h-48 bg-slate-800 relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop" alt="Server Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center">
+                                        <i className="fas fa-server text-6xl text-white/20"></i>
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-3 font-mono">
+                                        <div className="flex flex-wrap gap-2">
+                                            <span className="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
+                                            <span className="text-[10px] px-2 py-1 bg-slate-700/10 text-slate-500 dark:text-slate-400 border border-slate-700/20 rounded">ST 2110</span>
+                                            <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Rivermax</span>
+                                        </div>
+                                        <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2026</span>
+                                    </div>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-3-title')}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-3-desc')}</p>
+                                    <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                                        <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
                                     </button>
-                                    <div className="clear-both">
-                                        <div className="space-y-6">
-                                            <div>
-                                                <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">{data.title}</h3>
-                                                <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">{data.tech}</p>
-                                                <div className="flex gap-4 mb-4">
-                                                    {data.paperUrl && (
-                                                        <a href={data.paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/20 hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
-                                                            <i className="fas fa-file-lines mr-2"></i> {data.paperLabel || 'Paper'}
-                                                        </a>
-                                                    )}
-                                                    {data.githubUrl && (
-                                                        <a href={data.githubUrl} target="_blank" className="px-6 py-2 bg-slate-800/10 dark:bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
-                                                            <i className="fab fa-github mr-2"></i> GitHub
-                                                        </a>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
+                                </div>
+                            </div>
 
-                                            {data.videoEmbedUrl && (
-                                                <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6 bg-black">
-                                                    <iframe className="w-full h-full" src={data.videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                                                </div>
-                                            )}
-                                            {data.imageUrl && (
-                                                <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-6">
-                                                    <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
-                                                </div>
-                                            )}
+                            {/* Project 2 */}
+                            <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-green transition-all font-sans" onClick={() => openModal('modal-2')} data-aos="zoom-in" data-aos-delay="200">
+                                <div className="h-48 bg-slate-800 relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=800&auto=format&fit=crop" alt="VP Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-tech-green/40 to-slate-950 flex items-center justify-center">
+                                        <i className="fas fa-video-slash text-6xl text-white/20"></i>
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-3 font-mono">
+                                        <div className="flex gap-2 flex-wrap">
+                                            <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">Python</span>
+                                            <span className="text-[10px] px-2 py-1 bg-white/10 text-slate-800 dark:text-white border border-white/20 rounded">Unity</span>
+                                        </div>
+                                        <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2023-2024</span>
+                                    </div>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans">{t('proj-2-title')}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-2-desc')}</p>
+                                    <button className="text-xs font-bold text-tech-green flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                                        <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
 
-                                            <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg space-y-4 font-sans" dangerouslySetInnerHTML={{ __html: data.desc.includes('<br>') ? `<div class="p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg border border-white/5 font-sans">${data.desc}</div>` : `<p>${data.desc}</p>` }}>
-                                            </div>
-                                            <div className="flex justify-end pt-4">
-                                                <button onClick={closeModal} className="px-6 py-2 glass hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg transition-all text-sm font-bold font-sans">Close Window</button>
+                            {/* Project 1 */}
+                            <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all" onClick={() => openModal('modal-1')} data-aos="zoom-in" data-aos-delay="400">
+                                <div className="h-48 bg-slate-800 relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="AI Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center">
+                                        <i className="fas fa-robot text-6xl text-white/20"></i>
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-3 font-mono">
+                                        <div className="flex gap-2 flex-wrap">
+                                            <span className="text-[10px] px-2 py-1 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded">UE5</span>
+                                            <span className="text-[10px] px-2 py-1 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded">AI</span>
+                                        </div>
+                                        <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2024-2025</span>
+                                    </div>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-1-title')}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-1-desc')}</p>
+                                    <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
+                                        <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Footer Connect */}
+                <section id="contact" className="py-24 font-sans">
+                    <div className="container mx-auto px-6 text-center md:text-left">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 font-sans">
+                            <div data-aos="fade-right">
+                                <h2 className="text-3xl font-bold mb-8 font-sans">{t('edu-title')}</h2>
+                                <div className="space-y-6">
+                                    <div className="flex gap-4 items-stretch">
+                                        <div className="w-1 self-stretch bg-ue-blue rounded-full flex-shrink-0"></div>
+                                        <div className="text-left font-sans">
+                                            <h4 className="font-bold font-sans">{t('edu-1-uni')}</h4>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-1-deg')}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 items-stretch">
+                                        <div className="w-1 self-stretch bg-tech-green rounded-full flex-shrink-0"></div>
+                                        <div className="text-left font-sans">
+                                            <h4 className="font-bold font-sans">{t('edu-2-uni')}</h4>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-2-deg')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-aos="fade-left">
+                                <h2 className="text-3xl font-bold mb-8 font-sans">{t('connect-title')}</h2>
+                                <p className="text-slate-500 dark:text-slate-400 mb-8 font-sans">{t('connect-desc')}</p>
+                                <div className="flex justify-center md:justify-start items-center space-x-6 text-3xl">
+                                    <a href="https://github.com/supinzhen" target="_blank" className="text-slate-500 hover:text-ue-blue transition-all"><Github /></a>
+                                    <a href="https://www.linkedin.com/in/%E5%93%81%E7%94%84-%E8%98%87-b905491b8/" target="_blank" className="text-slate-500 hover:text-ue-blue transition-all"><i className="fab fa-linkedin"></i></a>
+                                    <a href="mailto:anniesuworkshop@gmail.com" className="text-slate-500 hover:text-tech-green transition-all"><Mail /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Modal */}
+                {modalId && modalData[modalId] && modalData[modalId][lang] && (
+                    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md" onClick={closeModal}></div>
+                        <div className="bg-white dark:bg-slate-900 max-w-3xl w-full px-8 pb-8 pt-4 md:px-12 md:pb-12 md:pt-6 rounded-3xl relative z-10 animate-scale-up max-h-[90vh] overflow-y-auto custom-scrollbar flex flex-col font-sans border border-slate-200 dark:border-white/10 shadow-2xl">
+                            {(() => {
+                                const data = modalData[modalId][lang] as ModalContent & ExperienceContent;
+                                const isProject = modalId.startsWith('modal');
+
+                                return (
+                                    <div className="w-full">
+                                        <button
+                                            onClick={closeModal}
+                                            className="sticky top-0 float-right text-slate-400 dark:text-slate-500 hover:text-ue-blue z-20 p-2"
+                                        >
+                                            <X className="w-8 h-8" />
+                                        </button>
+
+                                        <div className="clear-both">
+                                            <div className="space-y-6">
+                                                <div>
+                                                    <h3 className="text-3xl font-bold text-ue-blue mb-2 font-sans">
+                                                        {data.title}
+                                                    </h3>
+                                                    <p className="text-tech-green font-sans text-sm tracking-wide uppercase font-bold mb-4">
+                                                        {data.tech}
+                                                    </p>
+                                                    {(data.paperUrl || data.githubUrl) && (
+                                                        <div className="flex flex-wrap gap-4 mb-4">
+                                                            {data.paperUrl && (
+                                                                <a href={data.paperUrl} target="_blank" className="px-6 py-2 bg-tech-green/10 dark:bg-tech-green/20 hover:bg-tech-green/20 dark:hover:bg-tech-green/40 text-tech-green border border-tech-green/30 rounded-lg transition-all text-sm font-bold font-sans flex items-center">
+                                                                    <i className="fas fa-file-lines mr-2"></i> {data.paperLabel || t('view-paper') || '查看論文'}
+                                                                </a>
+                                                            )}
+                                                            {data.githubUrl && (
+                                                                <a href={data.githubUrl} target="_blank" className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 border border-slate-200 dark:border-white/20 rounded-lg transition-all text-sm font-bold font-sans flex items-center text-slate-700 dark:text-white">
+                                                                    <i className="fab fa-github mr-2"></i> GitHub
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <div className="h-1 w-24 bg-gradient-to-r from-ue-blue to-tech-green mb-4"></div>
+
+                                                {/* Media Support */}
+                                                {(data.videoEmbedUrl || data.imageUrl) && (
+                                                    <div className="space-y-6">
+                                                        {data.videoEmbedUrl && (
+                                                            <div className="aspect-video w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg bg-black mb-6">
+                                                                <iframe className="w-full h-full" src={data.videoEmbedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                                            </div>
+                                                        )}
+                                                        {data.imageUrl && (
+                                                            <div className="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg mb-6">
+                                                                <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+
+                                                <div className="text-text-primary leading-relaxed text-lg space-y-4 font-sans">
+                                                    <div
+                                                        className="font-sans"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: data.desc.includes('<br>')
+                                                                ? data.desc
+                                                                : data.desc.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')
+                                                        }}
+                                                    >
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end pt-4">
+                                                    <button
+                                                        onClick={closeModal}
+                                                        className="px-6 py-2 bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-700 dark:text-white rounded-xl transition-all text-sm font-bold font-sans border border-slate-200 dark:border-white/10 shadow-sm"
+                                                    >
+                                                        Close Window
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </>
-                            );
-                        })()}
+                                );
+                            })()}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };

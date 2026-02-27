@@ -266,8 +266,8 @@ const Admin: React.FC = () => {
             {/* Export Modal */}
             {showExport && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center px-6">
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowExport(false)}></div>
-                    <div className="glass p-8 rounded-3xl border-white/10 w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col relative z-10 animate-scale-up">
+                    <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md" onClick={() => setShowExport(false)}></div>
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-white/10 w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col relative z-10 animate-scale-up shadow-2xl">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-bold flex items-center gap-2">
                                 <CodeIcon className="w-5 h-5 text-ue-blue" />
