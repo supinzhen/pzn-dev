@@ -47,24 +47,36 @@ async function prerender() {
             const postPath = path.join(POSTS_DIR, `${slug}.json`);
             if (fs.existsSync(postPath)) {
                 const postData = JSON.parse(fs.readFileSync(postPath, 'utf-8'));
-                const content = postData.content || '';
-                // Look for markdown image: ![alt](url)
-                const imgMatch = content.match(/!\[.*?\]\((.*?)\)/);
+                // Check both content and content_zh for images
+                const combinedContent = (postData.content || '') + '\n' + (postData.content_zh || '');
+
+                // Improved markdown image regex: ![alt](url)
+                const imgMatch = combinedContent.match(/!\[.*?\]\((.*?)\)/);
+
                 if (imgMatch && imgMatch[1]) {
-                    let imgSrc = imgMatch[1];
+                    let imgSrc = imgMatch[1].trim();
                     if (imgSrc.startsWith('/')) {
+                        // Site-relative path
                         ogImage = `https://supinzhen.github.io/pzn-dev${imgSrc}`;
-                    } else if (!imgSrc.startsWith('http')) {
-                        // Handle relative paths if any (unlikely in this setup but safe)
-                        ogImage = `https://supinzhen.github.io/pzn-dev/posts/${imgSrc}`;
-                    } else {
+                    } else if (imgSrc.startsWith('http')) {
+                        // Absolute URL
                         ogImage = imgSrc;
+                    } else {
+                        // Relative to the post? Or maybe just in /image/slug/filename?
+                        // Fallback to post-specific structured path if it looks like just a filename
+                        if (!imgSrc.includes('/')) {
+                            ogImage = `https://supinzhen.github.io/pzn-dev/image/${note.id}/${imgSrc}`;
+                        } else {
+                            ogImage = `https://supinzhen.github.io/pzn-dev/posts/${imgSrc}`;
+                        }
                     }
                 }
             }
         } catch (e) {
             console.warn(`Could not extract image for ${slug}:`, e.message);
         }
+
+        console.log(`🖼️  Selected OG Image for ${slug}: ${ogImage}`);
 
         let html = template;
 
