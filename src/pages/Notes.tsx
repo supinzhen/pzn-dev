@@ -1,6 +1,8 @@
 import React, { useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Book, Cpu, Video, Filter, X, List, ChevronRight } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { noteService } from '../utils/noteService';
 
 interface NotesProps {
@@ -23,6 +25,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
     useEffect(() => {
         document.title = `${t('nav-notes')} | Annie Su`;
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
     }, [lang, t]);
 
     const categoryCounts = useMemo(() => {
@@ -75,7 +78,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         <div className="container mx-auto px-6 py-24">
             <div className="mb-16">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-4">
-                    <h1 className="text-4xl md:text-6xl font-bold font-sans">
+                    <h1 className="text-4xl md:text-6xl font-bold font-sans" data-aos="fade-right">
                         <span className="text-ue-blue">{t('nav-notes')}</span>
                     </h1>
                     <Link
@@ -87,7 +90,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
-                <p className="text-slate-500 dark:text-slate-400 max-w-2xl font-sans text-lg">
+                <p className="text-slate-500 dark:text-slate-400 max-w-2xl font-sans text-lg" data-aos="fade-right" data-aos-delay="200">
                     {lang === 'zh' ? '工程實踐中的技術筆記、解決方案與學習心得。' : 'Technical logs, solutions, and learning notes from my engineering practice.'}
                 </p>
             </div>
@@ -96,16 +99,18 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
             {/* Subject Categories */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 font-sans flex items-center gap-3">
+                <h2 className="text-2xl font-bold mb-6 font-sans flex items-center gap-3" data-aos="fade-up">
                     <span className="w-2 h-8 bg-ue-blue rounded-full"></span>
                     主題分類
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-sans focus-within:ring-0">
-                    {categories.map((cat) => (
+                    {categories.map((cat, index) => (
                         <Link
                             key={cat.id}
                             to={`/notes?category=${cat.title.toLowerCase()}`}
                             className={`glass p-5 rounded-xl border transition-all group cursor-pointer block ${activeCategory === cat.title.toLowerCase() ? 'border-ue-blue ring-1 ring-ue-blue/20' : 'border-white/5 hover:border-ue-blue/30'}`}
+                            data-aos="fade-up"
+                            data-aos-delay={index * 100}
                         >
                             <div className="mb-4 transform group-hover:scale-105 transition-transform flex items-center gap-3">
                                 <div className="p-2 bg-ue-blue/5 rounded-lg">
@@ -126,7 +131,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
             </div>
 
             {/* List Header with Filter Info */}
-            <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6" data-aos="fade-up" data-aos-delay="100">
                 <h2 className="text-2xl font-bold font-sans flex items-center gap-3">
                     <span className="w-2 h-8 bg-ue-blue rounded-full"></span>
                     {activeCategory ? (
@@ -151,7 +156,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
             </div>
 
             {/* Tags Ribbon */}
-            <div className="mb-12">
+            <div className="mb-12" data-aos="fade-up" data-aos-delay="200">
                 <div className="flex flex-wrap gap-2">
                     <button
                         onClick={() => {
@@ -179,8 +184,8 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
             <div className="mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans">
                     {filteredNotes.length > 0 ? (
-                        filteredNotes.slice(0, 4).map((note) => (
-                            <Link key={note.id} to={`/notes/${note.slug}`} className="glass rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col block font-sans min-h-[160px]">
+                        filteredNotes.slice(0, 4).map((note, index) => (
+                            <Link key={note.id} to={`/notes/${note.slug}`} data-aos="fade-up" data-aos-delay={index * 100} className="glass rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col block font-sans min-h-[160px]">
                                 <div className="p-6 flex flex-col flex-1">
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-text-secondary text-[10px] font-mono opacity-80">{note.date}</span>
@@ -216,7 +221,7 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
 
 
             {/* Migration Status Card */}
-            <div className="p-12 glass rounded-3xl border-dashed border-white/10 flex flex-col items-center text-center">
+            <div className="p-12 glass rounded-3xl border-dashed border-white/10 flex flex-col items-center text-center" data-aos="fade-up">
                 <div className="w-16 h-16 bg-slate-100 dark:bg-slate-950 rounded-full flex items-center justify-center mb-6 shadow-inner border border-white/5">
                     <Book className="text-slate-400 dark:text-slate-600 w-8 h-8" />
                 </div>
