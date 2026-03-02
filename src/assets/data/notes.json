@@ -1,9 +1,40 @@
 [
     {
+        "id": 11,
+        "slug": "unreal-dll-in-practice-part-2-responsibilities-of-the-third-party-library-wrapper-dll-and-unreal-plugin",
+        "title": "【Unreal & DLL 實戰系列】第二篇 —— 第三方函式庫、Wrapper DLL 與 Unreal Plugin 的分工",
+        "title_zh": "【Unreal & DLL 實戰系列】第二篇：第三方函式庫、Wrapper DLL 與 Unreal Plugin 的分工",
+        "title_en": "Unreal & DLL in Practice — Part 2: Responsibilities of the Third-Party Library, Wrapper DLL, and Unreal Plugin",
+        "category": "Unreal Engine",
+        "date": "2026-03-02",
+        "author": "Annie Su",
+        "readTime": "5 min read",
+        "tags": [
+            "Unreal Engine",
+            "PLUGIN"
+        ],
+        "summary": "Unreal 專案採三層式架構：第三方函式庫封裝於 Wrapper DLL，Unreal Plugin 透過 C API 溝通，避免編譯衝突與 ABI 風險，提升整合穩定性與可維護性。"
+    },
+    {
+        "id": 12,
+        "slug": "unreal-dll-in-practice-part-3-third-party-library",
+        "title": "【Unreal & DLL 實戰系列】第三篇 —— Third-Party Library",
+        "title_zh": "【Unreal & DLL 實戰系列】第三篇 —— Third-Party Library",
+        "title_en": "Unreal & DLL in Practice — Part 3: Third-Party Library",
+        "category": "Unreal Engine",
+        "date": "2026-03-02",
+        "author": "Annie Su",
+        "readTime": "5 min read",
+        "tags": [
+            "C++"
+        ],
+        "summary": "本章建立一個小而完整的示範第三方函式庫，具備狀態、計算與字串輸出，用於後續示範 DLL 封裝、C API 設計與 Unreal Plugin 載入流程，作為整個系列的共同基礎。"
+    },
+    {
         "id": 10,
         "slug": "unreal-dll-in-practice-part-1-concepts-and-system-design",
         "title": "Unreal & DLL in Practice — Part 1: Concepts and System Design",
-        "title_zh": "【Unreal & DLL 實戰】第一篇：概念與系統設計",
+        "title_zh": "【Unreal & DLL 實戰系列】第一篇：概念與系統設計",
         "title_en": "Unreal & DLL in Practice — Part 1: Concepts and System Design",
         "category": "Unreal Engine",
         "date": "2026-02-26",
