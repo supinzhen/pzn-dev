@@ -23,25 +23,21 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         }));
     }, [lang]);
 
+    // Initialize AOS once on mount
+    useEffect(() => {
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-quad',
+            offset: 50, // Trigger animation earlier
+            disable: 'mobile' // Optional: performance choice
+        });
+    }, []);
+
+    // Update document title
     useEffect(() => {
         document.title = `${t('nav-notes')} | Annie Su`;
-        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
     }, [lang, t]);
-
-    const categoryCounts = useMemo(() => {
-        const counts: Record<string, number> = {};
-        allNotes.forEach(n => {
-            counts[n.category] = (counts[n.category] || 0) + 1;
-        });
-        return counts;
-    }, [allNotes]);
-
-    const categories = [
-        { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, desc: 'Technical logs about UE5, Blueprints, and C++.' },
-        { id: 3, title: 'System Integration', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
-        { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, desc: 'On-set workflows and tracking systems.' },
-        { id: 4, title: 'Others', icon: <List className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and other technical tools.' },
-    ];
 
     const allTags = useMemo(() => {
         const tags = new Set<string>();
@@ -61,6 +57,30 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         }
         return filtered;
     }, [activeCategory, activeTag, allNotes]);
+
+    const categoryCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        allNotes.forEach(n => {
+            counts[n.category] = (counts[n.category] || 0) + 1;
+        });
+        return counts;
+    }, [allNotes]);
+
+    const categories = [
+        { id: 1, title: 'Unreal Engine', icon: <Cpu className="w-8 h-8 text-ue-blue" />, desc: 'Technical logs about UE5, Blueprints, and C++.' },
+        { id: 3, title: 'System Integration', icon: <Book className="w-8 h-8 text-ue-blue" />, desc: 'ST 2110, NMOS, and networking notes.' },
+        { id: 2, title: 'Virtual Production', icon: <Video className="w-8 h-8 text-ue-blue" />, desc: 'On-set workflows and tracking systems.' },
+        { id: 4, title: 'Others', icon: <List className="w-8 h-8 text-ue-blue" />, desc: 'React, LLM integration, and other technical tools.' },
+    ];
+
+    // Refresh AOS when search parameters or filtered content changes
+    useEffect(() => {
+        // Use a small timeout to ensure DOM has updated before AOS refreshes
+        const timer = setTimeout(() => {
+            AOS.refresh();
+        }, 100);
+        return () => clearTimeout(timer);
+    }, [activeCategory, activeTag, filteredNotes]);
 
     const handleTagClick = (tag: string) => {
         if (activeTag === tag) {

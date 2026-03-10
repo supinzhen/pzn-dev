@@ -20,7 +20,12 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
     React.useEffect(() => {
         const title = lang === 'zh' ? '所有技術文章' : 'All Technical Articles';
         document.title = `${title} | Annie Su`;
-        AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-quad',
+            offset: 50
+        });
     }, [lang]);
 
     const categories = useMemo(() => {
@@ -46,6 +51,14 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
             return matchesSearch && matchesCategory && matchesTag;
         });
     }, [notes, searchTerm, selectedCategory, selectedTag]);
+
+    // Refresh AOS when filters change
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            AOS.refresh();
+        }, 100);
+        return () => clearTimeout(timer);
+    }, [searchTerm, selectedCategory, selectedTag, filteredNotes]);
 
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen font-sans">

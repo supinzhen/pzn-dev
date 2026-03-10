@@ -27,6 +27,7 @@ const Admin: React.FC = () => {
     const [showGithubSettings, setShowGithubSettings] = useState(false);
 
     const [currentNote, setCurrentNote] = useState<Partial<Note>>({
+        title: '',
         title_zh: '',
         title_en: '',
         category: 'Unreal Engine',
@@ -119,6 +120,7 @@ const Admin: React.FC = () => {
 
     const resetForm = () => {
         setCurrentNote({
+            title: '',
             title_zh: '',
             title_en: '',
             category: 'Unreal Engine',
@@ -455,7 +457,7 @@ const Admin: React.FC = () => {
                                     <input
                                         type="text"
                                         value={currentNote.title_zh}
-                                        onChange={(e) => setCurrentNote({ ...currentNote, title_zh: e.target.value })}
+                                        onChange={(e) => setCurrentNote({ ...currentNote, title_zh: e.target.value, title: e.target.value })}
                                         className="w-full bg-slate-100 dark:bg-slate-900 border border-white/10 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-ue-blue/50"
                                     />
                                 </div>
