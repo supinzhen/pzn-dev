@@ -7,7 +7,6 @@ export const translations = {
         "skills-title": "Skills",
         "skill-1-title": "Game Engine Dev", "skill-2-title": "Virtual Production", "skill-3-title": "Broadcast Engineering",
         "exp-title": "Experience",
-        "exp-1-title": "System Engineer @ New Digital Technology Holdings Ltd.", "exp-1-date": "2025.08 - Present", "exp-1-short": "Broadcasting system integration, ST 2110 IP transmission, and VP on-site deployment.",
         "exp-2-title": "UE Engine Engineer @ BEARVFX", "exp-2-date": "2024.10 - 2025.07", "exp-2-short": "Participated in AI virtual human development, integrating LLM (ChatGPT, AWS Bedrock) and real-time speech recognition, optimizing multi-user synchronization performance.",
         "exp-3-title": "Research Assistant @ NDHU", "exp-3-date": "2022.09 - 2024.07", "exp-3-short": "Focusing on 360 pano tracking, VR/AR development, and computer vision research.",
         "view-details": "View Details",
@@ -18,10 +17,10 @@ export const translations = {
         "btn-details": "VIEW DETAILS",
         "edu-title": "Education", "edu-1-uni": "National Dong Hwa University", "edu-1-deg": "M.S. in Computer Science | 2022 - 2024",
         "edu-2-uni": "National Taiwan Univ. of Arts", "edu-2-deg": "B.A. in Radio & Television | 2017 - 2022",
-        "connect-title": "Contact Me", "connect-desc": "Interested in Unreal Engine development or broadcast systems integration? Let's talk!",
+        "connect-title": "Contact Me", "connect-desc": "Interested in Unreal Engine development or interactive systems? Let's talk!",
         "note-helpful": "Did you find this note helpful?", "note-desc": "This article is part of a professional technology series. Contact me for discussion.",
         "back-to-list": "BACK TO LIST", "breadcrumb-home": "HOME", "breadcrumb-notes": "NOTES",
-        "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
+        "typewriter-words": ["Unreal Engine Engineering", "Virtual Production Systems"]
     },
     zh: {
         "nav-about": "關於我", "nav-skills": "核心能力", "nav-exp": "工作經歷", "nav-projects": "精選專案", "nav-contact": "聯絡我", "nav-notes": "技術筆記",
@@ -31,7 +30,6 @@ export const translations = {
         "skills-title": "核心能力",
         "skill-1-title": "遊戲引擎開發", "skill-2-title": "虛擬製作技術", "skill-3-title": "廣電系統工程",
         "exp-title": "工作經歷",
-        "exp-1-title": "系統工程師 @ 台灣安達斯", "exp-1-date": "2025.08 - Present", "exp-1-short": "負責 ST 2110 IP 化製播流程設計與虛擬製作現場部署，優化訊號同步與延遲控制。",
         "exp-2-title": "UE 遊戲引擎工程師 @ 能火動畫", "exp-2-date": "2024.10 - 2025.07", "exp-2-short": "參與AI 虛擬人開發，整合 LLM (ChatGPT、AWS Bedrock) 與即時語音辨識，優化多人連線同步效能。",
         "exp-3-title": "研發助理 / TA @ 東華大學", "exp-3-date": "2022.09 - 2024.07", "exp-3-short": "投入 VR/AR 內容開發與 360 度全景追蹤算法研究，支援國科會虛擬製作相關專案。",
         "view-details": "查看細節",
@@ -42,9 +40,9 @@ export const translations = {
         "btn-details": "查看細節",
         "edu-title": "學歷背景", "edu-1-uni": "國立東華大學", "edu-1-deg": "資訊工程研究所 碩士 | 2022 - 2024",
         "edu-2-uni": "國立台灣藝術大學", "edu-2-deg": "廣播電視學系 學士 | 2017 - 2022",
-        "connect-title": "聯絡我", "connect-desc": "對 UnrealEngine 遊戲引擎開發或廣電系統整合有興趣？歡迎來信交流！",
+        "connect-title": "聯絡我", "connect-desc": "對 UnrealEngine 遊戲引擎開發或互動系統整合有興趣？歡迎來信交流！",
         "note-helpful": "覺得這篇筆記有幫助嗎？", "note-desc": "這篇文章是專業技術系列的一部分，如有疑問歡迎聯繫討論。",
         "back-to-list": "返回列表", "breadcrumb-home": "首頁", "breadcrumb-notes": "技術筆記",
-        "typewriter-words": ["Unreal Engine Engineering", "Broadcast Systems Integration", "Virtual Production Systems"]
+        "typewriter-words": ["Unreal Engine Engineering", "Virtual Production Systems"]
     }
 };

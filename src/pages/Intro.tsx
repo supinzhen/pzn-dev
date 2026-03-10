@@ -24,7 +24,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
     useEffect(() => {
         AOS.init({ duration: 800, once: true, easing: 'ease-out-quad' });
-        document.title = '蘇品甄 | Annie Su | Unreal Engine & Systems Engineer';
+        document.title = '蘇品甄 | Annie Su | Unreal Engine Engineer';
     }, []);
 
     useEffect(() => {
@@ -107,18 +107,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                 githubUrl: 'https://github.com/supinzhen/Unreal-Rivermax-ST2110-Integration'
             }
         },
-        'exp-antest': {
-            en: {
-                title: 'System Engineer @ New Digital Technology Holdings Ltd.',
-                tech: 'Broadcasting × ST 2110 × Virtual Production × UE5 × Architecture',
-                desc: '• Designing SDI & ST 2110 IP transmission architectures.<br>• Handling PTP synchronization, IP Routing, and multi-vendor device integration.<br>• Managing SDI-to-IP transitions including switch configuration and traffic flow management.<br>• Supporting VP/UE technical deployment and on-site troubleshooting.'
-            },
-            zh: {
-                title: '系統工程師 @ 台灣安達斯有限公司',
-                tech: '廣電系統整合 × ST 2110 × Virtual Production × 系統架構',
-                desc: '• 參與廣電系統整合專案，包含 SDI 與 ST 2110 IP 影音傳輸架構、PTP 時鐘同步與 IP Routing。<br>• 協助客戶完成 SDI → IP 系統轉換，負責交換器設定、流量管理與視音訊路由規劃。<br>• 支援虛擬製作與 Unreal Engine 系統整合，提供現場技術部署與故障排除。'
-            }
-        },
+
         'exp-n2': {
             en: {
                 title: 'UE Engine Engineer @ BEARVFX',
@@ -263,34 +252,6 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
                         <div className="relative font-sans">
                             <div className="timeline-line"></div>
-
-                            {/* Exp 1 */}
-                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-right">
-                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-antest')}>
-                                        <div className="text-ue-blue font-sans font-bold text-xs mb-2">{t('exp-1-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
-                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#ST2110</span>
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#VP</span>
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#UE5</span>
-                                        </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-1-short')}</p>
-                                        <div className="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans">
-                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,255,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                                <div className="md:hidden w-full pl-10">
-                                    <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer font-sans" onClick={() => openModal('exp-antest')}>
-                                        <span className="text-ue-blue font-sans font-bold block mb-2">{t('exp-1-date')}</span>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-1-short')}</p>
-                                    </div>
-                                </div>
-                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
-                            </div>
 
                             {/* Exp 2 */}
                             <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
