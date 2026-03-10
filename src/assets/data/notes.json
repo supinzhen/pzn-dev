@@ -56,7 +56,7 @@
     {
         "id": 11,
         "slug": "unreal-dll-in-practice-part-2-responsibilities-of-the-third-party-library-wrapper-dll-and-unreal-plugin",
-        "title": "【Unreal & DLL 實戰系列】第二篇 —— 第三方函式庫、Wrapper DLL 與 Unreal Plugin 的分工",
+        "title": "【Unreal & DLL 實戰系列】第二篇：第三方函式庫、Wrapper DLL 與 Unreal Plugin 的分工",
         "title_zh": "【Unreal & DLL 實戰系列】第二篇：第三方函式庫、Wrapper DLL 與 Unreal Plugin 的分工",
         "title_en": "Unreal & DLL in Practice — Part 2: Responsibilities of the Third-Party Library, Wrapper DLL, and Unreal Plugin",
         "category": "Unreal Engine",
@@ -74,7 +74,7 @@
     {
         "id": 12,
         "slug": "unreal-dll-in-practice-part-3-third-party-library",
-        "title": "【Unreal & DLL 實戰系列】第三篇 —— Third-Party Library",
+        "title": "【Unreal & DLL 實戰系列】第三篇：Third-Party Library",
         "title_zh": "【Unreal & DLL 實戰系列】第三篇：Third-Party Library",
         "title_en": "Unreal & DLL in Practice — Part 3: Third-Party Library",
         "category": "Unreal Engine",
