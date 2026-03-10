@@ -8,7 +8,7 @@
         "category": "Unreal Engine",
         "date": "2026-03-10",
         "author": "Annie Su",
-        "readTime": "5 min read",
+        "readTime": "20 min read",
         "tags": [
             "C++",
             "Unreal Engine",
@@ -16,6 +16,42 @@
             "DLL"
         ],
         "summary": "將第三方 C++ 類別封裝成 Unreal 可呼叫的 C API，隔離編譯環境避免衝突，編譯後產生 DLL 供執行時使用、LIB 供 Unreal 編譯連結。"
+    },
+    {
+        "id": 14,
+        "slug": "unreal-dll-in-practice-part-5-building-unreal-engine-projects-and-thirdparty-plugins",
+        "title": "【Unreal & DLL 實戰系列】第五篇：Unreal Engine 專案與 Third Party Plugin 建置",
+        "title_zh": "【Unreal & DLL 實戰系列】第五篇：Unreal Engine 專案與 Third Party Plugin 建置",
+        "title_en": "Unreal DLL in Practice — Part 5: Building Unreal Engine Projects and Third‑Party Plugins",
+        "category": "Unreal Engine",
+        "date": "2026-03-10",
+        "author": "Annie Su",
+        "readTime": "20 min read",
+        "tags": [
+            "C++",
+            "Unreal Engine",
+            "PLUGIN",
+            "DLL"
+        ],
+        "summary": "在完成 Wrapper DLL 的建置後，下一步就是將這個 DLL 安全、正確地整合進 Unreal Engine 專案。本篇將示範如何從零開始建立一個 C++ Unreal 專案與自訂 Plugin，並將第三方 DLL、LIB、以及 Wrapper 程式碼完整導入 UE 的建置流程中。"
+    },
+    {
+        "id": 15,
+        "slug": "unreal-dll-in-practice-part-0-introduction",
+        "title": "【Unreal & DLL 實戰系列】第零篇 ",
+        "title_zh": "【Unreal & DLL 實戰系列】第零篇 ",
+        "title_en": "Unreal & DLL in Practice — Part 0: Introduction",
+        "category": "Unreal Engine",
+        "date": "2026-03-10",
+        "author": "Annie Su",
+        "readTime": "5 min read",
+        "tags": [
+            "C++",
+            "Unreal Engine",
+            "PLUGIN",
+            "DLL"
+        ],
+        "summary": "從把第三方庫硬塞進 Unreal 造成專案爆炸開始，我建立了以「第三方函式庫 → Wrapper DLL → Unreal Plugin」為核心的乾淨整合流程，完整示範如何安全導入外部程式碼。"
     },
     {
         "id": 11,
@@ -26,7 +62,7 @@
         "category": "Unreal Engine",
         "date": "2026-03-02",
         "author": "Annie Su",
-        "readTime": "5 min read",
+        "readTime": "20 min read",
         "tags": [
             "Unreal Engine",
             "PLUGIN",
@@ -44,7 +80,7 @@
         "category": "Unreal Engine",
         "date": "2026-03-02",
         "author": "Annie Su",
-        "readTime": "5 min read",
+        "readTime": "20 min read",
         "tags": [
             "C++",
             "DLL",
