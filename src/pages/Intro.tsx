@@ -108,6 +108,30 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
             }
         },
 
+        'exp-akiyam': {
+            en: {
+                title: 'Unreal Engine Developer Intern @ Akiyam Solutions',
+                tech: 'AI System Design × FPS Gameplay × Cross-border Collaboration',
+                desc: '• Designed and implemented AI systems for a First-Person Shooter (FPS), including Behavior Trees, EQS, AI Controllers, and Blackboard data flow integration.<br>• Integrated AI systems with event-driven ability systems for complex character behaviors.<br>• Developed scalable and maintainable AI architectures, completing the full pipeline from perception to execution.<br>• Collaborated with international teams using Git for version control, Code Reviews, and multi-user workflows.'
+            },
+            zh: {
+                title: 'Unreal Engine Developer Intern @ Akiyam Solutions',
+                tech: 'AI 系統開發 × Gameplay × 跨國團隊協作',
+                desc: '• 負責第一人稱射擊遊戲（FPS）AI 系統設計與實作，涵蓋 Behavior Tree、EQS、AI Controller、Blackboard 資料流設計與事件驅動能力系統整合。<br>• 打造可擴充、可維護的 AI 行為架構，並能獨立完成從 AI 感知、決策到行為執行的完整流程。<br>• 與跨國團隊協作開發，使用 Git 進行版本控制、Code Review 與多人協作流程，確保專案穩定與開發效率。'
+            }
+        },
+        'exp-andas': {
+            en: {
+                title: 'System Engineer @ NDT (Taiwan) Ltd',
+                tech: 'Broadcast Systems × Virtual Production × ST 2110 IP',
+                desc: '• Participated in broadcast system integration projects, including SDI and ST 2110 IP video transmission architectures.<br>• Managed PTP clock synchronization, IP Routing, and multi-device integration workflows.<br>• Supported virtual production and Unreal Engine system integration with on-site technical deployment and troubleshooting.'
+            },
+            zh: {
+                title: '系統工程師 @ NDT (Taiwan) Ltd',
+                tech: '廣電系統整合 × Virtual Production × 系統架構規劃',
+                desc: '• 參與廣電系統整合專案，包含 SDI 與 ST 2110 IP 影音傳輸架構、PTP 時鐘同步、IP Routing 與多設備整合。<br>• 支援虛擬製作與 Unreal Engine 系統整合，提供現場技術部署與故障排除。'
+            }
+        },
         'exp-n2': {
             en: {
                 title: 'UE Engine Engineer @ BEARVFX',
@@ -253,18 +277,37 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         <div className="relative font-sans">
                             <div className="timeline-line"></div>
 
-                            {/* Exp 2 */}
+                            {/* Exp 1: Akiyam */}
                             <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
                                 <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
-                                <div className="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,243,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
                                 <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-n2')}>
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-akiyam')}>
+                                        <div className="text-ue-blue font-sans font-bold text-xs mb-2">{t('exp-1-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
+                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#AI</span>
+                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Gameplay</span>
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#Git</span>
+                                        </div>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-1-short')}</p>
+                                        <div className="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans">
+                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Exp 2: Andas */}
+                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
+                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-andas')}>
                                         <div className="text-tech-green font-sans font-bold text-xs mb-2">{t('exp-2-date')}</div>
                                         <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
-                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#AI</span>
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unreal Engine</span>
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
+                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#ST2110</span>
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#VP</span>
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#系統架構</span>
                                         </div>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-2-short')}</p>
                                         <div className="mt-4 text-tech-green text-[10px] font-bold tracking-widest uppercase font-sans">
@@ -272,21 +315,51 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="md:hidden w-full pl-10 font-sans">
+                                    <div className="glass p-6 rounded-xl border-glow-green cursor-pointer" onClick={() => openModal('exp-andas')}>
+                                        <span className="text-tech-green font-sans font-bold block mb-2">{t('exp-2-date')}</span>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-2-short')}</p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
                             </div>
 
-                            {/* Exp 3 */}
+                            {/* Exp 3: BEARVFX */}
+                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
+                                <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
+                                <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
+                                <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
+                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-n2')}>
+                                        <div className="text-slate-500 font-sans font-bold text-xs mb-2">{t('exp-3-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
+                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
+                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#AI</span>
+                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Unreal Engine</span>
+                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
+                                        </div>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-3-short')}</p>
+                                        <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
+                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Exp 4: NDHU */}
                             <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
                                 <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
                                     <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-ndhu')}>
                                         <div className="text-slate-500 font-sans font-bold text-xs mb-2">
-                                            {t('exp-3-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
+                                            {t('exp-4-date')}</div>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-4-title')}</h3>
                                         <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
                                             <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
                                             <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unity3D</span>
                                             <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Python</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-3-short')}</p>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-4-short')}</p>
                                         <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
                                             {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
                                         </div>
@@ -295,9 +368,9 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                 <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
                                 <div className="md:hidden w-full pl-10 font-sans">
                                     <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer" onClick={() => openModal('exp-ndhu')}>
-                                        <span className="text-slate-500 font-sans font-bold block mb-2">{t('exp-3-date')}</span>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-3-short')}</p>
+                                        <span className="text-slate-500 font-sans font-bold block mb-2">{t('exp-4-date')}</span>
+                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-4-title')}</h3>
+                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-4-short')}</p>
                                     </div>
                                 </div>
                                 <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
