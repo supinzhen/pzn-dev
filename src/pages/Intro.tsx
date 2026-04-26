@@ -64,8 +64,18 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
     const modalData: Record<string, { en: ModalContent | ExperienceContent; zh: ModalContent | ExperienceContent }> = {
         'modal-1': {
-            en: { year: '2024-2025', title: '3D AI Avatar System', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.' },
-            zh: { year: '2024-2025', title: '3D AI 虛擬人互動系統', tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。' }
+            en: { 
+                year: '2024-2025', 
+                title: '3D AI Avatar System', 
+                tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', 
+                desc: 'Explored integration of MetaHumans with LLMs. Implemented real-time lip-sync, dynamic behavioral trees, and cloud-based Pixel Streaming delivery.'
+            },
+            zh: { 
+                year: '2024-2025', 
+                title: '3D AI 虛擬人互動系統', 
+                tech: 'UE5, MetaHuman, ChatGPT API, WebRTC', 
+                desc: '本專案旨在探索虛擬製作與 AI 的結合。透過 WebSocket 串接 LLM 模型，實現具備即時口型同步、動態行為決策的 3D 接待員。'
+            }
         },
         'modal-2': {
             en: {
@@ -82,7 +92,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                 year: '2023-2024',
                 title: '非綠幕虛擬影視製作系統',
                 tech: 'Python, Unity, HTC Vive Tracker, 深度學習',
-                desc: '本專案透過整合深度學習（Deep Learning）與深度相機（Depth Camera）的影像去背技術，結合 3D 追蹤器（HTC Vive Tracker）實現高精準度的相機追蹤。此系統消除了對傳統綠幕的需求，讓開發者能即時預覽虛實合成畫面，大幅降低棚內架設成本並簡化後期合成流程。',
+                desc: '本專案透過整合深度學習（Deep Learning）與深度相機（Depth Camera）的影像去背技術，結合 3D 追蹤器（HTC Vive Tracker）實現高精準度的相機追蹤。此系統消除了對傳統綠幕的需求，讓開發者能即時預覽虛實合成畫面，大幅降低棚內架設成本並簡化後期合成流程處理。',
                 videoEmbedUrl: 'https://www.youtube-nocookie.com/embed/-cOFrrE-9bQ?rel=0&modestbranding=1',
                 paperUrl: 'https://www.mdpi.com/2079-9292/13/16/3182',
                 paperLabel: '查看論文',
@@ -205,9 +215,18 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                     <Link to="/#projects" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
                                         {t('btn-projects')}
                                     </Link>
-                                    <Link to="/#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                                    <Link to="/#contact" className="px-8 py-3 bg-ue-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/20 text-center">
                                         {t('btn-contact')}
                                     </Link>
+                                </div>
+
+                                {/* Live Status Tag */}
+                                <div className="mt-8 flex items-start justify-center lg:justify-start gap-2 text-slate-500 dark:text-slate-400 text-sm font-medium" data-aos="fade-right" data-aos-delay="800">
+                                    <span className="relative flex h-2 w-2 mt-1.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tech-green opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-tech-green"></span>
+                                    </span>
+                                    <span className="text-center lg:text-left">{t('hero-status')}</span>
                                 </div>
                             </div>
 
@@ -235,8 +254,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-sans">
                             <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up">
                                 <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-cube"></i></div>
-                                <h3 className="text-xl font-bold mb-4">{t('skill-1-title')}</h3>
-                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-slate-100">{t('skill-1-title')}</h3>
+                                <ul className="space-y-3 text-slate-600 dark:text-slate-400 font-sans text-sm">
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Unreal Engine 5</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> C++ / Blueprints</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Pixel Streaming</li>
@@ -245,8 +264,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             </div>
                             <div className="glass p-8 rounded-2xl border-glow-green transition-all" data-aos="fade-up" data-aos-delay="200">
                                 <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-video"></i></div>
-                                <h3 className="text-xl font-bold mb-4">{t('skill-2-title')}</h3>
-                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-slate-100">{t('skill-2-title')}</h3>
+                                <ul className="space-y-3 text-slate-600 dark:text-slate-400 font-sans text-sm">
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Zero Density / Reality</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Camera Tracking</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> nDisplay Configuration</li>
@@ -255,125 +274,13 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             </div>
                             <div className="glass p-8 rounded-2xl border-glow-blue transition-all" data-aos="fade-up" data-aos-delay="400">
                                 <div className="text-ue-blue text-4xl mb-6"><i className="fas fa-network-wired"></i></div>
-                                <h3 className="text-xl font-bold mb-4">{t('skill-3-title')}</h3>
-                                <ul className="space-y-3 text-slate-400 font-sans text-sm">
+                                <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-slate-100">{t('skill-3-title')}</h3>
+                                <ul className="space-y-3 text-slate-600 dark:text-slate-400 font-sans text-sm">
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SMPTE ST 2110 IP</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> PTP Synchronization</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> SDI / NDI Infrastructure</li>
                                     <li className="flex items-center"><i className="fas fa-check text-ue-blue mr-2"></i> Cisco/Arista Switch</li>
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Experience Section */}
-                <section id="experience" className="py-24 relative font-sans">
-                    <div className="container mx-auto px-6 relative">
-                        <h2 className="text-3xl font-bold mb-20 text-center font-sans tracking-tight" data-aos="fade-up">
-                            <span>{t('exp-title')}</span>
-                        </h2>
-
-                        <div className="relative font-sans">
-                            <div className="timeline-line"></div>
-
-                            {/* Exp 1: Akiyam */}
-                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
-                                <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
-                                <div className="z-20 flex items-center bg-ue-blue shadow-[0_0_15px_rgba(0,112,243,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                                <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-akiyam')}>
-                                        <div className="text-ue-blue font-sans font-bold text-xs mb-2">{t('exp-1-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-1-title')}</h3>
-                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#AI</span>
-                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Gameplay</span>
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#Git</span>
-                                        </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-1-short')}</p>
-                                        <div className="mt-4 text-ue-blue text-[10px] font-bold tracking-widest uppercase font-sans">
-                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Exp 2: Andas */}
-                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
-                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-green cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-andas')}>
-                                        <div className="text-tech-green font-sans font-bold text-xs mb-2">{t('exp-2-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
-                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#ST2110</span>
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#VP</span>
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#系統架構</span>
-                                        </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-2-short')}</p>
-                                        <div className="mt-4 text-tech-green text-[10px] font-bold tracking-widest uppercase font-sans">
-                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="z-20 flex items-center bg-tech-green shadow-[0_0_15px_rgba(0,255,171,0.6)] w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                                <div className="md:hidden w-full pl-10 font-sans">
-                                    <div className="glass p-6 rounded-xl border-glow-green cursor-pointer" onClick={() => openModal('exp-andas')}>
-                                        <span className="text-tech-green font-sans font-bold block mb-2">{t('exp-2-date')}</span>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-2-title')}</h3>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-2-short')}</p>
-                                    </div>
-                                </div>
-                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
-                            </div>
-
-                            {/* Exp 3: BEARVFX */}
-                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group" data-aos="fade-left">
-                                <div className="hidden md:block w-1/2 pr-12 font-sans"></div>
-                                <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                                <div className="w-full md:w-1/2 pl-10 md:pl-12 font-sans">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-n2')}>
-                                        <div className="text-slate-500 font-sans font-bold text-xs mb-2">{t('exp-3-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-3-title')}</h3>
-                                        <div className="flex flex-wrap gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#AI</span>
-                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Unreal Engine</span>
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#API整合</span>
-                                        </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-3-short')}</p>
-                                        <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
-                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Exp 4: NDHU */}
-                            <div className="mb-10 flex flex-col md:flex-row items-center w-full relative group font-sans" data-aos="fade-right">
-                                <div className="hidden md:flex w-1/2 pr-12 justify-end text-right">
-                                    <div className="max-w-md glass p-6 rounded-xl border-glow-blue cursor-pointer transition-all hover:scale-[1.02]" onClick={() => openModal('exp-ndhu')}>
-                                        <div className="text-slate-500 font-sans font-bold text-xs mb-2">
-                                            {t('exp-4-date')}</div>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-4-title')}</h3>
-                                        <div className="flex flex-wrap justify-end gap-2 mb-4 font-mono">
-                                            <span className="tag-pill border-slate-500/30 text-slate-400 bg-slate-500/5">#VR/AR</span>
-                                            <span className="tag-pill border-ue-blue/30 text-ue-blue bg-ue-blue/5">#Unity3D</span>
-                                            <span className="tag-pill border-tech-green/30 text-tech-green bg-tech-green/5">#Python</span>
-                                        </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{t('exp-4-short')}</p>
-                                        <div className="mt-4 text-slate-500 text-[10px] font-bold tracking-widest uppercase font-sans">
-                                            {t('view-details')} <i className="fas fa-chevron-right ml-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="z-20 flex items-center bg-slate-700 shadow-xl w-6 h-6 rounded-full border-4 border-slate-900 absolute left-0 md:left-1/2 md:-ml-3 ml-[-11px]"></div>
-                                <div className="md:hidden w-full pl-10 font-sans">
-                                    <div className="glass p-6 rounded-xl border-glow-blue cursor-pointer" onClick={() => openModal('exp-ndhu')}>
-                                        <span className="text-slate-500 font-sans font-bold block mb-2">{t('exp-4-date')}</span>
-                                        <h3 className="text-xl font-bold mb-1 font-sans">{t('exp-4-title')}</h3>
-                                        <p className="text-slate-500 dark:text-slate-400 text-sm">{t('exp-4-short')}</p>
-                                    </div>
-                                </div>
-                                <div className="hidden md:flex w-1/2 pl-12 font-sans"></div>
                             </div>
                         </div>
                     </div>
@@ -398,10 +305,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             {/* Project 3 */}
                             <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all font-sans" onClick={() => openModal('modal-3')} data-aos="zoom-in">
                                 <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop" alt="Server Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-950 flex items-center justify-center">
-                                        <i className="fas fa-server text-6xl text-white/20"></i>
-                                    </div>
+                                    <img src={getAssetPath('/ST2110_Infra.png')} alt={t('proj-3-title')} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" />
                                 </div>
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-3 font-mono">
@@ -412,8 +316,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                         </div>
                                         <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2026</span>
                                     </div>
-                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-3-title')}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-3-desc')}</p>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans text-slate-900 dark:text-slate-100">{t('proj-3-title')}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-3-desc')}</p>
                                     <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
                                         <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
                                     </button>
@@ -423,10 +327,7 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             {/* Project 2 */}
                             <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-green transition-all font-sans" onClick={() => openModal('modal-2')} data-aos="zoom-in" data-aos-delay="200">
                                 <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=800&auto=format&fit=crop" alt="VP Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-tech-green/40 to-slate-950 flex items-center justify-center">
-                                        <i className="fas fa-video-slash text-6xl text-white/20"></i>
-                                    </div>
+                                    <img src={getAssetPath('/image/Green-screen-free VP System.gif')} alt={t('proj-2-title')} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" />
                                 </div>
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-3 font-mono">
@@ -436,8 +337,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                         </div>
                                         <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2023-2024</span>
                                     </div>
-                                    <h3 className="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans">{t('proj-2-title')}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-2-desc')}</p>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-tech-green transition-colors font-sans text-slate-900 dark:text-slate-100">{t('proj-2-title')}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-2-desc')}</p>
                                     <button className="text-xs font-bold text-tech-green flex items-center group-hover:translate-x-1 transition-transform font-sans">
                                         <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
                                     </button>
@@ -446,11 +347,9 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
 
                             {/* Project 1 */}
                             <div className="glass rounded-2xl overflow-hidden group cursor-pointer border-glow-blue transition-all" onClick={() => openModal('modal-1')} data-aos="zoom-in" data-aos-delay="400">
-                                <div className="h-48 bg-slate-800 relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="AI Project" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-ue-blue/40 to-slate-950 flex items-center justify-center">
-                                        <i className="fas fa-robot text-6xl text-white/20"></i>
-                                    </div>
+                                <div className="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-ue-blue/20 to-slate-950"></div>
+                                    <i className="fas fa-robot text-5xl text-ue-blue/40 group-hover:scale-110 transition-transform"></i>
                                 </div>
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-3 font-mono">
@@ -460,11 +359,170 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                         </div>
                                         <span className="text-[10px] text-slate-500 dark:text-slate-400 border border-slate-700 px-2 py-1 rounded-full whitespace-nowrap">2024-2025</span>
                                     </div>
-                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans">{t('proj-1-title')}</h3>
-                                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-1-desc')}</p>
+                                    <h3 className="text-lg font-bold mb-2 group-hover:text-ue-blue transition-colors font-sans text-slate-900 dark:text-slate-100">{t('proj-1-title')}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 font-sans">{t('proj-1-desc')}</p>
                                     <button className="text-xs font-bold text-ue-blue flex items-center group-hover:translate-x-1 transition-transform font-sans">
                                         <span>{t('btn-details')}</span> <i className="fas fa-arrow-right ml-2"></i>
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Experience Section */}
+                <section id="experience" className="py-24 relative font-sans overflow-hidden">
+                    <div className="container mx-auto px-6 relative">
+                        <h2 className="text-3xl font-bold mb-16 text-center font-sans tracking-tight" data-aos="fade-up">
+                            <span>{t('exp-title')}</span>
+                        </h2>
+
+                        <div className="max-w-4xl mx-auto relative px-4 sm:px-8">
+                            {/* Vertical Timeline Line (Left aligned) */}
+                            <div className="absolute left-0 sm:left-4 top-0 bottom-0 w-px bg-gradient-to-b from-ue-blue via-tech-green to-transparent opacity-30"></div>
+
+                            <div className="space-y-12">
+                                {/* Exp 1: Akiyam */}
+                                <div className="relative pl-8 sm:pl-12 group" data-aos="fade-up">
+                                    {/* Timeline Dot */}
+                                    <div className="absolute left-[-4px] sm:left-[12px] top-2 w-2 h-2 rounded-full bg-ue-blue shadow-[0_0_10px_rgba(0,112,243,0.8)] group-hover:scale-150 transition-transform duration-300 z-10"></div>
+                                    
+                                    <div className="glass p-5 rounded-xl border-white/5 hover:border-ue-blue/30 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-ue-blue/10" onClick={() => openModal('exp-akiyam')}>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-ue-blue transition-colors">{t('exp-1-title')}</h3>
+                                            <span className="text-ue-blue font-mono text-[11px] font-bold bg-ue-blue/5 px-2 py-1 rounded border border-ue-blue/20 whitespace-nowrap">{t('exp-1-date')}</span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#AI</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#Gameplay</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#Git</span>
+                                        </div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all duration-500">{t('exp-1-short')}</p>
+                                        <div className="mt-3 flex items-center text-[10px] font-bold text-ue-blue/60 group-hover:text-ue-blue transition-colors uppercase tracking-wider">
+                                            <span>{t('view-details')}</span>
+                                            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Exp 2: Andas */}
+                                <div className="relative pl-8 sm:pl-12 group" data-aos="fade-up" data-aos-delay="100">
+                                    <div className="absolute left-[-4px] sm:left-[12px] top-2 w-2 h-2 rounded-full bg-tech-green shadow-[0_0_10px_rgba(0,255,171,0.8)] group-hover:scale-150 transition-transform duration-300 z-10"></div>
+                                    
+                                    <div className="glass p-5 rounded-xl border-white/5 hover:border-tech-green/30 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-tech-green/10" onClick={() => openModal('exp-andas')}>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-tech-green transition-colors">{t('exp-2-title')}</h3>
+                                            <span className="text-tech-green font-mono text-[11px] font-bold bg-tech-green/5 px-2 py-1 rounded border border-tech-green/20 whitespace-nowrap">{t('exp-2-date')}</span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#ST2110</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#VP</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#Systems</span>
+                                        </div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all duration-500">{t('exp-2-short')}</p>
+                                        <div className="mt-3 flex items-center text-[10px] font-bold text-tech-green/60 group-hover:text-tech-green transition-colors uppercase tracking-wider">
+                                            <span>{t('view-details')}</span>
+                                            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Exp 3: BEARVFX */}
+                                <div className="relative pl-8 sm:pl-12 group" data-aos="fade-up" data-aos-delay="200">
+                                    <div className="absolute left-[-4px] sm:left-[12px] top-2 w-2 h-2 rounded-full bg-slate-500 shadow-[0_0_10px_rgba(148,163,184,0.8)] group-hover:scale-150 transition-transform duration-300 z-10"></div>
+                                    
+                                    <div className="glass p-5 rounded-xl border-white/5 hover:border-slate-500/30 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-white/5" onClick={() => openModal('exp-n2')}>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-slate-500 transition-colors">{t('exp-3-title')}</h3>
+                                            <span className="text-slate-500 font-mono text-[11px] font-bold bg-slate-500/5 px-2 py-1 rounded border border-slate-500/20 whitespace-nowrap">{t('exp-3-date')}</span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#AI</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#UE5</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#API</span>
+                                        </div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all duration-500">{t('exp-3-short')}</p>
+                                        <div className="mt-3 flex items-center text-[10px] font-bold text-slate-500/60 group-hover:text-slate-500 transition-colors uppercase tracking-wider">
+                                            <span>{t('view-details')}</span>
+                                            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Exp 4: NDHU */}
+                                <div className="relative pl-8 sm:pl-12 group" data-aos="fade-up" data-aos-delay="300">
+                                    <div className="absolute left-[-4px] sm:left-[12px] top-2 w-2 h-2 rounded-full bg-slate-500 shadow-[0_0_10px_rgba(148,163,184,0.8)] group-hover:scale-150 transition-transform duration-300 z-10"></div>
+                                    
+                                    <div className="glass p-5 rounded-xl border-white/5 hover:border-slate-500/30 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-white/5" onClick={() => openModal('exp-ndhu')}>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-slate-500 transition-colors">{t('exp-4-title')}</h3>
+                                            <span className="text-slate-500 font-mono text-[11px] font-bold bg-slate-500/5 px-2 py-1 rounded border border-slate-500/20 whitespace-nowrap">{t('exp-4-date')}</span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#VR/AR</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#Unity</span>
+                                            <span className="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 rounded border border-slate-200 dark:border-white/5">#CV</span>
+                                        </div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all duration-500">{t('exp-4-short')}</p>
+                                        <div className="mt-3 flex items-center text-[10px] font-bold text-slate-500/60 group-hover:text-slate-500 transition-colors uppercase tracking-wider">
+                                            <span>{t('view-details')}</span>
+                                            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Events & Specialized Training Section */}
+                <section id="events" className="py-24 relative font-sans">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left">
+                            <div data-aos="fade-right" className="w-full md:w-auto">
+                                <h2 className="text-3xl font-bold font-sans">
+                                    <span>{t('events-title')}</span>
+                                </h2>
+                                <p className="text-slate-600 dark:text-slate-400 mt-2 font-sans">{t('events-subtitle')}</p>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-6 font-sans">
+                            {/* Event 1 */}
+                            <div className="glass p-6 rounded-xl border-glow-blue transition-all group max-w-2xl" data-aos="fade-up">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-ue-blue text-2xl mt-1">
+                                        <i className="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-bold mb-3 text-slate-900 dark:text-slate-100 group-hover:text-ue-blue transition-colors">
+                                            {t('event-1-title')}
+                                        </h3>
+                                        <div className="space-y-2 text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                                            <p className="flex items-center">
+                                                <span className="w-1 h-1 rounded-full bg-ue-blue mr-2 flex-shrink-0"></span>
+                                                {t('event-1-focus')}
+                                            </p>
+                                            <p className="flex items-start">
+                                                <span className="w-1 h-1 rounded-full bg-ue-blue mr-2 mt-1.5 flex-shrink-0"></span>
+                                                {t('event-1-tech')}
+                                            </p>
+                                            <p className="flex items-start">
+                                                <span className="w-1 h-1 rounded-full bg-ue-blue mr-2 mt-1.5 flex-shrink-0"></span>
+                                                <span>
+                                                    {lang === 'zh' ? '結業作品：' : 'Graduation Project: '}
+                                                    <a 
+                                                        href="https://youtu.be/nq8VTm7LuVs" 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="text-ue-blue hover:underline break-all"
+                                                    >
+                                                        https://youtu.be/nq8VTm7LuVs
+                                                    </a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -481,15 +539,15 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                     <div className="flex gap-4 items-stretch">
                                         <div className="w-1 self-stretch bg-ue-blue rounded-full flex-shrink-0"></div>
                                         <div className="text-left font-sans">
-                                            <h4 className="font-bold font-sans">{t('edu-1-uni')}</h4>
-                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-1-deg')}</p>
+                                            <h4 className="font-bold font-sans text-slate-900 dark:text-slate-100">{t('edu-1-uni')}</h4>
+                                            <p className="text-slate-600 dark:text-slate-400 text-sm font-sans">{t('edu-1-deg')}</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 items-stretch">
                                         <div className="w-1 self-stretch bg-tech-green rounded-full flex-shrink-0"></div>
                                         <div className="text-left font-sans">
-                                            <h4 className="font-bold font-sans">{t('edu-2-uni')}</h4>
-                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-sans">{t('edu-2-deg')}</p>
+                                            <h4 className="font-bold font-sans text-slate-900 dark:text-slate-100">{t('edu-2-uni')}</h4>
+                                            <p className="text-slate-600 dark:text-slate-400 text-sm font-sans">{t('edu-2-deg')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -562,8 +620,8 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                                                         </div>
                                                     )}
                                                     {data.imageUrl && (
-                                                        <div className="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg mb-6">
-                                                            <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto object-cover" />
+                                                        <div className="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg mb-6 bg-slate-900/50">
+                                                            <img src={getAssetPath(data.imageUrl || '')} alt={data.title} className="w-full h-auto block" />
                                                         </div>
                                                     )}
                                                 </div>

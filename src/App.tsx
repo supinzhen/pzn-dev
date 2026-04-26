@@ -101,8 +101,9 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
                                 <div className="glass rounded-xl border border-white/10 overflow-hidden shadow-xl text-center bg-white/5 backdrop-blur-md">
                                     <div className="py-1">
                                         <Link to="/#skills" className={dropLinkCls}>{t('nav-skills')}</Link>
-                                        <Link to="/#experience" className={dropLinkCls}>{t('nav-exp')}</Link>
                                         <Link to="/#projects" className={dropLinkCls}>{t('nav-projects')}</Link>
+                                        <Link to="/#experience" className={dropLinkCls}>{t('nav-exp')}</Link>
+                                        <Link to="/#events" className={dropLinkCls}>{t('nav-events') || 'Events'}</Link>
                                         <Link to="/#contact" className={dropLinkCls}>{t('nav-contact')}</Link>
                                     </div>
                                 </div>
@@ -178,8 +179,9 @@ const Layout: React.FC<LayoutProps> = ({ children, lang, setLang, t, theme, togg
                         {/* Secondary Links for Hero sections */}
                         <div className="flex flex-col mb-4">
                             <Link to="/#skills" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-skills')}</Link>
-                            <Link to="/#experience" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-exp')}</Link>
                             <Link to="/#projects" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-projects')}</Link>
+                            <Link to="/#experience" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-exp')}</Link>
+                            <Link to="/#events" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-events') || 'Events'}</Link>
                             <Link to="/#contact" onClick={() => setMobileOpen(false)} className={`block px-8 py-2 text-sm hover:text-ue-blue transition-colors ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{t('nav-contact')}</Link>
                         </div>
 
