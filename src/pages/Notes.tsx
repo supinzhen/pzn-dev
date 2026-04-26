@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Book, Cpu, Video, Filter, X, List, ChevronRight } from 'lucide-react';
+import { Book, Cpu, Video, Filter, X, List, ChevronRight, Pin } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { noteService } from '../utils/noteService';
@@ -58,6 +58,15 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
         return filtered;
     }, [activeCategory, activeTag, allNotes]);
 
+    const pinnedNotes = useMemo(() => {
+        return allNotes.filter(note => note.pinned);
+    }, [allNotes]);
+
+    const recentNotes = useMemo(() => {
+        // If we have filters, show filtered results. Otherwise show recent non-pinned or just the main list.
+        return filteredNotes.filter(note => !note.pinned || activeCategory || activeTag);
+    }, [filteredNotes, activeCategory, activeTag]);
+
     const categoryCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         allNotes.forEach(n => {
@@ -114,6 +123,48 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
                     {lang === 'zh' ? '工程實踐中的技術筆記、解決方案與學習心得。' : 'Technical logs, solutions, and learning notes from my engineering practice.'}
                 </p>
             </div>
+
+            {/* Featured Notes - Only show when no filters are active */}
+            {!activeCategory && !activeTag && pinnedNotes.length > 0 && (
+                <div className="mb-16">
+                    <h2 className="text-2xl font-bold mb-6 font-sans flex items-center gap-3" data-aos="fade-up">
+                        <span className="w-2 h-8 bg-tech-green rounded-full shadow-[0_0_15px_rgba(34,197,94,0.3)]"></span>
+                        {lang === 'zh' ? '推薦閱讀' : 'Featured Notes'}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {pinnedNotes.map((note, index) => (
+                            <Link 
+                                key={note.id} 
+                                to={`/notes/${note.slug}`} 
+                                data-aos="fade-up" 
+                                data-aos-delay={index * 100} 
+                                className="glass rounded-2xl border-tech-green/20 hover:border-tech-green transition-all group relative overflow-hidden flex flex-col p-6 min-h-[160px]"
+                            >
+                                <div className="absolute top-0 right-0 p-4">
+                                    <Pin className="w-4 h-4 text-tech-green animate-pulse" />
+                                </div>
+                                <div className="flex justify-between items-center mb-3">
+                                    <span className="text-text-secondary text-[10px] font-mono opacity-80">{note.date}</span>
+                                </div>
+                                <h3 className="text-xl font-bold mb-2 text-text-primary group-hover:text-tech-green transition-colors line-clamp-1">{note.title}</h3>
+                                <p className="text-text-secondary text-sm mb-4 leading-relaxed line-clamp-2 italic font-sans opacity-80">
+                                    {note.summary}
+                                </p>
+                                <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/5">
+                                    <div className="flex gap-1.5">
+                                        {note.tags.slice(0, 2).map(tag => (
+                                            <span key={tag} className="text-[9px] text-tech-green bg-tech-green/5 px-2 py-0.5 rounded border border-tech-green/10">#{tag}</span>
+                                        ))}
+                                    </div>
+                                    <div className="text-tech-green text-[10px] font-bold flex items-center gap-1.5 font-sans">
+                                        READ FEATURED <ChevronRight className="w-3 h-3" />
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
 
 
 
@@ -203,12 +254,18 @@ const Notes: React.FC<NotesProps> = ({ lang, t }) => {
             {/* Notes Grid */}
             <div className="mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans">
-                    {filteredNotes.length > 0 ? (
-                        filteredNotes.slice(0, 4).map((note, index) => (
+                    {recentNotes.length > 0 ? (
+                        recentNotes.slice(0, 4).map((note, index) => (
                             <Link key={note.id} to={`/notes/${note.slug}`} data-aos="fade-up" data-aos-delay={index * 100} className="glass rounded-2xl border-white/5 hover:border-ue-blue/30 transition-all group relative overflow-hidden flex flex-col block font-sans min-h-[160px]">
                                 <div className="p-6 flex flex-col flex-1">
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-text-secondary text-[10px] font-mono opacity-80">{note.date}</span>
+                                        {note.pinned && (
+                                            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-ue-blue/10 border border-ue-blue/20 rounded-full text-[9px] font-bold text-ue-blue">
+                                                <Pin className="w-2.5 h-2.5" />
+                                                <span>PINNED</span>
+                                            </div>
+                                        )}
                                     </div>
                                     <h3 className="text-xl font-bold mb-2 text-text-primary group-hover:text-ue-blue transition-colors line-clamp-1">{note.title}</h3>
                                     <p className="text-text-secondary text-sm mb-4 leading-relaxed line-clamp-2 italic font-sans">

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon, X, Github, RefreshCw, AlertCircle } from 'lucide-react';
+import { Plus, Save, Trash2, Edit2, Lock, ArrowLeft, LogOut, Download, Copy, Check, Code as CodeIcon, X, Github, RefreshCw, AlertCircle, Pin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { noteService, Note } from '../utils/noteService';
 import { githubService, FileUpdate } from '../utils/githubService';
@@ -36,7 +36,8 @@ const Admin: React.FC = () => {
         readTime: '5 min read',
         tags: [],
         summary: '',
-        content: ''
+        content: '',
+        pinned: false
     });
 
     const categories = ['Unreal Engine', 'System Integration', 'Virtual Production', 'Others'];
@@ -129,7 +130,8 @@ const Admin: React.FC = () => {
             readTime: '5 min read',
             tags: [],
             summary: '',
-            content: ''
+            content: '',
+            pinned: false
         });
     };
 
@@ -196,7 +198,8 @@ const Admin: React.FC = () => {
                 tags: note.tags,
                 summary: note.summary,
                 summary_zh: note.summary_zh,
-                summary_en: note.summary_en
+                summary_en: note.summary_en,
+                pinned: note.pinned
             }));
 
             const filesToUpdate: FileUpdate[] = [
@@ -516,6 +519,16 @@ const Admin: React.FC = () => {
                                 </div>
                             </div>
 
+                            <div className="flex items-center gap-3 p-4 bg-ue-blue/5 border border-ue-blue/10 rounded-xl cursor-pointer" onClick={() => setCurrentNote({ ...currentNote, pinned: !currentNote.pinned })}>
+                                <div className={`w-10 h-6 rounded-full relative transition-all ${currentNote.pinned ? 'bg-ue-blue' : 'bg-slate-300 dark:bg-slate-700'}`}>
+                                    <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${currentNote.pinned ? 'left-5' : 'left-1'}`}></div>
+                                </div>
+                                <div>
+                                    <span className="text-sm font-bold block">釘選此文章 (Pin this article)</span>
+                                    <span className="text-[10px] text-slate-500">將此文章置頂並顯示在推薦閱讀區塊</span>
+                                </div>
+                            </div>
+
                             <div>
                                 <label className="block text-xs font-mono text-slate-500 mb-2 uppercase">Tags</label>
                                 <div className="flex flex-wrap gap-2 mb-3">
@@ -637,7 +650,10 @@ const Admin: React.FC = () => {
                                         <button onClick={() => handleDelete(note.id)} className="p-1.5 hover:text-red-500"><Trash2 className="w-3.5 h-3.5" /></button>
                                     </div>
                                 </div>
-                                <h3 className="text-sm font-bold mb-1 truncate">{note.title_zh || note.title}</h3>
+                                <h3 className="text-sm font-bold mb-1 truncate flex items-center gap-2">
+                                    {note.pinned && <Pin className="w-3 h-3 text-ue-blue animate-pulse" />}
+                                    {note.title_zh || note.title}
+                                </h3>
                                 <p className="text-[10px] text-ue-blue font-mono mb-1 break-all">/{note.slug}</p>
                                 <p className="text-[11px] text-slate-500 font-mono">{note.date}</p>
                             </div>

@@ -18,6 +18,7 @@ export interface Note {
     content_zh?: string;
     content_en?: string;
     imageUrl?: string;
+    pinned?: boolean;
 }
 
 const LOCAL_STORAGE_KEY = 'pzn_custom_notes';
@@ -76,7 +77,13 @@ export const noteService = {
             notesMap.set(n.id, mapped as Note);
         });
 
-        return Array.from(notesMap.values()).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return Array.from(notesMap.values()).sort((a, b) => {
+            // First sort by pinned status
+            if (a.pinned && !b.pinned) return -1;
+            if (!a.pinned && b.pinned) return 1;
+            // Then sort by date descending
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
     },
 
     saveNote: (note: Note): void => {

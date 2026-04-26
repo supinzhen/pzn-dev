@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Search, ChevronRight, Pin } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { noteService } from '../utils/noteService';
@@ -148,7 +148,8 @@ const AllNotes: React.FC<AllNotesProps> = ({ lang }) => {
                                     <div className="hidden md:block text-[10px] text-text-secondary opacity-60">{note.date.split('-')[0]}</div>
                                 </div>
                                 <div className="col-span-6">
-                                    <h3 className="font-bold group-hover:text-ue-blue transition-colors text-lg md:text-base text-text-primary">
+                                    <h3 className="font-bold group-hover:text-ue-blue transition-colors text-lg md:text-base text-text-primary flex items-center gap-2">
+                                        {note.pinned && <Pin className="w-3.5 h-3.5 text-ue-blue flex-shrink-0" />}
                                         {note.title}
                                     </h3>
                                     <p className="text-text-secondary text-xs mt-1 md:hidden line-clamp-2">
