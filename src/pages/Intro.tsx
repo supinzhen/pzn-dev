@@ -487,22 +487,66 @@ const Intro: React.FC<IntroProps> = ({ lang, t }) => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6 font-sans">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
+                            {/* Event 2 */}
+                            <div className="glass p-6 rounded-xl border-glow-green transition-all group" data-aos="fade-up">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-tech-green text-2xl mt-1">
+                                        <i className="fas fa-gamepad"></i>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-tech-green transition-colors">
+                                                {t('event-2-title')}
+                                            </h3>
+                                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-tech-green/10 text-tech-green border border-tech-green/20 rounded-full whitespace-nowrap">
+                                                {t('event-2-date')}
+                                            </span>
+                                        </div>
+                                        <div className="space-y-2 text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                                            <p className="flex items-center">
+                                                <span className="w-1 h-1 rounded-full bg-tech-green mr-2 flex-shrink-0"></span>
+                                                {t('event-2-role')}
+                                            </p>
+                                            <p className="flex items-start">
+                                                <span className="w-1 h-1 rounded-full bg-tech-green mr-2 mt-1.5 flex-shrink-0"></span>
+                                                {t('event-2-tech')}
+                                            </p>
+                                            <p className="flex items-start">
+                                                <span className="w-1 h-1 rounded-full bg-tech-green mr-2 mt-1.5 flex-shrink-0"></span>
+                                                <span>
+                                                    {lang === 'zh' ? '作品連結：' : 'Project Link: '}
+                                                    <a
+                                                        href={t('event-2-link')}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-tech-green hover:underline break-all"
+                                                    >
+                                                        {t('event-2-link')}
+                                                    </a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* Event 1 */}
-                            <div className="glass p-6 rounded-xl border-glow-blue transition-all group max-w-2xl" data-aos="fade-up">
+                            <div className="glass p-6 rounded-xl border-glow-blue transition-all group" data-aos="fade-up" data-aos-delay="100">
                                 <div className="flex items-start gap-4">
                                     <div className="text-ue-blue text-2xl mt-1">
                                         <i className="fas fa-graduation-cap"></i>
                                     </div>
-                                    <div>
-                                        <h3 className="text-lg font-bold mb-3 text-slate-900 dark:text-slate-100 group-hover:text-ue-blue transition-colors">
-                                            {t('event-1-title')}
-                                        </h3>
+                                    <div className="flex-1">
+                                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-ue-blue transition-colors">
+                                                {t('event-1-title')}
+                                            </h3>
+                                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-ue-blue/10 text-ue-blue border border-ue-blue/20 rounded-full whitespace-nowrap">
+                                                {t('event-1-date')}
+                                            </span>
+                                        </div>
                                         <div className="space-y-2 text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-                                            <p className="flex items-center">
-                                                <span className="w-1 h-1 rounded-full bg-ue-blue mr-2 flex-shrink-0"></span>
-                                                {t('event-1-focus')}
-                                            </p>
                                             <p className="flex items-start">
                                                 <span className="w-1 h-1 rounded-full bg-ue-blue mr-2 mt-1.5 flex-shrink-0"></span>
                                                 {t('event-1-tech')}
